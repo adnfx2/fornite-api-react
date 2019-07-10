@@ -1,5 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import configureStore from "./redux/store/configureStore";
+import App from "./containers/App";
 
-ReactDOM.render(<h1>hello</h1>, document.getElementById("root"));
+const store = configureStore();
+
+ReactDOM.render(<App store={store} />, document.getElementById("root"));
