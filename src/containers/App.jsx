@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import Dummy from "./Dummy";
+import Gallery from "./Gallery";
 
 const App = ({ store }) => (
   <Provider store={store}>
-    <div>
-      <h1>Dummy Component</h1>
-      <Dummy />
+    <div className="container">
+      <h1 className="text-center">Items Api</h1>
+      <Gallery />
     </div>
   </Provider>
 );
