@@ -1,4 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project postponed
+
+TODO:
+
+Add navbar
+Add background
+Add search bar
+Add Filters
+Normalize Api data
+Add proper reducers
+
+----------------------------------------------------------
 
 ## Available Scripts
 
@@ -66,3 +77,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

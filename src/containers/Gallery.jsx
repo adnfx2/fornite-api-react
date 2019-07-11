@@ -32,7 +32,7 @@ class Gallery extends Component {
           className="col-sm-6 col-md-4 col-lg-3 d-flex mb-2 align-items-stretch"
           key={itemId}
         >
-          <Card inverse style={{ background: "teal" }}>
+          <Card inverse style={{ background: "slategray" }}>
             <CardHeader className="text-right text-uppercase small">
               {rarity}
             </CardHeader>
