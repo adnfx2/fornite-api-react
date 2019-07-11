@@ -1,9 +1,7 @@
-//libraries
 import axios from "axios";
-//utils
 import * as api from "../../utils/api/api";
+import { LOCAL_REDUX_STORE } from "../../utils/localStorage/localStorage";
 
-//constants
 export const REQUEST_ITEMS = "REQUEST_ITEMS";
 export const SUCCESS_ITEMS = "SUCCESS_ITEMS";
 export const FAILURE_ITEMS = "FAILURE_ITEMS";
@@ -24,6 +22,10 @@ export const fetchItems = () => dispatch => {
       }
     })
     .then(response => {
+      localStorage.setItem(
+        LOCAL_REDUX_STORE,
+        JSON.stringify(response.data.data)
+      );
       dispatch(successItems(response.data.data));
     })
     .catch(error => dispatch(failureItems(error)));

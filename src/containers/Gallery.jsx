@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import * as Actions from "../redux/actions/actions";
 import {
   Card,
+  CardBody,
+  CardHeader,
   CardImg,
   CardText,
-  CardBody,
   CardTitle,
   CardSubtitle,
   Button
@@ -13,8 +14,10 @@ import {
 
 class Gallery extends Component {
   componentDidMount() {
-    const { loadItems } = this.props;
-    loadItems();
+    const { loadItems, items } = this.props;
+    if (!items) {
+      loadItems();
+    }
   }
 
   renderCards = items =>
@@ -30,12 +33,23 @@ class Gallery extends Component {
           key={itemId}
         >
           <Card inverse style={{ background: "teal" }}>
-            <CardImg top width="100%" src={images.icon} alt={`${name} image`} />
-            <CardBody>
+            <CardHeader className="text-right text-uppercase small">
+              {rarity}
+            </CardHeader>
+            <CardImg
+              className="p-2"
+              top
+              width="100%"
+              src={images.icon}
+              alt={`${name} image`}
+            />
+            <CardBody className="d-flex flex-column">
               <CardTitle>{name}</CardTitle>
-              <CardSubtitle>{`rarity: ${rarity}`}</CardSubtitle>
-              <CardText>{description}</CardText>
-              <Button color="primary">{`Buy ${cost} $`}</Button>
+              <CardText className="small">{description}</CardText>
+              <Button
+                className="mt-auto"
+                color="primary"
+              >{`Buy ${cost} $`}</Button>
             </CardBody>
           </Card>
         </li>
@@ -68,7 +82,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadItems: () => dispatch(Actions.fetchItems())
+  loadItems: () => {
+    dispatch(Actions.fetchItems());
+  }
 });
 
 export default connect(
