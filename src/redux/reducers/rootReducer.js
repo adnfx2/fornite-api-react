@@ -1,5 +1,7 @@
+import { combineReducers } from "redux";
 import * as ActionTypes from "../actions/actions";
-import { LOCAL_REDUX_STORE } from "../../utils/localStorage/localStorage"
+import { LOCAL_REDUX_STORE } from "../../utils/localStorage/localStorage";
+
 const parseJson = key => {
   if (typeof key !== "string") {
     return new Error("key must be a String");
@@ -18,7 +20,7 @@ const initialState = {
   data: parseJson(LOCAL_REDUX_STORE) || []
 };
 
-const rootReducer = (state = initialState, action) => {
+const itemsReducer = (state = {}, action) => {
   switch (action.type) {
     case ActionTypes.REQUEST_ITEMS:
       return {
@@ -42,5 +44,35 @@ const rootReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+const news = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionTypes.REQUEST_NEWS:
+      return {
+        ...state,
+        isFetching: true
+      };
+
+    case ActionTypes.SUCCESS_NEWS:
+      return {
+        isFetching: false,
+        error: "",
+        data: action.payload
+      };
+
+    case ActionTypes.FAILURE_NEWS:
+      return {
+        ...state,
+        error: action.payload
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducer = combineReducers({
+  itemsReducer,
+  news
+});
 
 export default rootReducer;
