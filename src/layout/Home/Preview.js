@@ -21,6 +21,15 @@ const useStyles = createUseStyles({
     fontFamily: "var(--fortnite-font)",
     color: "#fff",
     textShadow: "2px 2px 8px #212529"
+  },
+  superTitle: {
+    fontFamily: "var(--fortnite-font)",
+    color: "#fff",
+    textShadow: "2px 2px 8px #212529",
+    fontSize: "68px",
+    paddingTop: "96px",
+    paddingBottom: "96px",
+    composes: ["text-center m-0 pr-3 pl-3"]
   }
 });
 
@@ -28,13 +37,14 @@ const Preview = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
+      <h1 className={classes.superTitle}>Are you ready to jump?</h1>
       <Container fluid={true}>
         <Row>
-          <Col className="pb-4" md={4}>
-            <div className={classes.flex_image}></div>
+          <Col className="pb-4 pr-0 pl-0" md={4}>
+            <div className={classes.flex_image} />
           </Col>
           <Col>
-            <h1 className={classes.title}>Helo</h1>
+            <h1 className={classes.title}>Getting to know!</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Quibusdam, autem, ullam? Labore commodi est assumenda voluptatem
