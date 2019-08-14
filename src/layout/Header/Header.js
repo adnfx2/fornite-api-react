@@ -7,12 +7,13 @@ const style_links = "text-light";
 
 const Header = props => (
   <header>
-    <Navbar fixed="top" bg="primary" variant="dark" expand="sm">
+    <Navbar className="navbar-fixed-top" bg="primary" variant="dark" expand="sm">
       <Navbar.Brand href="#" className="w-25">
         <img src={logo} alt="fornite" width="100" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse>
+        <hr className="d-sm-none" />
         <Nav className="ml-auto">
           <Nav.Link href="">Home</Nav.Link>
           <Nav.Link href="">Items</Nav.Link>

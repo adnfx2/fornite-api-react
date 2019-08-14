@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy|Montserrat&display=swap");
+
+:root {
+  --main-font: "Montserrat", sans-serif;
+  --fortnite-font: "Luckiest Guy", cursive;
+}
+
+body {
+  font-family: var(--main-font);
+}
