@@ -6,9 +6,7 @@ import previewImg from "../../assets/images/fortnite-preview.jpg";
 
 const useStyles = createUseStyles({
   flex_image: {
-    width: "100%",
-    height: "100%",
-    minHeight: "450px",
+    minHeight: "60vh",
     backgroundColor: "slategray",
     backgroundImage: `url(${previewImg})`,
     backgroundSize: "cover",
@@ -18,6 +16,7 @@ const useStyles = createUseStyles({
     }
   },
   title: {
+    composes: ["m-0 pt-5 pb-4 text-center"],
     fontFamily: "var(--fortnite-font)",
     color: "#fff",
     textShadow: "2px 2px 8px #212529"
@@ -30,6 +29,9 @@ const useStyles = createUseStyles({
     paddingTop: "96px",
     paddingBottom: "96px",
     composes: ["text-center m-0 pr-3 pl-3"]
+  },
+  previewBackground: {
+    backgroundColor: "#e9ecef"
   }
 });
 
@@ -37,15 +39,15 @@ const Preview = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <h1 className={classes.superTitle}>Are you ready to jump?</h1>
-      <Container fluid={true}>
-        <Row>
-          <Col className="pb-4 pr-0 pl-0" md={4}>
+      <Container className="pb-5" fluid={true}>
+        <h1 className={classes.superTitle}>Are you ready to jump?</h1>
+        <Row className={classes.previewBackground}>
+          <Col className="pr-0 pl-0" md={4}>
             <div className={classes.flex_image} />
           </Col>
           <Col>
             <h1 className={classes.title}>Getting to know!</h1>
-            <p>
+            <p className="pb-4">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Quibusdam, autem, ullam? Labore commodi est assumenda voluptatem
               similique! Excepturi eligendi illo quis minus rem itaque illum aut

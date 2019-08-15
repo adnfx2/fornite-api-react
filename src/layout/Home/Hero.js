@@ -29,7 +29,7 @@ class Hero extends React.Component {
         ? { selectedImage: heroImgPortrait, style: "pr-4 pl-4" }
         : { selectedImage: heroImgLandscape, style: "" };
     return (
-      <div>
+      <div className="pt-5 pb-5">
         <Jumbotron fluid={true}>
           <img
             className={`d-block w-100 ${image.style}`}

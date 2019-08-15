@@ -4,12 +4,12 @@ import Carousel from "react-bootstrap/Carousel";
 import Spinner from "react-bootstrap/Spinner";
 import * as Actions from "../../redux/actions/actions";
 import Snippet from "./Snippet";
-import FlexImage from "./FlexImage";
-
+import FlexBackground from "./FlexBackground";
+import ComponentsFactory from "../../components/ComponentsFactory/ComponentsFactory";
 class NewsFeed extends React.Component {
   componentDidMount() {
     const { loadNews, news } = this.props;
-    if (!news) {
+    if (!news.length) {
       loadNews();
     }
   }
@@ -21,7 +21,7 @@ class NewsFeed extends React.Component {
           <Carousel indicators={false} fade={true}>
             {news.map(({ title, image, ...props }) => (
               <Carousel.Item key={title}>
-                <FlexImage image={image} />
+                <FlexBackground image={image} />
                 <Carousel.Caption>
                   <Snippet title={title} {...props} />
                 </Carousel.Caption>
@@ -29,10 +29,13 @@ class NewsFeed extends React.Component {
             ))}
           </Carousel>
         ) : (
-          <div style={{ background: "teal" }}>
-            loading...
-            <Spinner />
-          </div>
+          <FlexBackground>
+            <ComponentsFactory quantity={5}>
+              <Spinner animation="grow" role="status" variant="light">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            </ComponentsFactory>
+          </FlexBackground>
         )}
       </div>
     );

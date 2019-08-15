@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Home from "../Home/Home";
+import Footer from "../Footer/Footer";
 // const news = JSON.parse(localStorage.getItem("LOCAL_REDUX_STORE"));
 
 const App = ({ store }) => (
@@ -12,6 +13,7 @@ const App = ({ store }) => (
       <Main>
         <Home />
       </Main>
+      <Footer />
     </div>
   </Provider>
 );
