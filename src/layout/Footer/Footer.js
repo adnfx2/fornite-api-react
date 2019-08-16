@@ -1,39 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import List from "../../components/List/List";
+import CustomLink from "../../components/CustomLink/CustomLink";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import flaticon_svg from "../../assets/images/flaticon.svg";
 import { fornite_references, menu_links, contact_data } from "./footer_data";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReact } from "@fortawesome/free-brands-svg-icons";
-
-const List = ({ renderItem, items }) => items.map(item => renderItem(item));
-
-const renderLinks = ({ type, label, content, faIcon }) => (
-  <li className="py-1">
-    {type === "string" ? (
-      <p className="m-0">
-        {faIcon ? (
-          <span className="mr-2">
-            <FontAwesomeIcon icon={faIcon} />
-          </span>
-        ) : (
-          ""
-        )}
-        <span>{content}</span>
-      </p>
-    ) : (
-      <a className="text-light" href={content}>
-        {faIcon ? (
-          <span className="mr-2">
-            <FontAwesomeIcon icon={faIcon} />
-          </span>
-        ) : (
-          ""
-        )}
-        <span>{label}</span>
-      </a>
-    )}
-  </li>
-);
+import { faReact, faFontAwesomeFlag } from "@fortawesome/free-brands-svg-icons";
 
 const footerSections = [
   { title: "Fortnite official", items: fornite_references },
@@ -41,7 +13,68 @@ const footerSections = [
   { title: "Contact", items: contact_data }
 ];
 
+const renderLinks = ({ type, label, content, faIcon, external }) => (
+  <li className="py-1">
+    {faIcon && (
+      <span className={"mr-2"}>
+        <FontAwesomeIcon icon={faIcon} />
+      </span>
+    )}
+    {(type === "string" && <span>{content}</span>) || (
+      <CustomLink
+        classes="text-light"
+        href={content}
+        content={<span>{label}</span>}
+        external={external}
+      />
+    )}
+  </li>
+);
+
+const CopyrightsLinks = {
+  Freepik: () => (
+    <CustomLink
+      classes="text-white-50"
+      href="https://www.flaticon.com/authors/freepik"
+      title="Freepik"
+      content="Freepik"
+      external={true}
+    />
+  ),
+  Flaticon: () => (
+    <CustomLink
+      href="https://www.flaticon.com/"
+      title="Flaticon"
+      content={<img src={flaticon_svg} alt="Flaticon icon" width="75px" />}
+      external={true}
+    />
+  ),
+  Fa: () => (
+    <CustomLink
+      classes="text-white-50"
+      href="https://fontawesome.com"
+      title="FontAwesome"
+      content={
+        <span>
+          <FontAwesomeIcon icon={faFontAwesomeFlag} /> FontAwesome
+        </span>
+      }
+      external={true}
+    />
+  ),
+  Adnfx2: () => (
+    <CustomLink
+      classes="text-white-50"
+      href="https://adnfx2.github.io/adn-react-portfolio/"
+      title="adnfx2"
+      content="@adnfx2"
+      external={true}
+    />
+  )
+};
+
 const Footer = props => {
+  const { Adnfx2, Freepik, Flaticon, Fa } = CopyrightsLinks;
   return (
     <footer className="pt-5 bg-dark text-light small">
       <Container>
@@ -49,9 +82,11 @@ const Footer = props => {
           {footerSections.map(({ title, items }) => (
             <Col xs={12} md={4}>
               <h5>{title}</h5>
-              <ul className="list-unstyled">
-                <List renderItem={renderLinks} items={items} />
-              </ul>
+              <List
+                renderItem={renderLinks}
+                items={items}
+                classes="list-unstyled"
+              />
             </Col>
           ))}
         </Row>
@@ -59,28 +94,9 @@ const Footer = props => {
           <Col>
             <hr className="m-0 pb-3" />
             <div className="text-center">
-              This website is made with <FontAwesomeIcon icon={faReact} /> by
-              @adnfx2. Icons made by{" "}
-              <a
-                className="text-white-50"
-                href="https://www.flaticon.com/authors/freepik"
-                title="Freepik"
-              >
-                Freepik
-              </a>{" "}
-              from{" "}
-              <a href="https://www.flaticon.com/" title="Flaticon">
-                <img src={flaticon_svg} alt="Flaticon icon" width="75px" />
-              </a>{" "}
-              licensed by{" "}
-              <a
-                className="text-white-50"
-                href="http://creativecommons.org/licenses/by/3.0/"
-                title="Creative Commons BY 3.0"
-                target="_blank"
-              >
-                CC 3.0 BY
-              </a>
+              This website is made with <FontAwesomeIcon icon={faReact} /> by{" "}
+              <Adnfx2 />. Icons made by <Freepik /> from <Flaticon /> and <Fa />
+              .
             </div>
           </Col>
         </Row>

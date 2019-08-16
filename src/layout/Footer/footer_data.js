@@ -53,27 +53,27 @@ export const fornite_references = [
     label: "Get fortnite now!",
     content: "https://www.epicgames.com/fortnite/en-US/download",
     faIcon: faExternalLinkAlt,
-    external: "true"
+    external: true
   },
   {
     type: "url",
     label: "Facebook",
     content: "https://www.facebook.com/FortniteGame/",
     faIcon: faFacebook,
-    external: "true"
+    external: true
   },
   {
     type: "url",
     label: "Twitter",
     content: "https://twitter.com/FortniteGame",
     faIcon: faTwitter,
-    external: "true"
+    external: true
   },
   {
     type: "url",
     label: "Twitch",
     content: "https://www.twitch.tv/fortnitegame",
     faIcon: faTwitch,
-    external: "true"
+    external: true
   }
 ];

@@ -3,11 +3,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import logo from "../../assets/images/lg-fornite.png";
 
-const style_links = "text-light";
-
 const Header = props => (
-  <header>
-    <Navbar className="navbar-fixed-top" bg="primary" variant="dark" expand="sm">
+    <Navbar sticky="top" bg="primary" variant="dark" expand="sm">
       <Navbar.Brand href="#" className="w-25">
         <img src={logo} alt="fornite" width="100" />
       </Navbar.Brand>
@@ -21,7 +18,6 @@ const Header = props => (
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  </header>
 );
 
 export default Header;
