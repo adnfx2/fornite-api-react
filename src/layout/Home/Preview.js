@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, Row, Col, Media } from "react-bootstrap";
 import { createUseStyles } from "react-jss";
-import { deviceWidth } from "../../styles/variables";
+import { Container, Row, Col, Media } from "react-bootstrap";
+import CustomLink from "../../components/CustomLink/CustomLink";
+import { deviceWidthPX } from "../../styles/variables";
 import previewImg from "../../assets/images/fortnite-preview.jpg";
 import jumpBackImg from "../../assets/images/jumpBack.png";
 import jumpFrontImg from "../../assets/images/jumpFront.png";
@@ -13,8 +14,9 @@ const useStyles = createUseStyles({
     backgroundImage: `url(${previewImg})`,
     backgroundSize: "cover",
 
-    [`@media only screen and (min-width: ${deviceWidth.sm})`]: {
-      minHeight: "300px"
+    [`@media only screen and (min-width: ${deviceWidthPX.sm}px)`]: {
+      minHeight: "300px",
+      height: "100%"
     }
   },
   title: {
@@ -24,19 +26,23 @@ const useStyles = createUseStyles({
     textShadow: "2px 2px 8px #212529"
   },
   jumpingTitle: {
+    composes: ["text-center m-0"],
+    padding: "96px 30px",
     fontFamily: "var(--fortnite-font)",
+    fontSize: "68px",
     color: "#fff",
     textShadow: "2px 2px 8px #212529",
-    fontSize: "68px",
-    paddingTop: "96px",
-    paddingBottom: "96px",
-    composes: ["text-center m-0 pr-3 pl-3"]
+    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {}
   },
   jumpingContainer: {
     backgroundImage: `url(${jumpFrontImg}), url(${jumpBackImg})`,
-    backgroundSize: "12%, 15%",
+    backgroundSize: "25%, 20%",
     backgroundRepeat: "no-repeat",
-    backgroundPosition: "10px 30px, 95% 95%"
+    backgroundPosition: "-10px 20px, 97% 97%",
+    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
+      backgroundSize: "15%, 15%",
+      backgroundPosition: "0% 5%, 100% 100%"
+    }
   },
   previewBackground: {
     composes: ["m-0"],
@@ -58,12 +64,25 @@ const Preview = () => {
           </Col>
           <Col>
             <h1 className={classes.title}>Getting to know!</h1>
-            <p className="pb-4">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Quibusdam, autem, ullam? Labore commodi est assumenda voluptatem
-              similique! Excepturi eligendi illo quis minus rem itaque illum aut
-              ut. Placeat, veniam, quae. Nisi quas, enim quam ipsum impedit
-              eligendi, mollitia iure maxime?
+            <p className="pb-4 pl-3 pr-3">
+              <q>
+                Fortnite is an online video game developed by Epic Games and
+                released in 2017. It is available in three distinct game mode
+                versions that otherwise share the same general gameplay and game
+                engine: Fortnite: Save the World, a cooperative shooter-survival
+                game for up to four players to fight off zombie-like creatures
+                and defend objects with fortifications they can build; Fortnite
+                Battle Royale, a free-to-play battle royale game where up to 100
+                players fight to be the last person standing; and Fortnite
+                Creative, where players are given complete freedom to create
+                worlds and battle arenas.
+              </q>
+              <CustomLink
+                classes="text-black-50 small d-flex justify-content-end"
+                external={true}
+                href="https://en.wikipedia.org/wiki/Fortnite"
+                content={`\u2013 Wikipedia`}
+              />
             </p>
           </Col>
         </Row>

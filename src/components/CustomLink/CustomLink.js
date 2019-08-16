@@ -4,7 +4,7 @@ const CustomLink = ({
   classes,
   href,
   title,
-  content,
+  placeholder,
   target,
   rel,
   external
@@ -16,7 +16,7 @@ const CustomLink = ({
     target={target || (external && "_blank")}
     rel={target || (external && "noopener noreferrer")}
   >
-    {content}
+    {placeholder}
   </a>
 );
 

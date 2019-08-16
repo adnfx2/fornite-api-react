@@ -7,13 +7,13 @@ import Snippet from "./Snippet";
 import FlexBackground from "./FlexBackground";
 import ComponentsFactory from "../../components/ComponentsFactory/ComponentsFactory";
 import { createUseStyles } from "react-jss";
-import { deviceWidth } from "../../styles/variables";
+import { deviceWidthPX } from "../../styles/variables";
 
 const useStyles = createUseStyles({
   containerCarousel: {
     composes: ["bg-dark position-relative"],
     transition: "padding 500ms ease-in-out",
-    [`@media (min-width: ${deviceWidth.sm})`]: {
+    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
       padding: "0 5vw"
     }
   },
@@ -28,7 +28,7 @@ const useStyles = createUseStyles({
     boxShadow: "0 0 8px rgba(255,255,255,.2)",
     letterSpacing: "1px",
     zIndex: "10",
-    [`@media (min-width: ${deviceWidth.sm})`]: {
+    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
       top: "5%",
       left: "8%"
     }

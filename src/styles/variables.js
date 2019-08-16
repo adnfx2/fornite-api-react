@@ -1,6 +1,6 @@
-export const deviceWidth = {
-  xs: "0px",
-  sm: "576px",
-  md: "992px",
-  lg: "1200px"
+export const deviceWidthPX = {
+  xs: 0,
+  sm: 576,
+  md: 992,
+  lg: 1200
 };

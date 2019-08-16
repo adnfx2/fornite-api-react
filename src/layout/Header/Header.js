@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import logo from "../../assets/images/lg-fornite.png";
 
 const Header = props => (
-    <Navbar sticky="top" bg="primary" variant="dark" expand="sm">
+    <Navbar bg="primary" variant="dark" expand="md">
       <Navbar.Brand href="#" className="w-25">
         <img src={logo} alt="fornite" width="100" />
       </Navbar.Brand>

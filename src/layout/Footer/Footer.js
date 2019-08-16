@@ -4,27 +4,33 @@ import List from "../../components/List/List";
 import CustomLink from "../../components/CustomLink/CustomLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import flaticon_svg from "../../assets/images/flaticon.svg";
-import { fornite_references, menu_links, contact_data } from "./footer_data";
+import {
+  contactsReferences,
+  menuReferences,
+  fortniteReferences
+} from "../../utils/links/links_references";
 import { faReact, faFontAwesomeFlag } from "@fortawesome/free-brands-svg-icons";
 
 const footerSections = [
-  { title: "Fortnite official", items: fornite_references },
-  { title: "Menu", items: menu_links },
-  { title: "Contact", items: contact_data }
+  { title: "Fortnite official", items: fortniteReferences },
+  { title: "Menu", items: menuReferences },
+  { title: "Contact", items: contactsReferences }
 ];
 
-const renderLinks = ({ type, label, content, faIcon, external }) => (
+const renderLinks = item => (
   <li className="py-1">
-    {faIcon && (
+    {item.faIcon && (
       <span className={"mr-2"}>
-        <FontAwesomeIcon icon={faIcon} />
+        <FontAwesomeIcon icon={item.faIcon} />
       </span>
     )}
-    {(type === "string" && <span>{content}</span>) || (
+    {type === "string" ? (
+      <span>{item.content}</span>
+    ) : (
       <CustomLink
         classes="text-light"
-        href={content}
-        content={<span>{label}</span>}
+        href={item.endpoint}
+        placeholder={<span>{item.placeholder}</span>}
         external={external}
       />
     )}
@@ -37,7 +43,7 @@ const CopyrightsLinks = {
       classes="text-white-50"
       href="https://www.flaticon.com/authors/freepik"
       title="Freepik"
-      content="Freepik"
+      placeholder="Freepik"
       external={true}
     />
   ),
@@ -45,7 +51,7 @@ const CopyrightsLinks = {
     <CustomLink
       href="https://www.flaticon.com/"
       title="Flaticon"
-      content={<img src={flaticon_svg} alt="Flaticon icon" width="75px" />}
+      placeholder={<img src={flaticon_svg} alt="Flaticon icon" width="75px" />}
       external={true}
     />
   ),
@@ -54,7 +60,7 @@ const CopyrightsLinks = {
       classes="text-white-50"
       href="https://fontawesome.com"
       title="FontAwesome"
-      content={
+      placeholder={
         <span>
           <FontAwesomeIcon icon={faFontAwesomeFlag} /> FontAwesome
         </span>
@@ -67,7 +73,7 @@ const CopyrightsLinks = {
       classes="text-white-50"
       href="https://adnfx2.github.io/adn-react-portfolio/"
       title="adnfx2"
-      content="@adnfx2"
+      placeholder="@adnfx2"
       external={true}
     />
   )

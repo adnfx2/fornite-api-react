@@ -8,15 +8,16 @@ const useStyles = createUseStyles({
     top: "1em",
     borderRadius: "10px",
     padding: "0.9em",
-    opacity: "0.92",
-    color: "#fafafa",
+    opacity: "0.82",
     boxShadow: mainColor => {
       return `0px 0px 20px ${color("white")
         .alpha(0.4)
         .hsl()}`;
     },
     cursor: "pointer",
-    fontSize: "14px",
+    fontSize: "calc(.7vw + 12px)",
+    color: "#fafafa",
+    textShadow: "0 0 4px rgba(0,0,0,.4)",
     background: mainColor => mainColor,
     transitionProperty: "opacity",
     transitionDuration: "300ms",
