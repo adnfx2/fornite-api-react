@@ -10,7 +10,7 @@ import { createUseStyles } from "react-jss";
 import { deviceWidth } from "../../styles/variables";
 
 const useStyles = createUseStyles({
-  ["container--carousel"]: {
+  containerCarousel: {
     composes: ["bg-dark position-relative"],
     transition: "padding 500ms ease-in-out",
     [`@media (min-width: ${deviceWidth.sm})`]: {
@@ -18,13 +18,14 @@ const useStyles = createUseStyles({
     }
   },
   carousel__title: {
-    composes: ["position-absolute bg-warning text-light font-weight-bolder"],
+    composes: ["position-absolute font-weight-bolder"],
     fontSize: "90%",
+    color: "white",
     top: "5%",
     left: "3%",
     padding: ".8% 2.8%",
     borderRadius: "10px",
-    boxShadow: "0 0 8px yellow",
+    boxShadow: "0 0 8px rgba(255,255,255,.2)",
     letterSpacing: "1px",
     zIndex: "10",
     [`@media (min-width: ${deviceWidth.sm})`]: {
@@ -43,7 +44,7 @@ const NewsFeed = props => {
   });
   const classes = useStyles();
   return (
-    <div className={classes["container--carousel"]}>
+    <div className={classes.containerCarousel}>
       <h5 className={classes.carousel__title}>Recent feed</h5>
       {news.length > 0 ? (
         <Carousel indicators={false} fade={true}>
