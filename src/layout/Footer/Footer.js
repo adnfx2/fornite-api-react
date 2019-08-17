@@ -3,13 +3,13 @@ import { Container, Row, Col } from "react-bootstrap";
 import List from "../../components/List/List";
 import CustomLink from "../../components/CustomLink/CustomLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import flaticon_svg from "../../assets/images/flaticon.svg";
+import { faReact } from "@fortawesome/free-brands-svg-icons";
 import {
   contactsReferences,
   menuReferences,
-  fortniteReferences
+  fortniteReferences,
+  copyrightsReferences
 } from "../../utils/links/links_references";
-import { faReact, faFontAwesomeFlag } from "@fortawesome/free-brands-svg-icons";
 
 const footerSections = [
   { title: "Fortnite official", items: fortniteReferences },
@@ -37,56 +37,45 @@ const renderLinks = item => (
   </li>
 );
 
-const CopyrightsLinks = {
-  Freepik: () => (
-    <CustomLink
-      classes="text-white-50"
-      href="https://www.flaticon.com/authors/freepik"
-      title="Freepik"
-      placeholder="Freepik"
-      external={true}
-    />
-  ),
-  Flaticon: () => (
-    <CustomLink
-      href="https://www.flaticon.com/"
-      title="Flaticon"
-      placeholder={<img src={flaticon_svg} alt="Flaticon icon" width="75px" />}
-      external={true}
-    />
-  ),
-  Fa: () => (
-    <CustomLink
-      classes="text-white-50"
-      href="https://fontawesome.com"
-      title="FontAwesome"
-      placeholder={
+const createLinks = refereces =>
+  refereces.keys.reduce((acc, reference) => {
+    const { endpoint, placeholder, external } = refereces[reference];
+
+    const finalPlaceholder =
+      typeof placeholder === "string" ? (
+        <span>{placeholder}</span>
+      ) : placeholder.image ? (
+        <img src={placeholder.image} alt="Flaticon icon" width="75px" />
+      ) : placeholder.fa ? (
         <span>
-          <FontAwesomeIcon icon={faFontAwesomeFlag} /> FontAwesome
+          <FontAwesomeIcon icon={placeholder.fa} /> {reference}
         </span>
-      }
-      external={true}
-    />
-  ),
-  Adnfx2: () => (
-    <CustomLink
-      classes="text-white-50"
-      href="https://adnfx2.github.io/adn-react-portfolio/"
-      title="adnfx2"
-      placeholder="@adnfx2"
-      external={true}
-    />
-  )
-};
+      ) : null;
+
+    return {
+      ...acc,
+      [reference]: () => (
+        <CustomLink
+          classes="text-light"
+          href={endpoint}
+          placeholder={finalPlaceholder}
+          external={external}
+        />
+      )
+    };
+  }, {});
 
 const Footer = props => {
-  const { Adnfx2, Freepik, Flaticon, Fa } = CopyrightsLinks;
+  const { Adnfx2, Freepik, Flaticon, FontAwesome } = createLinks(
+    copyrightsReferences
+  );
+
   return (
     <footer className="pt-5 bg-dark text-light small">
       <Container>
         <Row>
           {footerSections.map(({ title, items }) => (
-            <Col xs={12} md={4}>
+            <Col className="pr-md-2 pl-md-2 pr-lg-5 pl-lg-5" xs={12} md={4}>
               <h5>{title}</h5>
               <List
                 renderItem={renderLinks}
@@ -101,8 +90,8 @@ const Footer = props => {
             <hr className="m-0 pb-3" />
             <div className="text-center">
               This website is made with <FontAwesomeIcon icon={faReact} /> by{" "}
-              <Adnfx2 />. Icons made by <Freepik /> from <Flaticon /> and <Fa />
-              .
+              <Adnfx2 />. Icons made by <Freepik /> from <Flaticon /> and{" "}
+              <FontAwesome />.
             </div>
           </Col>
         </Row>

@@ -2,14 +2,17 @@ import {
   faTwitch,
   faFacebook,
   faTwitter,
-  faLinkedin
+  faLinkedin,
+  faFontAwesomeFlag
 } from "@fortawesome/free-brands-svg-icons";
-
 import {
   faExternalLinkAlt,
   faEnvelope,
   faPhone
 } from "@fortawesome/free-solid-svg-icons";
+import flaticon_svg from "../../assets/images/flaticon.svg";
+
+const URL = "URL";
 
 const addKeysFieldToObject = o => {
   if (typeof o !== "object") {
@@ -33,8 +36,8 @@ const contacts = {
     faIcon: faPhone
   },
   linkedIn: {
-    type: "url",
-    endpoint: "www.google.com",
+    type: URL,
+    endpoint: "https://www.linkedin.com/in/adrian-pirela-67106978",
     placeholder: "LinkedIn",
     faIcon: faLinkedin,
     external: true
@@ -43,43 +46,43 @@ const contacts = {
 export const contactsReferences = addKeysFieldToObject(contacts);
 
 const menu = {
-  home: { type: "url", endpoint: "#home", placeholder: "Home" },
-  items: { type: "url", endpoint: "#items", placeholder: "Items" },
-  blog: { type: "url", endpoint: "#blog", placeholder: "Blog" }
+  home: { type: URL, endpoint: "#home", placeholder: "Home" },
+  items: { type: URL, endpoint: "#items", placeholder: "Items" },
+  blog: { type: URL, endpoint: "#blog", placeholder: "Blog" }
 };
 export const menuReferences = addKeysFieldToObject(menu);
 
 const fortnite = {
   home: {
-    type: "url",
+    type: URL,
     endpoint: "https://www.epicgames.com/fortnite",
     placeholder: "Fortnite",
     faIcon: faExternalLinkAlt,
     external: true
   },
   download: {
-    type: "url",
+    type: URL,
     endpoint: "https://www.epicgames.com/fortnite/en-US/download",
     placeholder: "Get fortnite now!",
     faIcon: faExternalLinkAlt,
     external: true
   },
   fb: {
-    type: "url",
+    type: URL,
     endpoint: "https://www.facebook.com/FortniteGame/",
     placeholder: "Facebook",
     faIcon: faFacebook,
     external: true
   },
   twitter: {
-    type: "url",
+    type: URL,
     endpoint: "https://twitter.com/FortniteGame",
     placeholder: "Twitter",
     faIcon: faTwitter,
     external: true
   },
   twitch: {
-    type: "url",
+    type: URL,
     endpoint: "https://www.twitch.tv/fortnitegame",
     placeholder: "Twitch",
     faIcon: faTwitch,
@@ -87,3 +90,32 @@ const fortnite = {
   }
 };
 export const fortniteReferences = addKeysFieldToObject(fortnite);
+
+const copyrights = {
+  Freepik: {
+    type: URL,
+    endpoint: "https://www.flaticon.com/authors/freepik",
+    placeholder: "Freepik",
+    external: true
+  },
+  Flaticon: {
+    type: URL,
+    endpoint: "https://www.flaticon.com/",
+    placeholder: { image: flaticon_svg },
+    external: true
+  },
+
+  FontAwesome: {
+    type: URL,
+    endpoint: "https://fontawesome.com",
+    placeholder: { fa: faFontAwesomeFlag },
+    external: true
+  },
+  Adnfx2: {
+    type: URL,
+    endpoint: "https://adnfx2.github.io/adn-react-portfolio/",
+    placeholder: "@adnfx2",
+    external: true
+  }
+};
+export const copyrightsReferences = addKeysFieldToObject(copyrights);

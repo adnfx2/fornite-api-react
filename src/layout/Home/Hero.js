@@ -10,7 +10,7 @@ import { fortniteReferences } from "../../utils/links/links_references";
 const useStyles = createUseStyles({
   button: {
     position: "absolute",
-    bottom: "16.5%",
+    bottom: "10%",
     left: "50%",
     transform: "translateX(-50%)",
     padding: ".6rem 1.8rem 0rem",
@@ -19,12 +19,17 @@ const useStyles = createUseStyles({
     lineHeight: "2",
     letterSpacing: "1px",
     [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
-      bottom: "25%"
+      bottom: "15%",
+      fontSize: "calc(0.7vw + 1.6rem)"
     }
   },
   flexBackground: {
     composes: ["d-block w-100"],
     padding: ({ padding }) => padding || ""
+  },
+  c_jumbotron: {
+    composes: ["m-0 pt-5 pb-5"],
+    backgroundColor: "hsla(210,13%,50%,.3)"
   }
 });
 
@@ -45,15 +50,15 @@ const Hero = props => {
   const classes = useStyles(image.styles);
 
   return (
-    <div className="pt-5 pb-5 position-relative">
-      <Jumbotron fluid={true}>
+    <div className="pt-5 position-relative">
+      <Jumbotron className={classes.c_jumbotron} fluid={true}>
         <img
           className={classes.flexBackground}
           src={image.selectedImage}
           alt="Fortnite Hero"
         />
         <CustomLink
-          href={fortniteReferences.download}
+          href={fortniteReferences.download.endpoint}
           external={true}
           placeholder={<Button className={classes.button}>Join now!</Button>}
         />

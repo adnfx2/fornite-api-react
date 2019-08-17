@@ -2,7 +2,7 @@
 
 :root {
   --main-font: "Montserrat", sans-serif;
-  --fortnite-font: "Luckiest Guy", cursive;
+  --fortnite-font: "Luckiest Guy", arial, sans-serif;
 }
 
 body {

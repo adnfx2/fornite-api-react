@@ -46,7 +46,7 @@ const useStyles = createUseStyles({
   },
   previewBackground: {
     composes: ["m-0"],
-    backgroundColor: "#e9ecef"
+    backgroundColor: "hsla(210,13%,50%,.3)"
   }
 });
 
