@@ -1,6 +1,5 @@
 import {
   faTwitch,
-  faYoutube,
   faFacebook,
   faTwitter,
   faLinkedin
@@ -14,7 +13,7 @@ import {
 
 const addKeysFieldToObject = o => {
   if (typeof o !== "object") {
-    return console.warn("error");
+    throw new Error(`addKeysFieldToObject requires an object as argument`);
   }
   const keys = Object.keys(o);
   return { ...o, keys };
@@ -48,7 +47,7 @@ const menu = {
   items: { type: "url", endpoint: "#items", placeholder: "Items" },
   blog: { type: "url", endpoint: "#blog", placeholder: "Blog" }
 };
-export const menuReferences = addKeysFieldToObject(menu_links);
+export const menuReferences = addKeysFieldToObject(menu);
 
 const fortnite = {
   home: {
@@ -87,4 +86,4 @@ const fortnite = {
     external: true
   }
 };
-export const fortniteReferences = addKeysFieldToObject(fornite);
+export const fortniteReferences = addKeysFieldToObject(fortnite);

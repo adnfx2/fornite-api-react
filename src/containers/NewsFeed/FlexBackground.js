@@ -1,6 +1,5 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import color from "color";
 import { deviceWidthPX } from "../../styles/variables";
 
 const useStyles = createUseStyles({

@@ -1,6 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import { Container, Row, Col, Media } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import CustomLink from "../../components/CustomLink/CustomLink";
 import { deviceWidthPX } from "../../styles/variables";
 import previewImg from "../../assets/images/fortnite-preview.jpg";
@@ -81,7 +81,7 @@ const Preview = () => {
                 classes="text-black-50 small d-flex justify-content-end"
                 external={true}
                 href="https://en.wikipedia.org/wiki/Fortnite"
-                content={`\u2013 Wikipedia`}
+                placeholder={`\u2013 Wikipedia`}
               />
             </p>
           </Col>

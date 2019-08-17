@@ -24,14 +24,14 @@ const renderLinks = item => (
         <FontAwesomeIcon icon={item.faIcon} />
       </span>
     )}
-    {type === "string" ? (
+    {item.type === "string" ? (
       <span>{item.content}</span>
     ) : (
       <CustomLink
         classes="text-light"
         href={item.endpoint}
         placeholder={<span>{item.placeholder}</span>}
-        external={external}
+        external={item.external}
       />
     )}
   </li>

@@ -6,23 +6,19 @@ import Hero from "./Hero";
 
 const Home = props => (
   <React.Fragment>
-    <Section pt={false}>
+    <section pt={false}>
       <NewsFeed />
-    </Section>
-    <Section>
+    </section>
+    <section>
       <Preview />
-    </Section>
-    <Section>
+    </section>
+    <section>
       <Features />
-    </Section>
-    <Section>
+    </section>
+    <section>
       <Hero />
-    </Section>
+    </section>
   </React.Fragment>
-);
-
-const Section = ({ pt = true, children }) => (
-  <section className={""}>{children}</section>
 );
 
 export default Home;

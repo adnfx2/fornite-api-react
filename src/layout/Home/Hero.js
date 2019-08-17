@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Container, Jumbotron, Button } from "react-bootstrap";
+import { Jumbotron, Button } from "react-bootstrap";
 import CustomLink from "../../components/CustomLink/CustomLink";
 import { createUseStyles } from "react-jss";
 import heroImgLandscape from "../../assets/images/fortniteHeroLandscape.jpg";
 import heroImgPortrait from "../../assets/images/fortniteHeroPortrait.jpeg";
 import { deviceWidthPX } from "../../styles/variables";
 import { fortniteReferences } from "../../utils/links/links_references";
-const PORTRAIT = "PORTRAIT";
-const LANDSCAPE = "LANDSCAPE";
 
 const useStyles = createUseStyles({
   button: {
     position: "absolute",
-    bottom: "35%",
+    bottom: "16.5%",
     left: "50%",
     transform: "translateX(-50%)",
     padding: ".6rem 1.8rem 0rem",
     fontFamily: "var(--fortnite-font)",
     fontSize: "1.3rem",
     lineHeight: "2",
-    zindex: "1000"
+    letterSpacing: "1px",
+    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
+      bottom: "25%"
+    }
   },
   flexBackground: {
     composes: ["d-block w-100"],
@@ -49,10 +50,10 @@ const Hero = props => {
         <img
           className={classes.flexBackground}
           src={image.selectedImage}
-          alt="Fortnite Hero Image"
+          alt="Fortnite Hero"
         />
         <CustomLink
-          href={fortnite_references.dow}
+          href={fortniteReferences.download}
           external={true}
           placeholder={<Button className={classes.button}>Join now!</Button>}
         />
