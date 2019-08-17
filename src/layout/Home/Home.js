@@ -6,7 +6,7 @@ import Hero from "./Hero";
 
 const Home = props => (
   <React.Fragment>
-    <section pt={false}>
+    <section>
       <NewsFeed />
     </section>
     <section>

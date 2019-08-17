@@ -17,8 +17,8 @@ const footerSections = [
   { title: "Contact", items: contactsReferences }
 ];
 
-const renderLinks = item => (
-  <li className="py-1">
+const renderLinks = ({ itemRef, item }) => (
+  <li key={itemRef} className="py-1">
     {item.faIcon && (
       <span className={"mr-2"}>
         <FontAwesomeIcon icon={item.faIcon} />
@@ -75,7 +75,12 @@ const Footer = props => {
       <Container>
         <Row>
           {footerSections.map(({ title, items }) => (
-            <Col className="pr-md-2 pl-md-2 pr-lg-5 pl-lg-5" xs={12} md={4}>
+            <Col
+              key={title}
+              className="pr-md-2 pl-md-2 pr-lg-5 pl-lg-5"
+              xs={12}
+              md={4}
+            >
               <h5>{title}</h5>
               <List
                 renderItem={renderLinks}
