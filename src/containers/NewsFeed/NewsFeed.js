@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Carousel from "react-bootstrap/Carousel";
 import Spinner from "react-bootstrap/Spinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUnlink } from "@fortawesome/free-solid-svg-icons";
 import { fetchNews } from "../../redux/actions/actions";
 import Snippet from "./Snippet";
 import FlexBackground from "./FlexBackground";
@@ -21,29 +23,39 @@ const useStyles = createUseStyles({
   carousel__title: {
     composes: ["position-absolute font-weight-bolder"],
     fontSize: "90%",
-    color: "white",
     top: "5%",
     left: "3%",
     padding: ".8% 2.8%",
     borderRadius: "10px",
     boxShadow: "0 0 8px rgba(255,255,255,.2)",
+    color: "white",
+    textShadow: "0 0 4px black",
     letterSpacing: "1px",
     zIndex: "10",
     [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
       top: "5%",
       left: "8%"
     }
+  },
+
+  carousel__error: {
+    fontWeight: "bold",
+    letterSpacing: "1px",
+    color: "#4c4c4c",
+    cursor: "pointer"
   }
 });
 
 const NewsFeed = props => {
-  const { loadNews, news } = props;
+  const { loadNews, news, errorMessage } = props;
   useEffect(() => {
     if (!news) {
       loadNews();
     }
-  });
-  console.log({ news });
+  }, []);
+  const reloadHandler = () => {
+    loadNews();
+  };
   const classes = useStyles();
   return (
     <div className={classes.containerCarousel}>
@@ -61,22 +73,31 @@ const NewsFeed = props => {
         </Carousel>
       ) : (
         <FlexBackground>
-          <ComponentsFactory quantity={5}>
-            <Spinner animation="grow" role="status" variant="light">
-              <span className="sr-only">Loading...</span>
-            </Spinner>
-          </ComponentsFactory>
+          {!errorMessage ? (
+            <ComponentsFactory quantity={5}>
+              <Spinner animation="grow" role="status" variant="light">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            </ComponentsFactory>
+          ) : (
+            <div onClick={reloadHandler} className={classes.carousel__error}>
+              <FontAwesomeIcon icon={faUnlink} /> {errorMessage}, Click here to
+              reload!
+            </div>
+          )}
         </FlexBackground>
       )}
     </div>
   );
 };
 
-const mapStateToProps = ({ dataFetched }) => {
+const mapStateToProps = ({ dataFetched, errors }) => {
   const newsKey = ENDPOINT_NEWS_STW.split("/")[0];
   const news = dataFetched[newsKey];
+  const error = errors.apiErrors[newsKey];
   return {
-    news: news && news.data
+    news: news && news.data,
+    errorMessage: error
   };
 };
 

@@ -24,7 +24,7 @@ export default ({ data, toleranceFactor = 60, schema }) =>
         const camelizedData = camelizeKeys(slicedData);
         const normalizedData = normalize(camelizedData, schema);
 
-        // Recursive object merging including arrays
+        // Recursive merging, including arrays
         finalData = _mergeWith(
           finalData,
           normalizedData,

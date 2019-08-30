@@ -23,13 +23,12 @@ const simplifyNestedResponse = (obj, dataLocation) => {
 
 // This function wraps an object inside it's category and adds a timestamp.
 const reorganizeObj = (data, tag) => {
-  const _tag = tag.split("/")[0];
   if (!data.entities) {
-    return { [_tag]: { data, timestamp: Date.now() } };
+    return { [tag]: { data, timestamp: Date.now() } };
   }
   const { entities, result } = data;
   return {
-    [_tag]: {
+    [tag]: {
       ...entities,
       result,
       timestamp: Date.now()
@@ -60,7 +59,7 @@ const callApi = (
         data: plainData,
         toleranceFactor: 10,
         schema
-      }).then(result => reorganizeObj(result, endpoint));
+      });
     });
 };
 
@@ -92,27 +91,42 @@ const callFortniteAPI = store => next => action => {
   if (!types.every(type => typeof type === "string")) {
     throw new Error("Expected action types to be strings.");
   }
+
   const actionWith = data => {
     const finalAction = { ...action, ...data };
     delete finalAction[CALL_API];
     return finalAction;
   };
 
+  const endpointIdentifier = endpoint.split("/")[0];
+
   const [requestType, successType, failureType] = types;
-  next(actionWith({ type: requestType }));
+  next(
+    actionWith({
+      type: requestType,
+      apiErrors: {
+        [endpointIdentifier]: null
+      }
+    })
+  );
   return callApi(endpoint, config).then(
-    response =>
-      next(
+    result => {
+      const response = reorganizeObj(result, endpointIdentifier);
+      return next(
         actionWith({
           response,
           type: successType
         })
-      ),
+      );
+    },
     error =>
       next(
         actionWith({
           type: failureType,
-          error: error.message || error || "Something bad happened"
+          apiErrors: {
+            [endpointIdentifier]:
+              error.message || error || "Something bad happened"
+          }
         })
       )
   );

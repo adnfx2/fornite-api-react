@@ -7,13 +7,19 @@ const dataFetched = (state = {}, action) => {
   return state;
 };
 
+const errors = (state = { apiErrors: {} }, action) => {
+  if (action.apiErrors) {
+    return { ...state, apiErrors: { ...action.apiErrors } };
+  }
+  return state;
+};
+
 const rootReducer = combineReducers({
-  dataFetched
+  dataFetched,
+  errors
 });
 
 export default rootReducer;
-
-
 
 // -----> eyes on <-----
 // import * as ActionTypes from "../actions/actions";
