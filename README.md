@@ -2,7 +2,7 @@ Fortnite Api
 
 Development on-going  ---> Laying out UI (Home page)
 
-## [Latest changes on bootstraping branch!]
+## [Latest changes on itemPage branch!]
 
 ----------------------------------------------------------
 
