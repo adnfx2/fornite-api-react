@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Carousel from "react-bootstrap/Carousel";
 import Spinner from "react-bootstrap/Spinner";
-import * as Actions from "../../redux/actions/actions";
+import { fetchNews } from "../../redux/actions/actions";
 import Snippet from "./Snippet";
 import FlexBackground from "./FlexBackground";
 import ComponentsFactory from "../../components/ComponentsFactory/ComponentsFactory";
 import { createUseStyles } from "react-jss";
 import { deviceWidthPX } from "../../styles/variables";
+import { ENDPOINT_NEWS_STW } from "../../utils/api/api";
 
 const useStyles = createUseStyles({
   containerCarousel: {
@@ -38,15 +39,16 @@ const useStyles = createUseStyles({
 const NewsFeed = props => {
   const { loadNews, news } = props;
   useEffect(() => {
-    if (!news.length) {
+    if (!news) {
       loadNews();
     }
   });
+  console.log({ news });
   const classes = useStyles();
   return (
     <div className={classes.containerCarousel}>
       <h5 className={classes.carousel__title}>Recent feed</h5>
-      {news.length > 0 ? (
+      {news ? (
         <Carousel indicators={false} fade={true}>
           {news.map(({ title, image, ...props }) => (
             <Carousel.Item key={title}>
@@ -70,12 +72,16 @@ const NewsFeed = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  news: state.news.data
-});
+const mapStateToProps = ({ dataFetched }) => {
+  const newsKey = ENDPOINT_NEWS_STW.split("/")[0];
+  const news = dataFetched[newsKey];
+  return {
+    news: news && news.data
+  };
+};
 
 const mapDispatchToProps = {
-  loadNews: Actions.fetchNews
+  loadNews: fetchNews
 };
 
 export default connect(

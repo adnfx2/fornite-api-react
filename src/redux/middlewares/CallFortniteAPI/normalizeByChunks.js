@@ -5,7 +5,8 @@ import { camelizeKeys } from "humps";
 
 export default ({ data, toleranceFactor = 60, schema }) =>
   new Promise((resolve, reject) => {
-    if (!Array.isArray(data)) reject(`Error: "data" must be an array!`);
+    if (!Array.isArray(data))
+      reject(`normalizeByChunks() argument error, "data" must be an array`);
     if (data.length < toleranceFactor || !schema) {
       const camelizedData = camelizeKeys(data);
       return resolve(schema ? normalize(data, schema) : camelizedData);

@@ -1,27 +1,27 @@
 import axios from "axios";
 import {
   API_ROOT,
-  ENDPOINT_ITEMS,
-  ENDPOINT_NEWS_STW,
-  ENDPOINT_WEAPONS,
+  // ENDPOINT_ITEMS,
+  // ENDPOINT_NEWS_STW,
+  // ENDPOINT_WEAPONS,
   AUTH_TOKEN
 } from "../../../utils/api/api";
-import { schemas } from "./schemas";
 import normalizeByChunks from "./normalizeByChunks";
-import { camelize } from "humps";
 
-const simplifyNestedResponse = (response, nestedProps) => {
-  if (!Array.isArray(nestedProps)) {
+// This function returns an array nested in an object, the array should be located at "dataLocation" of "obj".
+const simplifyNestedResponse = (obj, dataLocation) => {
+  if (!Array.isArray(dataLocation)) {
     throw new Error("nestedProps must be an array");
   }
-  return nestedProps.reduce((acc, prop) => {
+  return dataLocation.reduce((acc, prop) => {
     if (!acc[prop]) {
       throw new Error(`Property "${prop}" not found in fetched data`);
     }
     return acc[prop];
-  }, response);
+  }, obj);
 };
 
+// This function wraps an object inside it's category and adds a timestamp.
 const reorganizeObj = (data, tag) => {
   const _tag = tag.split("/")[0];
   if (!data.entities) {
@@ -37,7 +37,12 @@ const reorganizeObj = (data, tag) => {
   };
 };
 
-const callApi = (endpoint, { schema, nestedProps }) => {
+// AJAX
+const callApi = (
+  endpoint,
+  config = { schema: null, locationInResponse: null }
+) => {
+  const { schema, locationInResponse } = config;
   const fullUrl =
     endpoint.indexOf(API_ROOT) === -1 ? `${API_ROOT}/${endpoint}` : endpoint;
 
@@ -48,19 +53,13 @@ const callApi = (endpoint, { schema, nestedProps }) => {
       }
     })
     .then(response => {
-      const test = response.data.data;
-      console.log(
-        "rawData ->",
-        test.filter(x => x.itemId === "0add7aa-f3225d4-8e12143-753c789")
-      );
-      const plainData = nestedProps
-        ? simplifyNestedResponse(response, nestedProps)
+      const plainData = locationInResponse
+        ? simplifyNestedResponse(response, locationInResponse)
         : response;
-
       return normalizeByChunks({
         data: plainData,
         toleranceFactor: 10,
-        schema: schema
+        schema
       }).then(result => reorganizeObj(result, endpoint));
     });
 };
@@ -75,7 +74,7 @@ const callFortniteAPI = store => next => action => {
     return next(action);
   }
 
-  const { endpoint, schema, types } = callAPI;
+  const { endpoint, config, types } = callAPI;
 
   if (typeof endpoint === "function") {
     throw new Error(
@@ -87,27 +86,21 @@ const callFortniteAPI = store => next => action => {
     throw new Error("Specify a string endpoint URL.");
   }
 
-  // if (!schema) {
-  //   throw new Error("Specify one of the exported Schemas.");
-  // }
-
   if (!Array.isArray(types) || types.length !== 3) {
     throw new Error("Expected an array of three action types.");
   }
   if (!types.every(type => typeof type === "string")) {
     throw new Error("Expected action types to be strings.");
   }
-
   const actionWith = data => {
-    const finalAction = { ...action, data };
+    const finalAction = { ...action, ...data };
     delete finalAction[CALL_API];
     return finalAction;
   };
 
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }));
-
-  return callApi(endpoint, schema).then(
+  return callApi(endpoint, config).then(
     response =>
       next(
         actionWith({
@@ -119,7 +112,7 @@ const callFortniteAPI = store => next => action => {
       next(
         actionWith({
           type: failureType,
-          error: error.message || "Something bad happened"
+          error: error.message || error || "Something bad happened"
         })
       )
   );

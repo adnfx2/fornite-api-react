@@ -77,17 +77,18 @@ const weaponsSchema = new schema.Array(weapon);
 // Schemas bundle
 export const schemas = {
 
-  commonNestedProps: ["data", "data"],
+  commonLocation: ["data", "data"],
   item,
   itemsSchema,
   weapon,
   weaponsSchema,
-  weaponsNestedProps: ["data", "data", "entries"]
+  weaponsLocation: ["data", "data", "entries"]
 };
 
 /* Notes:
-"____NestedProps" convention stores an array with properties where the data required
-is located in a JSON response, from parent to child.
+"someDataLocation" convention stores an array with strings representing the fields
+ of an object where the data required is located in a JSON response, from parent to
+ child.
 
   Example:
 
@@ -101,5 +102,5 @@ is located in a JSON response, from parent to child.
 
   The path to obtain what you want should be stored like this:
 
-  const commonNestedProps = ["data", "data"]
+  const myDataLocation = ["data", "data"]
   */

@@ -1,73 +1,49 @@
-import axios from "axios";
-import * as api from "../../utils/api/api";
-import { LOCAL_REDUX_STORE } from "../../utils/localStorage/localStorage";
 import { CALL_API } from "../middlewares/CallFortniteAPI/CallFortniteAPI";
+import { schemas } from "../middlewares/CallFortniteAPI/schemas";
+import {
+  ENDPOINT_NEWS_STW,
+  ENDPOINT_ITEMS,
+  ENDPOINT_WEAPONS
+} from "../../utils/api/api";
 
-export const REQUEST_ITEMS = "REQUEST_ITEMS";
-export const SUCCESS_ITEMS = "SUCCESS_ITEMS";
-export const FAILURE_ITEMS = "FAILURE_ITEMS";
-
-//***********************ITEMS
-// const fetchingItems = () => ({ type: REQUEST_ITEMS });
-// const successItems = items => ({ type: SUCCESS_ITEMS, payload: items });
-// const failureItems = error => ({ type: FAILURE_ITEMS, payload: error });
-//
-// export const fetchItems = () => dispatch => {
-//   const composedApi = api.API_ROOT + api.NEWS_STW;
-//   dispatch(fetchingItems());
-//
-//   return axios
-//     .get(composedApi, {
-//       headers: {
-//         Authorization: api.AUTH_TOKEN
-//       }
-//     })
-//     .then(response => {
-//       localStorage.setItem(
-//         LOCAL_REDUX_STORE,
-//         JSON.stringify(response.data.data)
-//       );
-//       dispatch(successItems(response.data.data));
-//       console.log(response);
-//     })
-//     .catch(error => dispatch(failureItems(error)));
-// };
-
+// News
 export const REQUEST_NEWS = "REQUEST_NEWS";
 export const SUCCESS_NEWS = "SUCCESS_NEWS";
 export const FAILURE_NEWS = "FAILURE_NEWS";
-
-//***********************NEWS
-// const fetchingNews = () => ({ type: REQUEST_NEWS });
-// const successNews = news => ({ type: SUCCESS_NEWS, payload: news });
-// const failureNews = error => ({ type: FAILURE_NEWS, payload: error });
-//
-// export const fetchNews = () => dispatch => {
-//   const composedApi = api.API_ROOT + api.NEWS_STW;
-//   dispatch(fetchingNews());
-//
-//   return axios
-//     .get(composedApi, {
-//       headers: {
-//         Authorization: api.AUTH_TOKEN
-//       }
-//     })
-//     .then(response => {
-//       localStorage.setItem(
-//         LOCAL_REDUX_STORE,
-//         JSON.stringify(response.data.data)
-//       );
-//       dispatch(successNews(response.data.data));
-//       console.log(response);
-//     })
-//     .catch(error => dispatch(failureNews(error)));
-// };
-
-export const fetchNews2 = () => ({
+export const fetchNews = () => ({
   [CALL_API]: {
     types: [REQUEST_NEWS, SUCCESS_NEWS, FAILURE_NEWS],
-    endpoint: api.ENDPOINT_NEWS_STW
+    endpoint: ENDPOINT_NEWS_STW,
+    config: { locationInResponse: schemas.commonLocation }
   }
 });
 
-// export const loadNews = () => dispatch => dispatch(fetchNews2());
+// Items
+export const REQUEST_ITEMS = "REQUEST_ITEMS";
+export const SUCCESS_ITEMS = "SUCCESS_ITEMS";
+export const FAILURE_ITEMS = "FAILURE_ITEMS";
+export const fetchItems = () => ({
+  [CALL_API]: {
+    types: [REQUEST_ITEMS, SUCCESS_ITEMS, FAILURE_ITEMS],
+    endpoint: ENDPOINT_ITEMS,
+    config: {
+      schema: schemas.itemsSchema,
+      locationInResponse: schemas.commonLocation
+    }
+  }
+});
+
+// Weapons
+export const REQUEST_WEAPONS = "REQUEST_WEAPONS";
+export const SUCCESS_WEAPONS = "SUCCESS_WEAPONS";
+export const FAILURE_WEAPONS = "FAILURE_WEAPONS";
+export const fetchWeapons = () => ({
+  [CALL_API]: {
+    types: [REQUEST_WEAPONS, SUCCESS_WEAPONS, FAILURE_WEAPONS],
+    endpoint: ENDPOINT_WEAPONS,
+    config: {
+      schema: schemas.weaponsSchema,
+      locationInResponse: schemas.weaponsLocation
+    }
+  }
+});
