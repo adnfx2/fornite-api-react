@@ -1,20 +1,34 @@
 import React from "react";
 import { Provider } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import Home from "../Home/Home";
 import Footer from "../Footer/Footer";
-// const news = JSON.parse(localStorage.getItem("LOCAL_REDUX_STORE"));
+import routes from "../../routes/routes";
 
 const App = ({ store }) => (
   <Provider store={store}>
-    <div>
-      <Header />
-      <Main>
-        <Home />
-      </Main>
-      <Footer />
-    </div>
+    <Router>
+      <React.Fragment>
+        <Header />
+        <Main>
+          <Switch>
+            {routes.map(({ name, ...route }) =>
+              // prettier-ignore
+              route.component
+                ? <Route key={name} {...route} />
+                : <Redirect key={name} {...route} />
+            )}
+          </Switch>
+        </Main>
+        <Footer />
+      </React.Fragment>
+    </Router>
   </Provider>
 );
 

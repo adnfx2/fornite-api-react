@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Jumbotron, Button } from "react-bootstrap";
-import CustomLink from "../../components/CustomLink/CustomLink";
+import CustomLink from "../../../components/CustomLink/CustomLink";
 import { createUseStyles } from "react-jss";
-import heroImgLandscape from "../../assets/images/fortniteHeroLandscape.jpg";
-import heroImgPortrait from "../../assets/images/fortniteHeroPortrait.jpeg";
-import { deviceWidthPX } from "../../styles/variables";
-import { fortniteReferences } from "../../utils/links/links_references";
+import heroImgLandscape from "../../../assets/images/fortniteHeroLandscape.jpg";
+import heroImgPortrait from "../../../assets/images/fortniteHeroPortrait.jpeg";
+import { deviceWidthPX } from "../../../styles/variables";
+import { fortniteReferences } from "../../../utils/links/links_references";
 
 const useStyles = createUseStyles({
   button: {
@@ -50,20 +50,22 @@ const Hero = props => {
   const classes = useStyles(image.styles);
 
   return (
-    <div className="pt-5 position-relative">
-      <Jumbotron className={classes.c_jumbotron} fluid={true}>
-        <img
-          className={classes.flexBackground}
-          src={image.selectedImage}
-          alt="Fortnite Hero"
-        />
-        <CustomLink
-          href={fortniteReferences.download.endpoint}
-          external={true}
-          placeholder={<Button className={classes.button}>Join now!</Button>}
-        />
-      </Jumbotron>
-    </div>
+    <section>
+      <div className="pt-5 position-relative">
+        <Jumbotron className={classes.c_jumbotron} fluid={true}>
+          <img
+            className={classes.flexBackground}
+            src={image.selectedImage}
+            alt="Fortnite Hero"
+          />
+          <CustomLink
+            href={fortniteReferences.download.endpoint}
+            external={true}
+            placeholder={<Button className={classes.button}>Join now!</Button>}
+          />
+        </Jumbotron>
+      </div>
+    </section>
   );
 };
 

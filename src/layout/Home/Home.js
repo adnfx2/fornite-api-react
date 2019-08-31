@@ -1,23 +1,15 @@
 import React from "react";
 import NewsFeed from "../../containers/NewsFeed/NewsFeed";
-import Preview from "./Preview";
-import Features from "./Features";
-import Hero from "./Hero";
+import Preview from "./components/Preview";
+import Features from "./components/Features";
+import Hero from "./components/Hero";
 
 const Home = props => (
   <React.Fragment>
-    <section>
-      <NewsFeed />
-    </section>
-    <section>
-      <Preview />
-    </section>
-    <section>
-      <Features />
-    </section>
-    <section>
-      <Hero />
-    </section>
+    <NewsFeed />
+    <Preview />
+    <Features />
+    <Hero />
   </React.Fragment>
 );
 

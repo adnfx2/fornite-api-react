@@ -33,12 +33,12 @@ const renderList = items =>
 const Home = props => {
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <section>
       <Container className="pt-5 pb-4" fluid={true}>
         <h1 className={classes.features__title}>Gametributes!</h1>
         <Row noGutters={true}>{renderList(features)}</Row>
       </Container>
-    </React.Fragment>
+    </section>
   );
 };
 export default Home;

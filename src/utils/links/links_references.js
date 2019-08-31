@@ -46,9 +46,9 @@ const contacts = {
 export const contactsReferences = addKeysFieldToObject(contacts);
 
 const menu = {
-  home: { type: URL, endpoint: "#home", placeholder: "Home" },
-  items: { type: URL, endpoint: "#items", placeholder: "Items" },
-  blog: { type: URL, endpoint: "#blog", placeholder: "Blog" }
+  home: { type: URL, endpoint: "/home", placeholder: "Home" },
+  items: { type: URL, endpoint: "/store", placeholder: "Store" },
+  blog: { type: URL, endpoint: "/dashboard", placeholder: "Dashboard" }
 };
 export const menuReferences = addKeysFieldToObject(menu);
 
