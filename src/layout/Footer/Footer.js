@@ -42,15 +42,18 @@ const createLinks = refereces =>
     const { endpoint, placeholder, external } = refereces[reference];
 
     const finalPlaceholder =
+      // Show placeholder?
       typeof placeholder === "string" ? (
         <span>{placeholder}</span>
-      ) : placeholder.image ? (
+      ) : // Show image?
+      placeholder.image ? (
         <img src={placeholder.image} alt="Flaticon icon" width="75px" />
-      ) : placeholder.fa ? (
+      ) : // Show icon?
+      placeholder.fa ? (
         <span>
           <FontAwesomeIcon icon={placeholder.fa} /> {reference}
         </span>
-      ) : null;
+      ) : "";
 
     return {
       ...acc,

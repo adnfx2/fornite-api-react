@@ -43,12 +43,15 @@ const useStyles = createUseStyles({
     margin: "0",
     padding: "0",
     fontSize: ".8em",
-    overflow: "hidden",
+    overflowY: "scroll",
     letterSpacing: "0.2px",
     transitionProperty: "max-height margin",
     transitionDuration: "300ms",
     transitionDelay: "50ms",
-    transitionTimingFunction: "ease-in-out"
+    transitionTimingFunction: "ease-in-out",
+    [`&::-webkit-scrollbar`]: {
+      width: "0px"
+    }
   }
 });
 

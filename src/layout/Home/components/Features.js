@@ -2,14 +2,17 @@ import React from "react";
 import { Container, Row, Col, Media } from "react-bootstrap";
 import { features } from "./Features_data";
 import { createUseStyles } from "react-jss";
+import { deviceWidthPX } from "../../../styles/variables";
 
 const useStyles = createUseStyles({
   features__title: {
     composes: ["text-center pb-5"],
     fontFamily: "var(--fortnite-font)",
     color: "#fff",
-    fontSize: "50px",
-    textShadow: "2px 2px 8px #212529"
+    textShadow: "2px 2px 8px #212529",
+    [`@media only screen and (min-width: ${deviceWidthPX.sm}px)`]: {
+      fontSize: "calc(40px + 1vw)"
+    }
   }
 });
 
