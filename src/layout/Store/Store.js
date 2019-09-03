@@ -1,5 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
+import { createUseStyles } from "react-jss";
+import { deviceWidthPX } from "../../styles/variables";
 
-const Store = props => <div>Store</div>;
+const useStyle = createUseStyles({
+  container: {
+    position: "relative",
+    backgroundColor: "teal"
+  },
+  overlay: {
+    position: "absolute",
+    overflow: "hidden",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    color: "white",
+    transition: "all 300ms",
+    backgroundColor: "rgba(0,0,0,0)",
+    zIndex: "-1"
+  },
+  ["active--overlay"]: {
+    backgroundColor: "rgba(0,0,0,0.3)",
+    zIndex: "1"
+  },
+  filter: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    transition: "all 300ms",
+    background: "indigo",
+    left: "100%"
+  },
+  ["active--filter"]: {
+    left: "30%",
+    zIndex: "2"
+  },
+  [`@media only screen and (min-width: ${deviceWidthPX.sm}px)`]: {
+    overlay: {
+      position: "static",
+      zIndex: "1"
+    },
+    filter: {
+      position: "static"
+    }
+  }
+});
+
+const Store = props => {
+  const [active, setActive] = useState(false);
+  const handler = () => setActive(prevState => !prevState);
+
+  const classes = useStyle(active);
+
+  return (
+    <div className={classes.container}>
+      <h1>Store</h1>
+      <button onClick={handler}>Click</button>
+      <div
+        onClick={handler}
+        className={`${classes.overlay} ${
+          active ? classes["active--overlay"] : ""
+        }`}
+      >
+        overlay-----------------------------
+      </div>
+      <div
+        className={`${classes.filter} ${
+          active ? classes["active--filter"] : ""
+        }`}
+      >
+        <h3>Sort by</h3>
+        <ul>
+          <li>i</li>
+          <li>i</li>
+          <li>i</li>
+        </ul>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima totam
+        tempore fugit molestiae ipsa, beatae, eius id reiciendis autem. Porro
+        aliquam iusto ipsam sit reprehenderit quo cumque animi labore quidem,
+        minus minima tenetur numquam commodi vero, quibusdam ipsa dolorem,
+        perferendis? Facere itaque voluptatem nobis similique, ipsum expedita,
+        incidunt accusantium, est iure veniam ullam laborum vero recusandae ad
+        perferendis quas distinctio quo libero quia optio! Eius soluta, rem ipsa
+        repellendus exercitationem minima quaerat consequatur delectus vel qui,
+        praesentium. Laborum deleniti labore esse, dolorum, amet temporibus
+        officia obcaecati ab iste aut animi, culpa vel reiciendis quam unde
+        veniam beatae! Sit, et, quo!
+      </p>
+      <p>
+        Consectetur soluta non perspiciatis at, facere pariatur a minima ut
+        adipisci maiores similique ullam! Quia delectus repellendus laboriosam
+        quaerat labore voluptate hic, aut quasi aspernatur dolorum, rerum amet
+        enim magni sequi ab laudantium voluptatem sit. Dolorum quia recusandae
+        dicta et harum nostrum quis optio eveniet obcaecati in amet porro modi
+        deleniti dignissimos impedit inventore reprehenderit, voluptates
+        voluptatum sapiente debitis neque, sunt similique aliquam vero? Aliquid
+        quod mollitia commodi ducimus illo sit quidem natus, harum perferendis
+        esse dolorum delectus, consequatur dolores impedit. Officiis dicta qui
+        temporibus corrupti, tempora at ut. Veniam pariatur dolor similique modi
+        sint recusandae temporibus quia omnis. Quibusdam.
+      </p>
+      <p>
+        Vero, voluptate! Explicabo dicta tenetur natus aliquam porro repellendus
+        ab quisquam fugit ratione accusamus sint recusandae, nam, quia incidunt
+        ipsam impedit voluptate itaque consequatur sapiente dolorem facilis
+        officiis sit? Vitae nulla neque, ad molestiae sequi voluptas quidem
+        deserunt eveniet, ullam nemo quaerat, earum autem recusandae ipsum
+        voluptates at voluptate? Voluptatem minima, libero harum. Natus quos
+        repellat, ab adipisci facilis debitis asperiores corrupti est iusto
+        nobis ipsam? Molestias pariatur, dignissimos aperiam, odit, debitis
+        distinctio aliquid numquam vitae amet nam natus esse aspernatur unde!
+        Tempore minima accusantium culpa, blanditiis inventore omnis porro
+        asperiores aut sed, consequuntur numquam voluptas quibusdam id ab
+        reprehenderit.
+      </p>
+      <p>
+        Quo deleniti eius alias soluta nostrum ratione optio, voluptates
+        delectus neque, doloribus! Vero doloremque magnam molestias accusantium
+        illo fugiat molestiae, voluptas! Quod sapiente cupiditate beatae tempore
+        animi placeat maxime dolorem veniam obcaecati, reprehenderit provident,
+        totam soluta accusantium delectus iste suscipit accusamus porro repellat
+        facere laudantium corrupti aliquam deleniti esse doloribus. Ullam
+        mollitia optio reprehenderit eveniet aliquam non. Consectetur dicta
+        mollitia recusandae neque et harum ea nobis aliquam, doloribus excepturi
+        soluta, natus sapiente quod officiis doloremque ex nesciunt possimus.
+        Corporis soluta, vel, adipisci suscipit ipsa temporibus beatae
+        accusantium, architecto numquam ab inventore quo illum consequuntur.
+        Repellat sed, quo. Ducimus, magnam, necessitatibus!
+      </p>
+    </div>
+  );
+};
 
 export default Store;

@@ -35,7 +35,7 @@ const Header = props => {
       variant="dark"
       expand="md"
     >
-      <Navbar.Brand href="#" className="w-25">
+      <Navbar.Brand href="/home" className="w-25">
         <img src={logo} alt="fornite" width="100" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
