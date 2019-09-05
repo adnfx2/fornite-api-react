@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { createUseStyles } from "react-jss";
 import { deviceWidthPX } from "../../styles/variables";
 import SideOverlay from "../../components/SideOverlay/SideOvelay";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 const useStyle = createUseStyles({
   container: {
-    position: "relative",
-    backgroundColor: "teal",
+    backgroundColor: "#eee",
     display: "flex",
     flexFlow: "row wrap"
   }
@@ -14,22 +16,44 @@ const useStyle = createUseStyles({
 
 const Store = props => {
   const [active, setActive] = useState(false);
-  const handler = () => setActive(prevState => !prevState);
-  const onCloseOverlayHandler = () => setActive(false);
+  const backdropRef = useRef();
+
+  const filterButtonHandler = e => {
+    setActive(prevState => {
+      if (prevState) {
+        enableBodyScroll();
+        return !prevState;
+      } else {
+        disableBodyScroll(void 0, { reserveScrollBarGap: true });
+        return !prevState;
+      }
+    });
+  };
+  const hideOverlayHandler = ref => {
+    enableBodyScroll();
+    setActive(false);
+  };
+
   const classes = useStyle(active);
 
   return (
     <div className={classes.container}>
-      <h1 className="w-100">Store</h1>
-      <button className="ml-auto" onClick={handler}>
-        Click
-      </button>
-      <div className="w-100 d-flex">
-        <span className="text-center">Item</span>
-        <span className="ml-auto text-center">Weapon</span>
+      <h1 className="w-100 p-5 text-center">Store</h1>
+      <div className="w-100 d-flex p-2 mb-5">
+        <span className="flex-fill text-center border-bottom border-primary">
+          Item
+        </span>
+        <span className="flex-fill text-center">Weapon</span>
+        <div onClick={filterButtonHandler} className="ml-auto px-4 p-y3 border">
+          <FontAwesomeIcon icon={faSlidersH} /> Filter
+        </div>
       </div>
-      <SideOverlay active={active} onCancel={onCloseOverlayHandler}>
-        <Filter />
+      <SideOverlay
+        active={active}
+        hideOverlayHandler={hideOverlayHandler}
+        backdropRef={backdropRef}
+      >
+        <FFilter />
       </SideOverlay>
       <Content />
     </div>
@@ -38,7 +62,7 @@ const Store = props => {
 
 export default Store;
 
-const Filter = () => (
+const FFilter = () => (
   <div>
     <h3>Sort by</h3>
     <ul>

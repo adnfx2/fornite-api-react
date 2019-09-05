@@ -5,59 +5,74 @@ import { deviceWidthPX } from "../../styles/variables";
 //  Backdrop
 const useStyleBackdrop = createUseStyles({
   backdrop: {
-    position: "absolute",
-    overflow: "hidden",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    width: "100%",
+    height: "100%",
     color: "white",
-    transition: "all 300ms",
+    transition: "background-color ease-in-out 300ms 20ms",
     backgroundColor: "rgba(0,0,0,0)",
-    zIndex: "-1",
     [`.active &`]: {
-      backgroundColor: "rgba(0,0,0,0.3)",
-      zIndex: "0"
+      backgroundColor: "rgba(0,0,0,0.3)"
     }
   }
 });
-const Backdrop = ({ children, active, onCancel }) => {
+const Backdrop = ({ children, active, onClick }) => {
   const { backdrop } = useStyleBackdrop();
-  return <div className={backdrop} onClick={onCancel} />;
+  return (
+    <div className={backdrop} onClick={onClick}>
+      {children}
+    </div>
+  );
 };
 
 //  Content
 const useStyleContent = createUseStyles({
   content: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    transition: "all 300ms",
+    width: "100%",
+    height: "100%",
+    transition: "margin-left ease-in-out 300ms 20ms",
     backgroundColor: "slategray",
-    left: "100%",
+    marginLeft: "100%",
     [`.active &`]: {
-      left: "20%"
+      marginLeft: "50%"
     }
   }
 });
 const Content = ({ children }) => {
   const { content } = useStyleContent();
-  return <div className={content}>{children}</div>;
+  return (
+    <div onClick={e => e.stopPropagation()} className={content}>
+      {children}
+    </div>
+  );
 };
 
 // SideOvelay
 const useStyleSideOverlay = createUseStyles({
-  sideoverlay: {}
+  sideoverlay: {
+    position: "fixed",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    transition: "z-index ease-in-out 300ms 10ms",
+    zIndex: -1,
+    [`&.active`]: {
+      zIndex: 1
+    },
+    [`@media only screen and (min-width: ${deviceWidthPX.sm}px)`]: {
+      position: "static",
+      zIndex: "initial"
+    }
+  }
 });
-const SideOverlay = ({ children, active, onCancel }) => {
+const SideOverlay = ({ children, active, hideOverlayHandler }) => {
   const { sideoverlay } = useStyleSideOverlay();
   const classes = `${sideoverlay} ${active ? "active" : ""}`;
   return (
     <div className={classes}>
-      <Backdrop onCancel={onCancel} />
-      <Content>{children}</Content>
+      <Backdrop onClick={hideOverlayHandler}>
+        <Content>{children}</Content>
+      </Backdrop>
     </div>
   );
 };
