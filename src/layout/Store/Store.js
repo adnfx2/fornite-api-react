@@ -1,10 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { deviceWidthPX } from "../../styles/variables";
-import SideOverlay from "../../components/SideOverlay/SideOvelay";
+import SideOverlay from "../../components/SideOverlay/SideOverlay";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks
+} from "body-scroll-lock";
 
 const useStyle = createUseStyles({
   container: {
@@ -15,26 +19,13 @@ const useStyle = createUseStyles({
 });
 
 const Store = props => {
-  const [active, setActive] = useState(false);
-  const backdropRef = useRef();
+  const [sideOverlayActive, setSideOverlayActive] = useState(false);
 
-  const filterButtonHandler = e => {
-    setActive(prevState => {
-      if (prevState) {
-        enableBodyScroll();
-        return !prevState;
-      } else {
-        disableBodyScroll(void 0, { reserveScrollBarGap: true });
-        return !prevState;
-      }
-    });
-  };
-  const hideOverlayHandler = ref => {
-    enableBodyScroll();
-    setActive(false);
-  };
+  const filterButtonHandler = e =>
+    setSideOverlayActive(prevState => !prevState);
+  const hideOverlayHandler = () => setSideOverlayActive(false);
 
-  const classes = useStyle(active);
+  const classes = useStyle();
 
   return (
     <div className={classes.container}>
@@ -48,19 +39,53 @@ const Store = props => {
           <FontAwesomeIcon icon={faSlidersH} /> Filter
         </div>
       </div>
-      <SideOverlay
-        active={active}
+      <ResponsiveFilter
+        active={sideOverlayActive}
         hideOverlayHandler={hideOverlayHandler}
-        backdropRef={backdropRef}
-      >
-        <FFilter />
-      </SideOverlay>
+      />
       <Content />
     </div>
   );
 };
 
 export default Store;
+
+const ResponsiveFilter = ({ active, hideOverlayHandler }) => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const handleScreenResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleScreenResize);
+    return () => {
+      window.removeEventListener("resize", handleScreenResize);
+      clearAllBodyScrollLocks();
+    };
+  }, []);
+
+  if (screenWidth > deviceWidthPX.sm) {
+    // larger devices
+    hideOverlayHandler();
+    enableBodyScroll();
+    return (
+      <div>
+        <FFilter />
+      </div>
+    );
+  } else {
+    // smaller devices
+    // if SideOverlay is active prevent window scrolling.
+    active
+      ? disableBodyScroll(void 0, { reserveScrollBarGap: true })
+      : enableBodyScroll();
+
+    return (
+      <SideOverlay active={active} hideOverlayHandler={hideOverlayHandler}>
+        <FFilter />
+      </SideOverlay>
+    );
+  }
+};
 
 const FFilter = () => (
   <div>

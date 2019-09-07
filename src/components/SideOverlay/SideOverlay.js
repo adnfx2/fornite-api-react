@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { createUseStyles } from "react-jss";
-import { deviceWidthPX } from "../../styles/variables";
 
 //  Backdrop
 const useStyleBackdrop = createUseStyles({
@@ -58,10 +57,6 @@ const useStyleSideOverlay = createUseStyles({
     zIndex: -1,
     [`&.active`]: {
       zIndex: 1
-    },
-    [`@media only screen and (min-width: ${deviceWidthPX.sm}px)`]: {
-      position: "static",
-      zIndex: "initial"
     }
   }
 });
