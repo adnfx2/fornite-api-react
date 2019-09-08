@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Media } from "react-bootstrap";
 import { features } from "./Features_data";
 import { createUseStyles } from "react-jss";
-import { deviceWidthPX } from "../../../styles/variables";
+import { breakpoints } from "../../../styles/variables";
 
 const useStyles = createUseStyles({
   features__title: {
@@ -10,7 +10,7 @@ const useStyles = createUseStyles({
     fontFamily: "var(--fortnite-font)",
     color: "#fff",
     textShadow: "2px 2px 8px #212529",
-    [`@media only screen and (min-width: ${deviceWidthPX.sm}px)`]: {
+    [`@media only screen and (min-width: ${breakpoints.sm}px)`]: {
       fontSize: "calc(40px + 1vw)"
     }
   }

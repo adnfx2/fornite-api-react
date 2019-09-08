@@ -4,8 +4,9 @@ import CustomLink from "../../../components/CustomLink/CustomLink";
 import { createUseStyles } from "react-jss";
 import heroImgLandscape from "../../../assets/images/fortniteHeroLandscape.jpg";
 import heroImgPortrait from "../../../assets/images/fortniteHeroPortrait.jpeg";
-import { deviceWidthPX } from "../../../styles/variables";
+import { breakpoints } from "../../../styles/variables";
 import { fortniteReferences } from "../../../utils/links/links_references";
+import useViewportWidth from "../../../hooks/useViewportWidth";
 
 const useStyles = createUseStyles({
   button: {
@@ -18,7 +19,7 @@ const useStyles = createUseStyles({
     fontSize: "1.3rem",
     lineHeight: "2",
     letterSpacing: "1px",
-    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
+    [`@media (min-width: ${breakpoints.sm}px)`]: {
       bottom: "15%",
       fontSize: "calc(0.7vw + 1.6rem)"
     }
@@ -34,16 +35,10 @@ const useStyles = createUseStyles({
 });
 
 const Hero = props => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const handleScreenResize = () => setScreenWidth(window.innerWidth);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleScreenResize);
-    return () => window.removeEventListener("resize", handleScreenResize);
-  }, [screenWidth]);
+  const currentViewportWidth = useViewportWidth();
 
   const image =
-    screenWidth < deviceWidthPX.sm
+    currentViewportWidth < breakpoints.sm
       ? { selectedImage: heroImgPortrait, styles: { padding: "pr-4 pl-4" } }
       : { selectedImage: heroImgLandscape, styles: {} };
 

@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
-import { deviceWidthPX } from "../../styles/variables";
 import SideOverlay from "../../components/SideOverlay/SideOverlay";
+import { Col, Row, Container } from "react-bootstrap";
+import { breakpoints } from "../../styles/variables";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks
-} from "body-scroll-lock";
+import ResponsiveFilter from "./components/ResponsiveFilter";
 
 const useStyle = createUseStyles({
   container: {
@@ -28,67 +25,46 @@ const Store = props => {
   const classes = useStyle();
 
   return (
-    <div className={classes.container}>
-      <h1 className="w-100 p-5 text-center">Store</h1>
-      <div className="w-100 d-flex p-2 mb-5">
-        <span className="flex-fill text-center border-bottom border-primary">
-          Item
-        </span>
-        <span className="flex-fill text-center">Weapon</span>
-        <div onClick={filterButtonHandler} className="ml-auto px-4 p-y3 border">
-          <FontAwesomeIcon icon={faSlidersH} /> Filter
-        </div>
-      </div>
-      <ResponsiveFilter
-        active={sideOverlayActive}
-        hideOverlayHandler={hideOverlayHandler}
-      />
-      <Content />
-    </div>
+    <Container fluid>
+      <Row>
+        <Col>
+          <h1 className="w-100 p-5 text-center">Store</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className="w-100 d-flex p-2 mb-5">
+            <span className="flex-fill text-center border-bottom border-primary">
+              Item
+            </span>
+            <span className="flex-fill text-center">Weapon</span>
+            <div
+              onClick={filterButtonHandler}
+              className="d-md-none ml-auto px-4 p-y3 border"
+            >
+              <FontAwesomeIcon icon={faSlidersH} /> Filter
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Content />
+        </Col>
+        <ResponsiveFilter
+          active={sideOverlayActive}
+          hideOverlayHandler={hideOverlayHandler}
+          render={<FFilter />}
+        />
+      </Row>
+    </Container>
   );
 };
 
 export default Store;
 
-const ResponsiveFilter = ({ active, hideOverlayHandler }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const handleScreenResize = () => {
-    setScreenWidth(window.innerWidth);
-  };
-  useEffect(() => {
-    window.addEventListener("resize", handleScreenResize);
-    return () => {
-      window.removeEventListener("resize", handleScreenResize);
-      clearAllBodyScrollLocks();
-    };
-  }, []);
-
-  if (screenWidth > deviceWidthPX.sm) {
-    // larger devices
-    hideOverlayHandler();
-    enableBodyScroll();
-    return (
-      <div>
-        <FFilter />
-      </div>
-    );
-  } else {
-    // smaller devices
-    // if SideOverlay is active prevent window scrolling.
-    active
-      ? disableBodyScroll(void 0, { reserveScrollBarGap: true })
-      : enableBodyScroll();
-
-    return (
-      <SideOverlay active={active} hideOverlayHandler={hideOverlayHandler}>
-        <FFilter />
-      </SideOverlay>
-    );
-  }
-};
-
 const FFilter = () => (
-  <div>
+  <div className="border">
     <h3>Sort by</h3>
     <ul>
       <li>i</li>
@@ -99,7 +75,13 @@ const FFilter = () => (
 );
 
 const Content = props => (
-  <div>
+  <div
+    style={{
+      backgroundColor: "#aaa",
+      height: "100vh",
+      overflow: "scroll"
+    }}
+  >
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima totam
       tempore fugit molestiae ipsa, beatae, eius id reiciendis autem. Porro
@@ -153,5 +135,14 @@ const Content = props => (
       numquam ab inventore quo illum consequuntur. Repellat sed, quo. Ducimus,
       magnam, necessitatibus!
     </p>
+    <div>
+      <button
+        style={{
+          margin: "auto 40%"
+        }}
+      >
+        Load more...
+      </button>
+    </div>
   </div>
 );

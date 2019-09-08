@@ -13,7 +13,7 @@ const useStyles = createUseStyles({
   link: {
     composes: ["p-2 text-center"],
     color: "white",
-    transtionProperty: "transform",
+    transitionProperty: "transform",
     transitionDelay: "50ms",
     transitionDuration: "200ms",
     [`&:hover`]: {
@@ -34,6 +34,7 @@ const Header = props => {
       bg="primary"
       variant="dark"
       expand="md"
+      // collapseOnSelect
     >
       <Navbar.Brand href="/home" className="w-25">
         <img src={logo} alt="fornite" width="100" />

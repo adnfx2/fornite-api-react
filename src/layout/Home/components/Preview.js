@@ -2,7 +2,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import { Container, Row, Col } from "react-bootstrap";
 import CustomLink from "../../../components/CustomLink/CustomLink";
-import { deviceWidthPX } from "../../../styles/variables";
+import { breakpoints } from "../../../styles/variables";
 import previewImg from "../../../assets/images/fortnite-preview.jpg";
 import jumpBackImg from "../../../assets/images/jumpBack.png";
 import jumpFrontImg from "../../../assets/images/jumpFront.png";
@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
     backgroundImage: `url(${previewImg})`,
     backgroundSize: "cover",
 
-    [`@media only screen and (min-width: ${deviceWidthPX.sm}px)`]: {
+    [`@media only screen and (min-width: ${breakpoints.sm}px)`]: {
       minHeight: "300px",
       height: "100%"
     }
@@ -32,14 +32,14 @@ const useStyles = createUseStyles({
     fontSize: "68px",
     color: "#fff",
     textShadow: "2px 2px 8px #212529",
-    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {}
+    [`@media (min-width: ${breakpoints.sm}px)`]: {}
   },
   jumpingContainer: {
     backgroundImage: `url(${jumpFrontImg}), url(${jumpBackImg})`,
     backgroundSize: "25%, 20%",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "-10px 20px, 97% 97%",
-    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
+    [`@media (min-width: ${breakpoints.sm}px)`]: {
       backgroundSize: "15%, 15%",
       backgroundPosition: "0% 5%, 100% 100%"
     }

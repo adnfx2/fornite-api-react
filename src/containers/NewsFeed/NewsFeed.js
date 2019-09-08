@@ -9,14 +9,14 @@ import Snippet from "./Snippet";
 import FlexBackground from "./FlexBackground";
 import ComponentsFactory from "../../components/ComponentsFactory/ComponentsFactory";
 import { createUseStyles } from "react-jss";
-import { deviceWidthPX } from "../../styles/variables";
+import { breakpoints } from "../../styles/variables";
 import { ENDPOINT_NEWS_STW } from "../../utils/api/api";
 
 const useStyles = createUseStyles({
   containerCarousel: {
     composes: ["bg-dark position-relative"],
     transition: "padding 500ms ease-in-out",
-    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
+    [`@media (min-width: ${breakpoints.sm}px)`]: {
       padding: "0 5vw"
     }
   },
@@ -32,7 +32,7 @@ const useStyles = createUseStyles({
     textShadow: "0 0 4px black",
     letterSpacing: "1px",
     zIndex: "10",
-    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
+    [`@media (min-width: ${breakpoints.sm}px)`]: {
       top: "5%",
       left: "8%"
     }

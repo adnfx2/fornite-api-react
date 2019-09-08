@@ -1,6 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import { deviceWidthPX } from "../../styles/variables";
+import { breakpoints } from "../../styles/variables";
 
 const useStyles = createUseStyles({
   carousel__img: {
@@ -10,7 +10,7 @@ const useStyles = createUseStyles({
     backgroundImage: props => `url(${props.image})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
-    [`@media (min-width: ${deviceWidthPX.sm}px)`]: {
+    [`@media (min-width: ${breakpoints.sm}px)`]: {
       height: "89vh",
     }
   }
