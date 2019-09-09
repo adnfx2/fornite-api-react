@@ -34,7 +34,7 @@ const Store = props => {
   const chunkSize = weaponsPage.currentPage * max;
   const data = weaponsList.slice(0, chunkSize);
   const handler = () => {
-    setWeaponsPage(prev => ({ ...prev, currentPage: prev.currentPage + 1 }));
+     setWeaponsPage(prev => ({ ...prev, currentPage: prev.currentPage + 1 }));
   };
   /*end test*/
 
