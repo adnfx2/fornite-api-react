@@ -10,8 +10,7 @@ const useViewportWidth = () => {
     return () => {
       window.removeEventListener("resize", handleViewportResize);
     };
-  }, []);
-
+  });
   return viewportWidth;
 };
 

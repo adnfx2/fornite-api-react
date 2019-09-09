@@ -15,15 +15,11 @@ const ResponsiveFilter = ({ render, active, hideOverlayHandler }) => {
   useOnUnmount(clearAllBodyScrollLocks);
 
   //  is breakpoint triggered?
-  if (currentViewportWidth > breakpoints.md) {
+  if (currentViewportWidth >= breakpoints.md) {
     // display component for larger devices
-    hideOverlayHandler();
+    active && hideOverlayHandler();
     enableBodyScroll();
-    return (
-      <Col md={3} lg={4}>
-        {render}
-      </Col>
-    );
+    return <Col md={3}>{render}</Col>;
   } else {
     // display component for smaller devices
     active // if SideOverlay is active prevent scrolling
