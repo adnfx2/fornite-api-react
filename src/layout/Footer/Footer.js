@@ -4,21 +4,16 @@ import List from "../../components/List/List";
 import CustomLink from "../../components/CustomLink/CustomLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
-import {
-  contactsReferences,
-  menuReferences,
-  fortniteReferences,
-  copyrightsReferences
-} from "../../utils/links/links_references";
+import * as references from "../../utils/links/links_references";
 
 const footerSections = [
-  { title: "Fortnite official", items: fortniteReferences },
-  { title: "Menu", items: menuReferences },
-  { title: "Contact", items: contactsReferences }
+  { title: "Fortnite official", items: references.fortnite },
+  { title: "Menu", items: references.menu },
+  { title: "Contact", items: references.contacts }
 ];
 
-const renderLinks = ({ itemRef, item }) => (
-  <li key={itemRef} className="py-1">
+const renderLinks = item => (
+  <li key={item.id} className="py-1">
     {item.faIcon && (
       <span className={"mr-2"}>
         <FontAwesomeIcon icon={item.faIcon} />
@@ -37,27 +32,26 @@ const renderLinks = ({ itemRef, item }) => (
   </li>
 );
 
-const createLinks = refereces =>
-  refereces.keys.reduce((acc, reference) => {
-    const { endpoint, placeholder, external } = refereces[reference];
-
-    const finalPlaceholder =
-      // Show placeholder?
-      typeof placeholder === "string" ? (
-        <span>{placeholder}</span>
-      ) : // Show image?
-      placeholder.image ? (
-        <img src={placeholder.image} alt="Flaticon icon" width="75px" />
-      ) : // Show icon?
-      placeholder.fa ? (
-        <span>
-          <FontAwesomeIcon icon={placeholder.fa} /> {reference}
-        </span>
-      ) : "";
+const createLinks = references => {
+  return references.reduce((acc, reference) => {
+    const { id, name, endpoint, placeholder, external } = reference;
+    //  prettier-ignore
+    const finalPlaceholder = (
+      //  Show placeholder?
+      typeof placeholder === "string"
+      ? <span>{placeholder}</span>
+      // Show image?
+      : placeholder.image
+        ? <img src={placeholder.image} alt="Flaticon icon" width="75px" />
+        // Show icon?
+        : placeholder.fa
+          ? <span><FontAwesomeIcon icon={placeholder.fa} /> {name}</span>
+          : ""
+    );
 
     return {
       ...acc,
-      [reference]: () => (
+      [id]: props => (
         <CustomLink
           classes="text-light"
           href={endpoint}
@@ -67,11 +61,15 @@ const createLinks = refereces =>
       )
     };
   }, {});
+};
 
 const Footer = props => {
-  const { Adnfx2, Freepik, Flaticon, FontAwesome } = createLinks(
-    copyrightsReferences
-  );
+  const {
+    [`id-adnfx2`]: Adnfx2,
+    [`id-freepik`]: Freepik,
+    [`id-flaticon`]: Flaticon,
+    [`id-fa`]: FontAwesome
+  } = createLinks(references.copyrights);
 
   return (
     <footer className="pt-5 bg-dark text-light small">

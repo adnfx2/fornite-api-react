@@ -5,7 +5,7 @@ import { createUseStyles } from "react-jss";
 import heroImgLandscape from "../../../assets/images/fortniteHeroLandscape.jpg";
 import heroImgPortrait from "../../../assets/images/fortniteHeroPortrait.jpeg";
 import { breakpoints } from "../../../styles/variables";
-import { fortniteReferences } from "../../../utils/links/links_references";
+import { fortnite as fortniteReferences } from "../../../utils/links/links_references";
 import useViewportWidth from "../../../hooks/useViewportWidth";
 
 const useStyles = createUseStyles({
@@ -43,6 +43,7 @@ const Hero = props => {
       : { selectedImage: heroImgLandscape, styles: {} };
 
   const classes = useStyles(image.styles);
+  const fortniteDownloadRef = fortniteReferences[1].endpoint;
 
   return (
     <section>
@@ -54,7 +55,7 @@ const Hero = props => {
             alt="Fortnite Hero"
           />
           <CustomLink
-            href={fortniteReferences.download.endpoint}
+            href={fortniteDownloadRef}
             external={true}
             placeholder={<Button className={classes.button}>Join now!</Button>}
           />
