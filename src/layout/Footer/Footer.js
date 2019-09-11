@@ -83,11 +83,9 @@ const Footer = props => {
               md={4}
             >
               <h5>{title}</h5>
-              <List
-                renderItem={renderLinks}
-                items={items}
-                classes="list-unstyled"
-              />
+              <ul className="list-unstyled">
+                <List renderItem={renderLinks} items={items} />
+              </ul>
             </Col>
           ))}
         </Row>
