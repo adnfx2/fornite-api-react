@@ -3,43 +3,74 @@ import Store from "../layout/Store/Store";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import NotFound from "../layout/NotFound/NotFound";
 
-export const HOME = "Home";
-export const ENDPOINT_DEFAULT = "/";
-export const ENDPOINT_HOME = "/home";
 
-export const STORE = "Store";
-export const ENDPOINT_STORE = "/store";
+//  Main routes
+const HOME = "Home";
+const ROUTE_DEFAULT = "/";
+const ROUTE_HOME = "/home";
 
-export const DASHBOARD = "Dashboard";
-export const ENDPOINT_DASHBOARD = "/dashboard";
+const STORE = "Store";
+const ROUTE_STORE = "/store";
+
+const DASHBOARD = "Dashboard";
+const ROUTE_DASHBOARD = "/dashboard";
 
 const routes = [
   {
     name: HOME,
-    path: ENDPOINT_DEFAULT,
+    path: ROUTE_DEFAULT,
     exact: true,
     component: Home
   },
   {
     name: STORE,
-    path: ENDPOINT_STORE,
+    path: ROUTE_STORE,
     component: Store
   },
   {
     name: DASHBOARD,
-    path: ENDPOINT_DASHBOARD,
+    path: ROUTE_DASHBOARD,
     component: Dashboard
   },
   {
     name: "Home-Redirect",
-    from: ENDPOINT_HOME,
-    to: ENDPOINT_DEFAULT
+    from: ROUTE_HOME,
+    to: ROUTE_DEFAULT
   },
   {
     name: "Not-Found",
     component: NotFound
   }
 ];
-
 export default routes;
 export const links = routes.filter(route => route.path);
+
+
+//  Store routes
+const WEAPONS = "Weapons";
+const ROUTE_WEAPONS = "/store/weapons";
+const ITEMS = "Items";
+const ROUTE_ITEMS = "/store/items";
+
+export const storeRoutes = [
+  {
+    name: WEAPONS,
+    path: ROUTE_WEAPONS,
+    component: Dashboard /*dummy*/
+  },
+  {
+    name: ITEMS,
+    path: ROUTE_ITEMS,
+    component: Dashboard /*dummy*/
+  },
+  {
+    name: "Store-Redirect",
+    from: ROUTE_STORE,
+    to: ROUTE_WEAPONS
+  },
+  {
+    name: "Not-Found",
+    component: NotFound
+  }
+];
+export const storeLinks = storeRoutes.filter(route => route.path);
