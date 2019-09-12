@@ -20,9 +20,8 @@ const useStyles = createUseStyles({
     }
   },
   title: {
-    composes: ["m-0 pt-5 pb-4 text-center"],
+    composes: ["m-0 pt-5 pb-4 text-center text-light"],
     fontFamily: "var(--fortnite-font)",
-    color: "#fff",
     textShadow: "2px 2px 8px #212529"
   },
   jumpingTitle: {

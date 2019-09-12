@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
 import FilterButton from "./components/FilterButton";
 import { fetchWeapons, fetchItems } from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
-import { storeLinks } from "../../routes/routes";
+import { storeLinks, storeRoutes } from "../../routes/routes";
+import fortniteBanner from "../../assets/images/Fortnite-Banner.jpg";
 
 const useStyle = createUseStyles({
-  //todo
+  store__title: {
+    composes: ["text-center text-light p-5"],
+    background: `url(${fortniteBanner}) top center/cover border-box`,
+    fontFamily: "var(--fortnite-font)",
+    textShadow: "2px 2px 8px #212529"
+  }
 });
 
 const useShouldFetch = (data, dispatcher) => {
@@ -17,25 +23,27 @@ const useShouldFetch = (data, dispatcher) => {
     if (!data) {
       dispatcher();
     }
-  });
+  }, []);
 };
 
 const Store = props => {
   const { weapons, fetchWeapons, items, fetchItems } = props;
-  // useShouldFetch(weapons, fetchWeapons);
-  // useShouldFetch(items, fetchItems);
+  useShouldFetch(weapons, fetchWeapons);
+  useShouldFetch(items, fetchItems);
+  const classes = useStyle();
 
   return (
-    <Container className="mx-1 mb-3 text-dark" fluid>
+    <Container className="mb-3 text-dark" fluid>
       <Row>
-        <Col>
-          <h1 className="text-center p-5">Title</h1>
+        <Col className="px-0">
+          <h1 className={classes.store__title}>Store</h1>
         </Col>
       </Row>
       <Row>
         <Col className="d-flex px-0">
           {storeLinks.map(link => (
             <NavLink
+              key={link.name}
               className="d-flex justify-content-center align-items-center flex-fill border-bottom text-dark text-decoration-none"
               activeClassName="border-primary"
               to={link.path}
@@ -44,6 +52,36 @@ const Store = props => {
             </NavLink>
           ))}
           <FilterButton />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Switch>
+            {storeRoutes.map(({ name, ...route }) => {
+              // when routes have a render key, a render component must be provided
+              if (route.render) {
+                const dataKey = `${name.toLowerCase()}`;
+                var newRoute = {
+                  ...route,
+                  render: () => (
+                    <div>
+                      {(props[dataKey] &&
+                        props[dataKey].result.slice(0, 15).map(x => {
+                          return <p key={x}>{`${dataKey} -- ${x}`}</p>;
+                        })) ||
+                      "loading"}
+                    </div>
+                  )
+                };
+              }
+              const finalRoute = newRoute || route;
+              const isRoute = !route.to;
+              // prettier-ignore
+              return isRoute
+                ? <Route key={name} {...finalRoute} />
+                : <Redirect key={name} {...finalRoute}/>
+            })}
+          </Switch>
         </Col>
       </Row>
     </Container>

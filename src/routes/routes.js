@@ -3,7 +3,6 @@ import Store from "../layout/Store/Store";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import NotFound from "../layout/NotFound/NotFound";
 
-
 //  Main routes
 const HOME = "Home";
 const ROUTE_DEFAULT = "/";
@@ -45,7 +44,6 @@ const routes = [
 export default routes;
 export const links = routes.filter(route => route.path);
 
-
 //  Store routes
 const WEAPONS = "Weapons";
 const ROUTE_WEAPONS = "/store/weapons";
@@ -56,12 +54,12 @@ export const storeRoutes = [
   {
     name: WEAPONS,
     path: ROUTE_WEAPONS,
-    component: Dashboard /*dummy*/
+    render: true /*When true the caller must provide a component here*/
   },
   {
     name: ITEMS,
     path: ROUTE_ITEMS,
-    component: Dashboard /*dummy*/
+    render: true /*When true the caller must provide a component here*/
   },
   {
     name: "Store-Redirect",
