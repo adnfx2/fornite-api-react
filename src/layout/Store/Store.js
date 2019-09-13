@@ -30,6 +30,8 @@ const Store = props => {
   const { weapons, fetchWeapons, items, fetchItems } = props;
   useShouldFetch(weapons, fetchWeapons);
   useShouldFetch(items, fetchItems);
+  const weaponsSorting = null;
+  const itemsSorting = null;
   const classes = useStyle();
 
   return (
@@ -61,17 +63,10 @@ const Store = props => {
               // when routes have a render key, a render component must be provided
               if (route.render) {
                 const dataKey = `${name.toLowerCase()}`;
+                const C = route.render;
                 var newRoute = {
                   ...route,
-                  render: () => (
-                    <div>
-                      {(props[dataKey] &&
-                        props[dataKey].result.slice(0, 15).map(x => {
-                          return <p key={x}>{`${dataKey} -- ${x}`}</p>;
-                        })) ||
-                      "loading"}
-                    </div>
-                  )
+                  render: () => <C data={props[dataKey]} />
                 };
               }
               const finalRoute = newRoute || route;
