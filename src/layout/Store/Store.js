@@ -60,7 +60,6 @@ const Store = props => {
         <Col>
           <Switch>
             {storeRoutes.map(({ name, ...route }) => {
-              // when routes have a render key, a render component must be provided
               if (route.render) {
                 const dataKey = `${name.toLowerCase()}`;
                 const C = route.render;
