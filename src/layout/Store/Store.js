@@ -57,7 +57,7 @@ const Store = props => {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col className="pt-3">
           <Switch>
             {storeRoutes.map(({ name, ...route }) => {
               if (route.render) {

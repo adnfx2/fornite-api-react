@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const max = 15; //  Maximun amount of data to be displayed
+const max = 10; //  Maximun amount of data to be displayed
 
 const usePagination = data => {
   const [page, setPage] = useState(1);

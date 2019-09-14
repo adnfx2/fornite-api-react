@@ -8,10 +8,12 @@ export const breakpoints = {
 };
 
 // Fornite color schemes
-export const rarityColors = {
-  _common: "#B3B3B3",
-  _uncommon: "#008100",
-  _rare: "#3266FF",
-  _epic: "#830081",
-  _legendary: "#D3C520"
+export const fortniteColors = {
+  rarities: {
+    _common: "#B3B3B3",
+    _uncommon: "#008100",
+    _rare: "#0066FF",
+    _epic: "#830081",
+    _legendary: "#D3C520"
+  }
 };
