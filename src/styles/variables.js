@@ -14,6 +14,7 @@ export const fortniteColors = {
     _uncommon: "#008100",
     _rare: "#0066FF",
     _epic: "#830081",
-    _legendary: "#D3C520"
+    _legendary: "#D3C520",
+    _marvel: "#B22222"
   }
 };
