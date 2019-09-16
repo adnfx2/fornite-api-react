@@ -1,21 +1,31 @@
 import React, { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { createUseStyles } from "react-jss";
-import usePagination from "../../../hooks/usePagination";
-import Placeholder from "./Placeholder.js";
 import { fortniteColors } from "../../../styles/variables";
-import color from "color";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-
+import { breakpoints } from "../../../styles/variables";
 const getFortniteColor = rarity => fortniteColors.rarities[rarity];
-const firstLetterCaps = l => l[0].toUpperCase() + l.slice(1);
+const firstLetterCaps = word => word[0].toUpperCase() + word.slice(1);
+
+const gutter = "12px";
 
 const useStyledCard = createUseStyles({
   card: {
+    composes: ["flex-fill"],
     border: "none",
     background: "#fff",
-    boxShadow: `0px 0px 4px rgba(0,0,0,0.3)`
+    boxShadow: `0px 0px 4px rgba(0,0,0,0.3)`,
+    [`@media only screen and (min-width: ${breakpoints.sm}px)`]: {
+      maxWidth: `calc(50% - ${gutter})`,
+      marginBottom: "15px !important",
+    },
+    [`@media only screen and (min-width: ${breakpoints.md}px)`]: {
+      maxWidth: `calc(33.33% - ${gutter})`
+    },
+    [`@media only screen and (min-width: ${breakpoints.xl}px)`]: {
+      maxWidth: `calc(25% - ${gutter})`
+    }
   },
   card__header: {
     display: "flex",
@@ -58,7 +68,7 @@ const StyledCard = ({ data }) => {
   const [btn, setBtn] = useState(false);
   const handler = () => console.log("hi") || setBtn(_ => !_);
   /*end test*/
-  const { id, name, image, rarity, attributes } = data;
+  const { name, image, rarity, attributes } = data;
   const type = data.type || null;
   const classes = useStyledCard({ rarity, type });
 

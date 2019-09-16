@@ -1,30 +1,31 @@
-import React from 'react';
-import { createUseStyles } from 'react-jss';
+import React from "react";
+import { createUseStyles } from "react-jss";
 
 const useStyle = createUseStyles({
   [`@keyframes blinking`]: {
-    [`0%`]: {opacity: 1},
-    [`50%`]: {opacity: 0.7},
-    [`100%`]: {opacity: 1} 
+    [`0%`]: { opacity: 1 },
+    [`50%`]: { opacity: 0.7 },
+    [`100%`]: { opacity: 1 }
   },
   placeholder: {
+    border: "0.25rem",
     padding: "1em",
-    background: "#ddd"
+    boxShadow: `0px 0px 4px rgba(0,0,0,0.3)`
   },
   placeholder__image: {
-      width: "100%",
-      height: "250px",
-      background: "#bbb",
-      animation: "$blinking 1750ms ease-in-out infinite"
+    width: "100%",
+    height: "250px",
+    background: "#bbb",
+    animation: "$blinking 1750ms ease-in-out infinite"
   },
   placeholder__text: {
-      width: "100%",
-      height: "40px",
-      marginTop: "1em",
-      borderRadius: "8px",
-      background: "#bbb",
-      animation: "$blinking 1750ms ease-in-out infinite"
-    }
+    width: "100%",
+    height: "40px",
+    marginTop: "1em",
+    borderRadius: "8px",
+    background: "#bbb",
+    animation: "$blinking 1750ms ease-in-out infinite"
+  }
 });
 
 const BlockImage = props => {
@@ -38,7 +39,7 @@ const BlockText = props => {
 };
 
 const Placeholder = props => {
-  const { placeholder } = useStyle(); 
+  const { placeholder } = useStyle();
   return (
     <div className={placeholder}>
       <BlockImage />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Placeholder from "./Placeholder.js";
 import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";

@@ -1,16 +1,26 @@
-import React, { useState } from "react";
-import { CardGroup } from "react-bootstrap";
+import React from "react";
+import { Button, CardGroup } from "react-bootstrap";
 
-const StyledCardGroup = ({ numberOfItems, children, nextPage, loadMoreHandler }) => {
+const StyledCardGroup = ({
+  numberOfItems,
+  children,
+  nextPage,
+  loadMoreHandler
+}) => {
   return (
-    <CardGroup>
-      <p>Total: {numberOfItems}</p>
-      {children}
-      {//prettier-ignore
-      nextPage
-          ? <button onClick={loadMoreHandler}>LoadMore</button>
-          : "that's it"}
-    </CardGroup>
+    <React.Fragment>
+      <p className="">Total: {numberOfItems}</p>
+      <CardGroup className="justify-content-around">{children}</CardGroup>
+      {nextPage ? (
+        <span className="d-flex justify-content-center">
+          <Button size="lg" variant="secondary" onClick={loadMoreHandler}>
+            LoadMore
+          </Button>
+        </span>
+      ) : (
+        ""
+      )}
+    </React.Fragment>
   );
 };
 

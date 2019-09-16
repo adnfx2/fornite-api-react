@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Jumbotron, Button } from "react-bootstrap";
 import CustomLink from "../../../components/CustomLink/CustomLink";
 import { createUseStyles } from "react-jss";
@@ -19,7 +19,7 @@ const useStyles = createUseStyles({
     fontSize: "1.3rem",
     lineHeight: "2",
     letterSpacing: "1px",
-    [`@media (min-width: ${breakpoints.sm}px)`]: {
+    [`@media only screen and (min-width: ${breakpoints.sm}px)`]: {
       bottom: "15%",
       fontSize: "calc(0.7vw + 1.6rem)"
     }
