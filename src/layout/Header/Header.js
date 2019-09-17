@@ -8,17 +8,21 @@ import { links } from "../../routes/routes";
 
 const useStyles = createUseStyles({
   c_navbar: {
-    fontFamily: "var(--fortnite-font)"
+    fontFamily: "var(--fortnite-font)",
   },
   link: {
     composes: ["p-2 text-center"],
-    color: "white",
-    transitionProperty: "transform",
+    height: "40px",
+    overflow: "hidden",
+    color: "white"
+  },
+  link__placeholder: {
+    transitionProperty: "all",
     transitionDelay: "50ms",
     transitionDuration: "200ms",
-    [`&:hover`]: {
-      textDecoration: "underline",
-      transform: "scale(1.2)"
+    [`$link:hover &`]: {
+      transform: "scale(1.2)",
+      textDecoration: "underline"
     }
   },
   active: {
@@ -51,7 +55,7 @@ const Header = props => {
               to={path}
               exact={exact}
             >
-              {placeholder}
+              <div className={classes.link__placeholder}>{placeholder}</div>
             </NavLink>
           ))}
         </Nav>
