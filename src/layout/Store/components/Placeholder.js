@@ -1,8 +1,11 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 
-//  Global style
+//Constants
 const BLINKING = "blinking--animation";
+const BG_COLOR = "#bbb";
+
+//  ***Global style***
 const animationStyle = `${BLINKING} 1750ms ease-in-out infinite`;
 const useBlinkingAnimationStyle = createUseStyles({
   [`@global`]: {
@@ -15,55 +18,19 @@ const useBlinkingAnimationStyle = createUseStyles({
   }
 });
 
-//  Text
-const usePlaceholderTextStyle = createUseStyles({
-  placeholder__text: {
-    width: "100%",
-    height: variant => {
-      const size =
-        //  prettier-ignore
-        variant === "sm"
-          ? 10
-          : variant === "md"
-            ? 20
-            : 40;
-      console.log({ size });
-      return `${size}px`;
-    },
-    borderRadius: "8px",
-    background: "#bbb",
-    animation: animationStyle,
-    flex: "0 1 calc(50% - 4px)",
-    margin: "2px 0"
-  }
-});
-const Text = props => {
-  const { variant } = props;
-  const { placeholder__text } = usePlaceholderTextStyle(variant);
-  return <div className={placeholder__text} />;
-};
+//  ***LAYOUTS***
 
-//  Image
-const usePlaceholderImageStyle = createUseStyles({
-  placeholder__image: {
-    display: "flex",
-    position: "relative",
-    width: "100%",
-    padding: "1em",
-    height: "250px",
-    [`&::after`]: {
-      content: `""`,
-      width: "100%",
-      height: "100%",
-      borderRadius: "8px",
-      background: "#bbb",
-      animation: `${BLINKING} 1750ms ease-in-out infinite`
-    }
+//  Placeholder
+const usePlaceholderStyle = createUseStyles({
+  placeholder: {
+    border: "0.25rem",
+    boxShadow: `0px 0px 4px rgba(0,0,0,0.3)`
   }
 });
-const Image = props => {
-  const { placeholder__image } = usePlaceholderImageStyle();
-  return <div className={placeholder__image} />;
+const Placeholder = ({ children, className = "" }) => {
+  useBlinkingAnimationStyle();
+  const { placeholder } = usePlaceholderStyle();
+  return <div className={`${placeholder} ${className}`.trim()}>{children}</div>;
 };
 
 //  Header
@@ -77,7 +44,7 @@ const Header = ({ children }) => {
 
 //  Body
 const useBodyStyle = createUseStyles({
-  placeholder__body: { padding: "0 1.35em" }
+  placeholder__body: { padding: "1em" }
 });
 const Body = ({ children }) => {
   const { placeholder__body } = useBodyStyle();
@@ -102,47 +69,148 @@ const Footer = ({ children }) => {
   return <div className={placeholder__footer}>{children}</div>;
 };
 
-//  Placeholder container
-const usePlaceholderStyle = createUseStyles({
-  placeholder: {
-    border: "0.25rem",
-    boxShadow: `0px 0px 4px rgba(0,0,0,0.3)`
+//  ***BASIC COMPONENTS***
+
+//  Text
+const usePlaceholderTextStyle = createUseStyles({
+  placeholder__text: {
+    width: "100%",
+    height: size => `${size}px`,
+    borderRadius: "8px",
+    background: `${BG_COLOR}`,
+    animation: animationStyle,
+    [`&.splitted`]: {
+      flex: "0 1 calc(50% - 4px)",
+      margin: "2px 0"
+    }
   }
 });
-const Placeholder = props => {
-  useBlinkingAnimationStyle();
-  const { placeholder } = usePlaceholderStyle();
+const Text = props => {
+  const { variant = "sm", splitted } = props;
+  const size =
+    //  prettier-ignore
+    variant === "sm"
+      ? 10
+      : variant === "md"
+        ? 20
+        : 40;
+  const { placeholder__text } = usePlaceholderTextStyle(size);
+  console.log(`${placeholder__text} ${splitted ? "splitted" : ""}`.trim());
   return (
-    <div className={placeholder}>
-      <Header>
-        <Text />
-      </Header>
-      <Image />
-      <Title>
-        <Text />
-      </Title>
-      <Body>
-        <div
-          style={{
-            display: "flex",
-            flexFlow: "row wrap",
-            justifyContent: "space-around",
-            padding: "0.25em 0"
-          }}
-        >
-          <Text variant="sm" />
-          <Text variant="sm" />
-          <Text variant="sm" />
-          <Text variant="sm" />
-          <Text variant="sm" />
-          <Text variant="sm" />
-        </div>
-      </Body>
-      <Footer>
-        <Text />
-      </Footer>
+    <div
+      className={`${placeholder__text} ${splitted ? "splitted" : ""}`.trim()}
+    />
+  );
+};
+
+//  Image
+const usePlaceholderImageStyle = createUseStyles({
+  placeholder__image: {
+    display: "flex",
+    position: "relative",
+    width: "100%",
+    padding: "0 1em",
+    height: "250px",
+    [`&::after`]: {
+      content: `""`,
+      width: "100%",
+      height: "100%",
+      borderRadius: "8px",
+      background: `${BG_COLOR}`,
+      animation: `${animationStyle}`
+    }
+  }
+});
+const Image = props => {
+  const { placeholder__image } = usePlaceholderImageStyle();
+  return <div className={placeholder__image} />;
+};
+
+//  Circle
+const useCircleStyle = createUseStyles({
+  circle: {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    height: size => `${size}px`,
+    margin: "2px 0",
+    [`&::after`]: {
+      content: `""`,
+      width: size => `${size}px`,
+      height: "100%",
+      borderRadius: "50%",
+      background: `${BG_COLOR}`,
+      animation: `${animationStyle}`
+    }
+  }
+});
+const Circle = ({ variant = "sm" }) => {
+  const size =
+    //  prettier-ignore
+    variant === "sm"
+      ? 10
+      : variant === "md"
+        ? 20
+        : 40;
+  const { circle } = useCircleStyle(size);
+  return <div className={circle} />;
+};
+
+//  ***ASSEMBLED COMPONENTS***
+
+//  Paragraph
+const useParagraphStyle = createUseStyles({
+  placeholder__paragraph: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "space-around"
+  }
+});
+const Paragraph = ({ lines = 1 }) => {
+  const { placeholder__paragraph } = useParagraphStyle();
+  return (
+    <div className={placeholder__paragraph}>
+      {Array.from(Array(lines)).map((_, index) => (
+        <React.Fragment key={index}>
+          <Text variant="sm" splitted />
+          <Text variant="sm" splitted />
+        </React.Fragment>
+      ))}
     </div>
   );
 };
+
+//  Ellipsis
+const useEllipsisStyle = createUseStyles({
+  placeholder__ellipsis: {
+    display: "flex",
+    flexFlow: "row wrap",
+    justifyContent: "space-around"
+  }
+});
+const Ellipsis = ({ quantity = 3, className = "" }) => {
+  const { placeholder__ellipsis } = useEllipsisStyle();
+  return (
+    <div className={`${placeholder__ellipsis} ${className}`.trim()}>
+      {Array.from(Array(quantity)).map((_, index) => (
+        <React.Fragment key={index}>
+          <Circle variant="sm" />
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+Placeholder.Header = Header;
+Placeholder.Title = Title;
+Placeholder.Body = Body;
+Placeholder.Footer = Footer;
+
+Placeholder.Text = Text;
+Placeholder.Image = Image;
+Placeholder.Circle = Circle;
+
+Placeholder.Paragraph = Paragraph;
+Placeholder.Ellipsis = Ellipsis;
 
 export default Placeholder;

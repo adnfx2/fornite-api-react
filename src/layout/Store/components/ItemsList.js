@@ -1,5 +1,5 @@
 import React from "react";
-import Placeholder from "./Placeholder.js";
+import ListPlaceholder from "./ListPlaceholder.js";
 import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
@@ -44,7 +44,7 @@ export const ItemsList = ({ data = { itemsById: {}, result: [] } }) => {
       </StyledCardGroup>
     );
   } else {
-    return <Placeholder />;
+    return <ListPlaceholder />;
   }
 };
 
