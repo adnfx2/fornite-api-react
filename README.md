@@ -6,6 +6,17 @@
 
 FortniteStarred It's a on-going project meant to facilitate to users informantion related to fortnite in-game items, weapons & more. All the data is provided by [<forniteapi.com>](https://fortniteapi.com).
 
+###Run this project
+This project was bootstraped with "CreateReactApp".
+
+You can simple run:
+
+- `npm install`
+
+- `npm start`
+
+(or yarn start if you prefer it).
+
 ###Features
 
 Currently the project have three main sections:
