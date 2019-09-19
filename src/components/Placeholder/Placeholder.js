@@ -3,13 +3,13 @@ import { createUseStyles } from "react-jss";
 
 //Constants
 const BLINKING = "blinking--animation";
-const BG_COLOR = "#bbb";
+const BG_COLOR = "#c6c6c6";
 
 //  ***Global style***
-const animationStyle = `${BLINKING} 1750ms ease-in-out infinite`;
+const animationStyle = `${BLINKING} 2000ms ease-in-out infinite`;
 const useBlinkingAnimationStyle = createUseStyles({
   [`@global`]: {
-    // Name convention needed to avoid future conflicts.
+    // Name convention needed to avoid future conflicts (Because of being global).
     [`@keyframes ${BLINKING}`]: {
       [`0%`]: { opacity: 1 },
       [`50%`]: { opacity: 0.7 },
@@ -95,7 +95,6 @@ const Text = props => {
         ? 20
         : 40;
   const { placeholder__text } = usePlaceholderTextStyle(size);
-  console.log(`${placeholder__text} ${splitted ? "splitted" : ""}`.trim());
   return (
     <div
       className={`${placeholder__text} ${splitted ? "splitted" : ""}`.trim()}
@@ -110,7 +109,7 @@ const usePlaceholderImageStyle = createUseStyles({
     position: "relative",
     width: "100%",
     padding: "0 1em",
-    height: "250px",
+    height: "220px",
     [`&::after`]: {
       content: `""`,
       width: "100%",

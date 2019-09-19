@@ -10,7 +10,7 @@ import {
   clearAllBodyScrollLocks
 } from "body-scroll-lock";
 
-const ResponsiveFilter = ({ render, active, hideOverlayHandler }) => {
+const ResponsiveFilterOptions = ({ render, active, hideOverlayHandler }) => {
   const currentViewportWidth = useViewportWidth();
   useOnUnmount(clearAllBodyScrollLocks);
 
@@ -33,4 +33,4 @@ const ResponsiveFilter = ({ render, active, hideOverlayHandler }) => {
   }
 };
 
-export default ResponsiveFilter;
+export default ResponsiveFilterOptions;

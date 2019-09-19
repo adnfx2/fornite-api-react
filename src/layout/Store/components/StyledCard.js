@@ -14,11 +14,11 @@ const useStyledCard = createUseStyles({
   card: {
     composes: ["flex-fill"],
     border: "none",
+    margin: "6px !important",
     background: "#fff",
     boxShadow: `0px 0px 4px rgba(0,0,0,0.3)`,
     [`@media only screen and (min-width: ${breakpoints.sm}px)`]: {
-      maxWidth: `calc(50% - ${gutter})`,
-      marginBottom: "15px !important",
+      maxWidth: `calc(50% - ${gutter})`
     },
     [`@media only screen and (min-width: ${breakpoints.md}px)`]: {
       maxWidth: `calc(33.33% - ${gutter})`
@@ -38,6 +38,13 @@ const useStyledCard = createUseStyles({
       borderRadius: "50%",
       marginLeft: "0.5em",
       backgroundColor: ({ rarity }) => getFortniteColor(rarity)
+    }
+  },
+  card__title: {
+    overflow: "scroll",
+    whiteSpace: "nowrap",
+    [`&::-webkit-scrollbar`]: {
+      width: "0px"
     }
   },
   card__attributes: {
@@ -66,7 +73,7 @@ const useStyledCard = createUseStyles({
 const StyledCard = ({ data }) => {
   /*test*/
   const [btn, setBtn] = useState(false);
-  const handler = () => console.log("hi") || setBtn(_ => !_);
+  const handler = () => setBtn(value => !value);
   /*end test*/
   const { name, image, rarity, attributes } = data;
   const type = data.type || null;
@@ -81,7 +88,7 @@ const StyledCard = ({ data }) => {
       </Card.Header>
       <Card.Img variant="top" src={image} className={classes.card__image} />
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title className={classes.card__title}>{name}</Card.Title>
         <Card.Text className={classes.card__attributes}>
           {attributes.map((attr, i) => (
             <span key={i} className={classes.card__attribute}>

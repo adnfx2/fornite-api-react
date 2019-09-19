@@ -10,10 +10,10 @@ const StyledCardGroup = ({
   return (
     <React.Fragment>
       <p className="">Total: {numberOfItems}</p>
-      <CardGroup className="justify-content-around">{children}</CardGroup>
+      <CardGroup>{children}</CardGroup>
       {nextPage ? (
         <span className="d-flex justify-content-center">
-          <Button size="lg" variant="secondary" onClick={loadMoreHandler}>
+          <Button className="m-3" size="lg" variant="secondary" onClick={loadMoreHandler}>
             LoadMore
           </Button>
         </span>

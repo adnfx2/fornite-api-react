@@ -4,7 +4,7 @@ import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
 
-const WeaponsList = ({ data = { weaponsById: {}, result: [] } }) => {
+const ListWeapons = ({ data = { weaponsById: {}, result: [] } }) => {
   const [weaponsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
   if (weaponsSlice.length) {
     const { weaponsById } = data;
@@ -26,7 +26,7 @@ const WeaponsList = ({ data = { weaponsById: {}, result: [] } }) => {
               `Ammo: ${stats.magazinesize}`,
               `Headshot: ${stats.hitHead}`,
               `Bodyshot: ${stats.hitBody}`,
-              `Reload time: ${stats.reloadtime}`,
+              `Reload t.: ${stats.reloadtime}`,
               `Firerate: ${stats.firerate}`
             ]
           };
@@ -39,4 +39,4 @@ const WeaponsList = ({ data = { weaponsById: {}, result: [] } }) => {
   }
 };
 
-export default WeaponsList;
+export default ListWeapons;

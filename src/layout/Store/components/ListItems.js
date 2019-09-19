@@ -4,7 +4,7 @@ import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
 
-export const ItemsList = ({ data = { itemsById: {}, result: [] } }) => {
+export const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
   const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
   if (itemsSlice.length) {
     const { itemsById } = data;
@@ -32,11 +32,11 @@ export const ItemsList = ({ data = { itemsById: {}, result: [] } }) => {
             type,
             attributes: [
               `Cost: ${cost || "--"}`,
-              `Obtain type: ${obtainedType}`,
+              `Get: ${obtainedType}`,
               `Type: ${type.slice(1)}`,
-              `Average stars: ${ratings.avgStars}`,
-              `Total points: ${ratings.totalPoints}`,
-              `Total votes: ${ratings.numberVotes}`
+              `Avg. stars: ${ratings.avgStars}`,
+              `Points: ${ratings.totalPoints}`,
+              `Votes: ${ratings.numberVotes}`
             ]
           };
           return <StyledCard key={id} data={normalizedData} />;
@@ -48,4 +48,4 @@ export const ItemsList = ({ data = { itemsById: {}, result: [] } }) => {
   }
 };
 
-export default ItemsList;
+export default ListItems;
