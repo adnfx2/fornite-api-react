@@ -43,3 +43,4 @@ I was looking for a clean and simple way to look up fornite items without too mu
 If you have any suggestions/ideas or any kind of feedback let me know here <fx.adrian@gmail.com>.
 
 >No copyright infringement intended, this project was created only for educational purposes & for the ease of sharing fortnite related information.
+
