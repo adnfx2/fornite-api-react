@@ -1,3 +1,8 @@
+#PROJEC NEWS!!
+--> API service provider down, Currently the mantainer of FortniteApi is migrating his DB.
+if this process doesn't get fixed soon, ill look for a new api provider. Meanwhile Ill keep
+developing the missing parts of this website.
+---
 # -- FortniteStarred --
 
 ![Fortnite](https://s.pngkit.com/png/small/542-5420737_fortnite-llama-head-fortnite-playground-mode-logo.png)
@@ -43,4 +48,3 @@ I was looking for a clean and simple way to look up fornite items without too mu
 If you have any suggestions/ideas or any kind of feedback let me know here <fx.adrian@gmail.com>.
 
 >No copyright infringement intended, this project was created only for educational purposes & for the ease of sharing fortnite related information.
-
