@@ -1,7 +1,5 @@
-#PROJEC NEWS!!
---> Third party FortniteAPI service down, Currently the mantainer of FortniteApi is migrating his DB.
-if this process does not get completed soon, ill look for a new api service. Meanwhile I'll keep 
-developing the missing parts of this website.
+#PROJECT NEWS!!
+--> FortniteAPI service down, Currently the mantainer is migrating his database. if this process doesn't get completed soon, ill look for a new api. Meanwhile I'll keep developing the missing parts of this website.
 
 ---
 # -- FortniteStarred --
