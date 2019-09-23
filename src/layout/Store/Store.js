@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -8,6 +8,7 @@ import { fetchWeapons, fetchItems } from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
 import { storeLinks, storeRoutes } from "../../routes/routes";
 import fortniteBanner from "../../assets/images/Fortnite-Banner.jpg";
+import ResponsiveFilterOptions from "./components/ResponsiveFilterOptions";
 
 const useStyle = createUseStyles({
   store__title: {
@@ -26,10 +27,18 @@ const useShouldFetch = (data, dispatcher) => {
   }, []);
 };
 
+const useFilterToggle = () => {
+  const [visible, setVisible] = useState(false);
+  const filterToggleHandler = () =>
+    setVisible(prevVisible => console.log("hi") || !prevVisible);
+  return [visible, filterToggleHandler];
+};
+
 const Store = props => {
   const { weapons, fetchWeapons, items, fetchItems } = props;
   useShouldFetch(weapons, fetchWeapons);
   useShouldFetch(items, fetchItems);
+  const [visible, filterToggleHandler] = useFilterToggle();
   const weaponsSorting = null;
   const itemsSorting = null;
   const classes = useStyle();
@@ -53,7 +62,7 @@ const Store = props => {
               {link.name}
             </NavLink>
           ))}
-          <FilterButton />
+          <FilterButton onClick={filterToggleHandler} />
         </Col>
       </Row>
       <Row>
@@ -77,10 +86,17 @@ const Store = props => {
             })}
           </Switch>
         </Col>
+        <ResponsiveFilterOptions
+          render={<Test />}
+          filterToggleHandler={filterToggleHandler}
+          visible={visible}
+        />
       </Row>
     </Container>
   );
 };
+
+const Test = () => <div>Filter</div>;
 
 const mapStateToProps = ({ dataFetched, errors }) => {
   const array = [ENDPOINT_WEAPONS, ENDPOINT_ITEMS];

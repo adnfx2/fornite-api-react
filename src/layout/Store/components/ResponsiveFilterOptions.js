@@ -10,23 +10,23 @@ import {
   clearAllBodyScrollLocks
 } from "body-scroll-lock";
 
-const ResponsiveFilterOptions = ({ render, active, hideOverlayHandler }) => {
+const ResponsiveFilterOptions = ({ render, visible, filterToggleHandler }) => {
   const currentViewportWidth = useViewportWidth();
   useOnUnmount(clearAllBodyScrollLocks);
 
   //  is breakpoint triggered?
   if (currentViewportWidth >= breakpoints.md) {
     // display component for larger devices
-    active && hideOverlayHandler();
+    visible && filterToggleHandler();
     enableBodyScroll();
     return <Col md={3}>{render}</Col>;
   } else {
     // display component for smaller devices
-    active // if SideOverlay is active prevent scrolling
+    visible // if SideOverlay is visible prevent scrolling
       ? disableBodyScroll(void 0, { reserveScrollBarGap: true })
       : enableBodyScroll();
     return (
-      <SideOverlay active={active} hideOverlayHandler={hideOverlayHandler}>
+      <SideOverlay active={visible} toggleOverlayHandler={filterToggleHandler}>
         {render}
       </SideOverlay>
     );
