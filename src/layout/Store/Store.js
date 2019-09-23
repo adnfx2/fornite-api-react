@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
+import { Container, Row, Col } from "react-bootstrap";
+import { NavLink, Route, Switch, Redirect } from "react-router-dom";
+import FilterMenu from "./components/FilterMenu";
 import FilterButton from "./components/FilterButton";
+import ResponsiveFilterOptions from "./components/ResponsiveFilterOptions";
 import { fetchWeapons, fetchItems } from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
 import { storeLinks, storeRoutes } from "../../routes/routes";
 import fortniteBanner from "../../assets/images/Fortnite-Banner.jpg";
-import ResponsiveFilterOptions from "./components/ResponsiveFilterOptions";
 
 const useStyle = createUseStyles({
   store__title: {
@@ -87,7 +88,7 @@ const Store = props => {
           </Switch>
         </Col>
         <ResponsiveFilterOptions
-          render={<Test />}
+          render={<FilterMenu />}
           filterToggleHandler={filterToggleHandler}
           visible={visible}
         />
@@ -95,8 +96,6 @@ const Store = props => {
     </Container>
   );
 };
-
-const Test = () => <div>Filter</div>;
 
 const mapStateToProps = ({ dataFetched, errors }) => {
   const array = [ENDPOINT_WEAPONS, ENDPOINT_ITEMS];

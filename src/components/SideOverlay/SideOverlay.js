@@ -29,7 +29,7 @@ const Backdrop = ({ children, active, onClick }) => {
 const useStyleContent = createUseStyles({
   content: {
     position: "relative",
-    minWidth: "250px",
+    minWidth: "275px",
     height: "100%",
     transition: "left ease-in-out 300ms 20ms",
     backgroundColor: "var(--white)",
