@@ -1,62 +1,42 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-//  Search
+import Search from "../../../components/Search/Search";
+import RadioGroup from "../../../components/RadioGroup/RadioGroup";
+import SearchSelect from "../../../components/SearchSelect/SearchSelect";
 
-const useSearchStyle = createUseStyles({
-  search: {
-    position: "relative"
-  },
-  input: {
-    width: "100%",
-    borderRadius: "8px",
-    border: "1px solid var(--light)",
-    height: "2.5rem",
-    fontSize: ".875rem",
-    padding: "0 .25rem 0 2.5rem",
-    [`&:focus`]: {
-      outline: "none",
-      borderColor: "var(--primary)",
-      boxShadow: "0 0 0 1px var(--primary)"
-    }
-  },
-  icon: {
-    position: "absolute",
-    display: "inline-block",
-    textAlign: "center",
-    top: "1px",
-    lineHeight: "2.5rem",
-    left: "1rem",
-    color: "var(--gray)"
-  }
-});
-const Search = props => {
-  const { search, input, icon } = useSearchStyle();
-  return (
-    <div className={search}>
-      <span className={icon}>
-        <FontAwesomeIcon icon={faSearch} />
-      </span>
-      <input className={input} type="text" placeholder="Search..." />
-    </div>
-  );
+const nameRadioGroup = {
+  groupTitle: "Name",
+  groupName: "byName",
+  options: [{ label: "Default" }, { label: "A-Z" }, { label: "Z-A" }]
 };
 
-//  FilterMenu
+const selectTypes = {
+  title: "Rarity",
+  options: ["all", "rare", "weird", "lol"]
+};
 
 const useFilterMenuStyle = createUseStyles({
   filterMenu: {
     composes: ["p-4 text-dark"]
+  },
+  title: {
+    composes: ["py-3"]
+  },
+  subTitle: {
+    composes: ["pt-4 pb-2"]
   }
 });
 const FilterMenu = ({ ...props }) => {
-  const { filterMenu } = useFilterMenuStyle();
+  const classes = useFilterMenuStyle();
 
   return (
-    <div className={filterMenu}>
-      <h4>Filter by</h4>
+    <div className={classes.filterMenu}>
+      <h3 className={classes.title}>Filter by</h3>
       <Search />
+      <h4 className={classes.subTitle}>Name</h4>
+      <RadioGroup className="pl-2" config={nameRadioGroup} />
+      <h4 className={classes.subTitle}>Rarity</h4>
+      <SearchSelect className="pl-2" config={selectTypes} />
     </div>
   );
 };
