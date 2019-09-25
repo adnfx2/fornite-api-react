@@ -4,10 +4,15 @@ import { createUseStyles } from "react-jss";
 const useSearchSelectStyle = createUseStyles({
   select: {
     display: "inline-block",
+    background: "#fff",
     width: "100%",
     borderRadius: "4px",
     border: "none",
-    boxShadow: "0 0 1px #888"
+    boxShadow: "0 0 1px #555",
+    [`&:focus`]: {
+      border: "1px solid #555",
+      outline: "none"
+    }
   },
   option: {
     fontSize: "0.8em"
