@@ -85,7 +85,7 @@ const usePlaceholderTextStyle = createUseStyles({
     }
   }
 });
-const Text = props => {
+const Text = ({ className, ...props }) => {
   const { variant = "sm", splitted } = props;
   const size =
     //  prettier-ignore
@@ -97,7 +97,10 @@ const Text = props => {
   const { placeholder__text } = usePlaceholderTextStyle(size);
   return (
     <div
-      className={`${placeholder__text} ${splitted ? "splitted" : ""}`.trim()}
+      className={`${placeholder__text} ${
+        splitted ? "splitted" : ""
+      } ${className || ""}`.trim()}
+      {...props}
     />
   );
 };

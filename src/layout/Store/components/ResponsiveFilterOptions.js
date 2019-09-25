@@ -15,7 +15,7 @@ const ResponsiveFilterOptions = ({ render, visible, filterToggleHandler }) => {
   useOnUnmount(clearAllBodyScrollLocks);
 
   //  is breakpoint triggered?
-  if (currentViewportWidth >= breakpoints.md) {
+  if (currentViewportWidth >= breakpoints.lg) {
     // display component for larger devices
     visible && filterToggleHandler();
     enableBodyScroll();

@@ -9,7 +9,7 @@ const StyledCardGroup = ({
 }) => {
   return (
     <React.Fragment>
-      <p className="">Total: {numberOfItems}</p>
+      <p className="p-2">Total: {numberOfItems}</p>
       <CardGroup>{children}</CardGroup>
       {nextPage ? (
         <span className="d-flex justify-content-center">
