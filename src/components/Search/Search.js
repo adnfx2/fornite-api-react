@@ -10,7 +10,7 @@ const useSearchStyle = createUseStyles({
   input: {
     width: "100%",
     borderRadius: "8px",
-    border: "1px solid var(--light)",
+    border: "1px solid #fff",
     height: "2.5rem",
     fontSize: ".875rem",
     padding: "0 .25rem 0 2.5rem",
@@ -27,7 +27,7 @@ const useSearchStyle = createUseStyles({
     top: "1px",
     lineHeight: "2.5rem",
     left: "1rem",
-    color: "var(--gray)"
+    color: "#555"
   }
 });
 
@@ -38,7 +38,7 @@ const Search = props => {
       <span className={icon}>
         <FontAwesomeIcon icon={faSearch} />
       </span>
-      <input className={input} type="text" placeholder="Search..." />
+      <input size={15} className={input} type="text" placeholder="Search..." />
     </div>
   );
 };

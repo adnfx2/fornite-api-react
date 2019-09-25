@@ -1,5 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
+import RadioButton from "../RadioButton/RadioButton";
 
 const useRadioGroupStyle = createUseStyles({
   radioGroup: {
@@ -7,14 +8,6 @@ const useRadioGroupStyle = createUseStyles({
     flexFlow: "column wrap"
   }
 });
-
-const RadioButton = ({ label, groupName }) => {
-  return (
-    <label key={"name"}>
-      <input type="radio" name={groupName} /> {label}
-    </label>
-  );
-};
 
 const RadioGroup = ({ config, className, ...props }) => {
   const { groupName, options } = config;

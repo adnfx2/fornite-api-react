@@ -31,11 +31,11 @@ const FilterMenu = ({ ...props }) => {
 
   return (
     <div className={classes.filterMenu}>
-      <h3 className={classes.title}>Filter by</h3>
+      <h4 className={classes.title}>Sort By</h4>
       <Search />
-      <h4 className={classes.subTitle}>Name</h4>
+      <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup className="pl-2" config={nameRadioGroup} />
-      <h4 className={classes.subTitle}>Rarity</h4>
+      <h5 className={classes.subTitle}>Rarity</h5>
       <SearchSelect className="pl-2" config={selectTypes} />
     </div>
   );
