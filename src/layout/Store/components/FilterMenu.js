@@ -3,6 +3,7 @@ import { createUseStyles } from "react-jss";
 import Search from "../../../components/Search/Search";
 import RadioGroup from "../../../components/RadioGroup/RadioGroup";
 import SearchSelect from "../../../components/SearchSelect/SearchSelect";
+import { breakpoints } from "../../../styles/variables";
 
 const nameRadioGroup = {
   groupTitle: "Name",
@@ -17,10 +18,14 @@ const selectTypes = {
 
 const useFilterMenuStyle = createUseStyles({
   filterMenu: {
-    composes: ["p-4 text-dark"]
+    composes: ["p-4 text-dark"],
+    [`@media only screen and (min-width: ${breakpoints.lg}px)`]: {
+      marginTop: "52px",
+      boxShadow: "0 0 4px rgba(0,0,0,0.3)"
+    }
   },
   title: {
-    composes: ["py-3"]
+    composes: ["pt-0 pb-3"]
   },
   subTitle: {
     composes: ["pt-4 pb-2"]

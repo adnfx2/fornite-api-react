@@ -32,7 +32,8 @@ const useStyleContent = createUseStyles({
     minWidth: "275px",
     height: "100%",
     transition: "left ease-in-out 300ms 20ms",
-    backgroundColor: "var(--white)",
+    backgroundColor: "#fff",
+    overflowY: "scroll",
     left: "100%",
     [`.active &`]: {
       left: "0%"

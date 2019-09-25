@@ -9,8 +9,8 @@ const useSearchStyle = createUseStyles({
   },
   input: {
     width: "100%",
-    borderRadius: "8px",
-    border: "1px solid #fff",
+    borderRadius: "4px",
+    border: "1px solid #f4f4f4",
     height: "2.5rem",
     fontSize: ".875rem",
     padding: "0 .25rem 0 2.5rem",

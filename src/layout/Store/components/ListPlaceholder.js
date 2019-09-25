@@ -12,7 +12,7 @@ const useCardPlaceholderStyle = createUseStyles({
     [`@media only screen and (min-width: ${breakpoints.sm}px)`]: {
       maxWidth: `calc(50% - ${gutter})`
     },
-    [`@media only screen and (min-width: ${breakpoints.lg}px)`]: {
+    [`@media only screen and (min-width: ${breakpoints.md}px)`]: {
       maxWidth: `calc(33.33% - ${gutter})`
     },
     [`@media only screen and (min-width: ${breakpoints.xl}px)`]: {

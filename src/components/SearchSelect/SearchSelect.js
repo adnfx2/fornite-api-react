@@ -4,10 +4,11 @@ import { createUseStyles } from "react-jss";
 const useSearchSelectStyle = createUseStyles({
   select: {
     display: "inline-block",
-    background: "#fff",
+    background: "#f4f4f4",
+    padding: "8px",
     width: "100%",
     borderRadius: "4px",
-    border: "none",
+    border: "1px solid #f4f4f4",
     boxShadow: "0 0 1px #555",
     [`&:focus`]: {
       border: "1px solid #555",
@@ -16,7 +17,7 @@ const useSearchSelectStyle = createUseStyles({
   },
   option: {
     fontSize: "0.8em"
-  } 
+  }
 });
 
 const Option = ({ name }) => {
@@ -28,7 +29,7 @@ const SearchSelect = ({ config, className, ...props }) => {
   const classes = useSearchSelectStyle();
   return (
     <div className={`${className || ""}`.trim()}>
-      <select className={classes.select}> 
+      <select className={classes.select}>
         {options.map(option => (
           <Option name={option} />
         ))}
