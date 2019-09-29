@@ -1,5 +1,7 @@
 // constants
-export const API_ROOT = "https://fortnite-api.theapinetwork.com";
+const CORS_ANYWHERE_URL = "https://cors-anywhere.herokuapp.com/";
+export const API_ROOT =
+  CORS_ANYWHERE_URL + "https://fortnite-api.theapinetwork.com";
 export const AUTH_TOKEN = "8231bb87427bdaa20e08de2767f9992e";
 // endpoints
 export const ENDPOINT_WEAPONS = "weapons/get"; // headers: {{Authorization}}

@@ -37,7 +37,8 @@ const CardPlaceholder = () => {
 
 const useTextPlaceholderStyle = createUseStyles({
   textPlaceholder: {
-    composes: ["p-2 w-100 d-flex"]
+    composes: ["p-2 w-100 d-flex"],
+    marginBottom: "20px"
   },
   smallBlock: {
     width: "2em"

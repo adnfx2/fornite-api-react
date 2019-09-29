@@ -13,7 +13,7 @@ const useSearchStyle = createUseStyles({
     border: "1px solid #f4f4f4",
     height: "2.5rem",
     fontSize: ".875rem",
-    padding: "0 .25rem 0 2.5rem",
+    padding: "0 .25rem .5rem 2.5rem",
     [`&:focus`]: {
       outline: "none",
       borderColor: "#555",

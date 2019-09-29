@@ -20,7 +20,7 @@ const useFilterMenuStyle = createUseStyles({
   filterMenu: {
     composes: ["p-4 text-dark"],
     [`@media only screen and (min-width: ${breakpoints.lg}px)`]: {
-      marginTop: "52px",
+      marginTop: "78px",
       boxShadow: "0 0 4px rgba(0,0,0,0.3)"
     }
   },

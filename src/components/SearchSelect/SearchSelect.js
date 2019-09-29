@@ -8,8 +8,7 @@ const useSearchSelectStyle = createUseStyles({
     padding: "8px",
     width: "100%",
     borderRadius: "4px",
-    border: "1px solid #f4f4f4",
-    boxShadow: "0 0 1px #555",
+    border: "1px solid rgba(0,0,0,.3)",
     [`&:focus`]: {
       border: "1px solid #555",
       outline: "none"

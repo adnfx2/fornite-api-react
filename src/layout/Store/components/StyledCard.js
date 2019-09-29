@@ -11,6 +11,13 @@ const firstLetterCaps = word => word[0].toUpperCase() + word.slice(1);
 const gutter = "12px";
 
 const useStyledCard = createUseStyles({
+  hideOverflow: {
+    overflow: "scroll",
+    whiteSpace: "nowrap",
+    [`&::-webkit-scrollbar`]: {
+      display: "none"
+    }
+  },
   card: {
     composes: ["flex-fill"],
     border: "none",
@@ -37,23 +44,18 @@ const useStyledCard = createUseStyles({
       height: "calc(16px + 0.1vw)",
       borderRadius: "50%",
       marginLeft: "0.5em",
-      backgroundColor: ({ rarity }) => getFortniteColor(rarity)
-    }
-  },
-  card__title: {
-    overflow: "scroll",
-    whiteSpace: "nowrap",
-    [`&::-webkit-scrollbar`]: {
-      width: "0px"
+      backgroundColor: ({ rarity }) => getFortniteColor(rarity) || "#000"
     }
   },
   card__attributes: {
     composes: ["d-flex flex-wrap"],
     fontSize: "13px",
-    display: "flex"
+    display: "flex",
+    justifyContent: "space-between"
   },
   card__attribute: {
-    flex: "1 1 50%"
+    flex: "0 1 48%",
+    textOverflow: "ellipsis"
   },
   card__image: {
     width: "55%",
@@ -88,10 +90,13 @@ const StyledCard = ({ data }) => {
       </Card.Header>
       <Card.Img variant="top" src={image} className={classes.card__image} />
       <Card.Body>
-        <Card.Title className={classes.card__title}>{name}</Card.Title>
+        <Card.Title className={classes.hideOverflow}>{name}</Card.Title>
         <Card.Text className={classes.card__attributes}>
           {attributes.map((attr, i) => (
-            <span key={i} className={classes.card__attribute}>
+            <span
+              key={i}
+              className={`${classes.card__attribute} ${classes.hideOverflow}`}
+            >
               {attr}
             </span>
           ))}

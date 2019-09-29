@@ -34,7 +34,7 @@ export const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
               `Cost: ${cost || "--"}`,
               `Get: ${obtainedType}`,
               `Type: ${type.slice(1)}`,
-              `Avg. stars: ${ratings.avgStars}`,
+              `Stars: ${ratings.avgStars}`,
               `Points: ${ratings.totalPoints}`,
               `Votes: ${ratings.numberVotes}`
             ]
