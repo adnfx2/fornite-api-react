@@ -25,7 +25,7 @@ const useShouldFetch = (data, dispatcher) => {
     if (!data) {
       dispatcher();
     }
-  }, []);
+  }, []); //eslint-disable-line
 };
 
 const useFilterToggle = () => {
@@ -40,8 +40,8 @@ const Store = props => {
   useShouldFetch(weapons, fetchWeapons);
   useShouldFetch(items, fetchItems);
   const [visible, filterToggleHandler] = useFilterToggle();
-  const weaponsSorting = null;
-  const itemsSorting = null;
+  // const weaponsSorting = null;
+  // const itemsSorting = null;
   const classes = useStyle();
 
   return (

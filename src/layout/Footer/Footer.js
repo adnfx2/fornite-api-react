@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import List from "../../components/List/List";
 import CustomLink from "../../components/CustomLink/CustomLink";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
@@ -84,7 +83,7 @@ const Footer = props => {
             >
               <h5>{title}</h5>
               <ul className="list-unstyled">
-                <List renderItem={renderLinks} items={items} />
+                {items.map(item => renderLinks(item))}
               </ul>
             </Col>
           ))}

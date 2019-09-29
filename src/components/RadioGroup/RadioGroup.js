@@ -14,8 +14,8 @@ const RadioGroup = ({ config, className, ...props }) => {
   const classes = useRadioGroupStyle();
   return (
     <div className={`${classes.radioGroup} ${className || ""}`.trim()}>
-      {options.map(el => (
-        <RadioButton label={el.label} groupName={groupName} />
+      {options.map((el, i) => (
+        <RadioButton key={i} label={el.label} groupName={groupName} />
       ))}
     </div>
   );

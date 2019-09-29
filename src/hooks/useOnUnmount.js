@@ -10,7 +10,7 @@ const useOnUnmount = (...funcs) => {
   });
   useEffect(() => {
     return () => funcs.forEach(func => func());
-  }, []);
+  }, []); //eslint-disable-line
 };
 
 export default useOnUnmount;

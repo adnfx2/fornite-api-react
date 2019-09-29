@@ -30,7 +30,7 @@ const SearchSelect = ({ config, className, ...props }) => {
     <div className={`${className || ""}`.trim()}>
       <select className={classes.select}>
         {options.map(option => (
-          <Option name={option} />
+          <Option key={option} name={option} />
         ))}
       </select>
     </div>

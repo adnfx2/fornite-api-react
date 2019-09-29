@@ -52,7 +52,7 @@ const NewsFeed = props => {
     if (!news) {
       loadNews();
     }
-  }, []);
+  }, []); //eslint-disable-line
   const reloadHandler = () => {
     loadNews();
   };

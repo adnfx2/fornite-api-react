@@ -12,7 +12,7 @@ const useBlinkingAnimationStyle = createUseStyles({
     // Name convention needed to avoid future conflicts (Because of being global).
     [`@keyframes ${BLINKING}`]: {
       [`0%`]: { opacity: 1 },
-      [`50%`]: { opacity: 0.7 },
+      [`50%`]: { opacity: 0.6 },
       [`100%`]: { opacity: 1 }
     }
   }
@@ -174,8 +174,8 @@ const Paragraph = ({ lines = 1 }) => {
     <div className={placeholder__paragraph}>
       {Array.from(Array(lines)).map((_, index) => (
         <React.Fragment key={index}>
-          <Text variant="sm" splitted />
-          <Text variant="sm" splitted />
+          <Text variant="sm" splitted={1} />
+          <Text variant="sm" splitted={1} />
         </React.Fragment>
       ))}
     </div>
