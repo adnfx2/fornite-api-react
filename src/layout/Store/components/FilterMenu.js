@@ -4,17 +4,7 @@ import Search from "../../../components/Search/Search";
 import RadioGroup from "../../../components/RadioGroup/RadioGroup";
 import SearchSelect from "../../../components/SearchSelect/SearchSelect";
 import { breakpoints } from "../../../styles/variables";
-
-const nameRadioGroup = {
-  groupTitle: "Name",
-  groupName: "byName",
-  options: [{ label: "Default" }, { label: "A-Z" }, { label: "Z-A" }]
-};
-
-const selectTypes = {
-  title: "Rarity",
-  options: ["all", "rare", "weird", "lol"]
-};
+import { nameRadioGroup, getRarities } from "./FilterMenuConfig";
 
 const useFilterMenuStyle = createUseStyles({
   filterMenu: {
@@ -31,9 +21,9 @@ const useFilterMenuStyle = createUseStyles({
     composes: ["pt-4 pb-2"]
   }
 });
-const FilterMenu = ({ ...props }) => {
+const FilterMenu = ({ rarities }) => {
   const classes = useFilterMenuStyle();
-
+  const _rarities = getRarities(rarities);
   return (
     <div className={classes.filterMenu}>
       <h4 className={classes.title}>Sort By</h4>
@@ -41,7 +31,7 @@ const FilterMenu = ({ ...props }) => {
       <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup className="pl-2" config={nameRadioGroup} />
       <h5 className={classes.subTitle}>Rarity</h5>
-      <SearchSelect className="pl-2" config={selectTypes} />
+      <SearchSelect className="pl-2" config={_rarities} />
     </div>
   );
 };

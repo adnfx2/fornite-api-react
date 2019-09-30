@@ -5,9 +5,9 @@ import { fortniteColors } from "../../../styles/variables";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { breakpoints } from "../../../styles/variables";
-const getFortniteColor = rarity => fortniteColors.rarities[rarity];
-const firstLetterCaps = word => word[0].toUpperCase() + word.slice(1);
+import { firstLetterCaps } from "../../../utils/textUtils";
 
+const getFortniteColor = rarity => fortniteColors.rarities[rarity];
 const gutter = "12px";
 
 const useStyledCard = createUseStyles({

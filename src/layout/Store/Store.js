@@ -88,10 +88,11 @@ const Store = props => {
           </Switch>
         </Col>
         <ResponsiveFilterOptions
-          render={<FilterMenu />}
           filterToggleHandler={filterToggleHandler}
           visible={visible}
-        />
+        >
+          <FilterMenu rarities={items && items.itemsByRarity} />
+        </ResponsiveFilterOptions>
       </Row>
     </Container>
   );
@@ -109,6 +110,7 @@ const mapStateToProps = ({ dataFetched, errors }) => {
     weaponsErrorMsg: weapons.error,
     items: items.data,
     itemsErrorMsg: items.error,
+
     filter: "none"
   };
 };

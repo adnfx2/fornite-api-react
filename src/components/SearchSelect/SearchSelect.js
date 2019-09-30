@@ -23,16 +23,17 @@ const Option = ({ name }) => {
   return <option value={name}>{name}</option>;
 };
 
+const renderOptions = options => {
+  if (!options) return;
+  return options.map(option => <Option key={option} name={option} />);
+};
+
 const SearchSelect = ({ config, className, ...props }) => {
   const { options } = config;
   const classes = useSearchSelectStyle();
   return (
     <div className={`${className || ""}`.trim()}>
-      <select className={classes.select}>
-        {options.map(option => (
-          <Option key={option} name={option} />
-        ))}
-      </select>
+      <select className={classes.select}>{renderOptions(options)}</select>
     </div>
   );
 };

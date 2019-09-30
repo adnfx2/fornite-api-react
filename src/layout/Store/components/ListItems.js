@@ -4,10 +4,15 @@ import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
 
-export const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
+const SortByAlpha = (array, data) => {
+  return array.sort((a, b) => data[a].name.localeCompare(data[b].name));
+};
+
+const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
   const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
   if (itemsSlice.length) {
     const { itemsById } = data;
+
     return (
       <StyledCardGroup
         numberOfItems={data.result.length}

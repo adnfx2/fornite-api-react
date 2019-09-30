@@ -10,7 +10,7 @@ import {
   clearAllBodyScrollLocks
 } from "body-scroll-lock";
 
-const ResponsiveFilterOptions = ({ render, visible, filterToggleHandler }) => {
+const ResponsiveFilterOptions = ({ children, visible, filterToggleHandler }) => {
   const currentViewportWidth = useViewportWidth();
   useOnUnmount(clearAllBodyScrollLocks);
 
@@ -19,7 +19,7 @@ const ResponsiveFilterOptions = ({ render, visible, filterToggleHandler }) => {
     // display component for larger devices
     visible && filterToggleHandler();
     enableBodyScroll();
-    return <Col md={3}>{render}</Col>;
+    return <Col md={3}>{children}</Col>;
   } else {
     // display component for smaller devices
     visible // if SideOverlay is visible prevent scrolling
@@ -27,7 +27,7 @@ const ResponsiveFilterOptions = ({ render, visible, filterToggleHandler }) => {
       : enableBodyScroll();
     return (
       <SideOverlay active={visible} toggleOverlayHandler={filterToggleHandler}>
-        {render}
+        {children}
       </SideOverlay>
     );
   }
