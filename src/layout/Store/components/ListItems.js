@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ListPlaceholder from "./ListPlaceholder.js";
 import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
+import queryString from "query-string";
 
 const SortByAlpha = (array, data) => {
   return array.sort((a, b) => data[a].name.localeCompare(data[b].name));
 };
 
-const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
+const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
+  console.log({ props });
   const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
+
   if (itemsSlice.length) {
     const { itemsById } = data;
 
@@ -19,6 +22,17 @@ const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
         loadMoreHandler={loadMoreHandler}
         nextPage={nextPage}
       >
+        <div
+          style={{
+            background: "var(--primary)",
+            position: "absolute",
+            padding: "1em",
+            color: "#fff",
+            zIndex: "5000"
+          }}
+        >
+          {"location.pathname"}
+        </div>
         {itemsSlice.map(id => {
           const {
             name,

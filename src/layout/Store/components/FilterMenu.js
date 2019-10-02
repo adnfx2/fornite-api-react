@@ -1,5 +1,6 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
+import { useHistory } from "react-router-dom";
 import Search from "../../../components/Search/Search";
 import RadioGroup from "../../../components/RadioGroup/RadioGroup";
 import SearchSelect from "../../../components/SearchSelect/SearchSelect";
@@ -24,8 +25,21 @@ const useFilterMenuStyle = createUseStyles({
 const FilterMenu = ({ rarities }) => {
   const classes = useFilterMenuStyle();
   const _rarities = getRarities(rarities);
+  const history = useHistory();
+
   return (
     <div className={classes.filterMenu}>
+      <button
+        onClick={() => {
+          const {
+            location: { pathname }
+          } = history;
+          console.log(pathname);
+          history.push(`${pathname}?crabs=hello&h=jk`);
+        }}
+      >
+        test
+      </button>
       <h4 className={classes.title}>Sort By</h4>
       <Search />
       <h5 className={classes.subTitle}>Name</h5>
