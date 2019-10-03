@@ -9,9 +9,15 @@ const SortByAlpha = (array, data) => {
   return array.sort((a, b) => data[a].name.localeCompare(data[b].name));
 };
 
+const useFilter = (data, queryParams) => {
+  const queries = queryString.parse(queryParams);
+  console.log({ queries });
+};
+
 const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
-  console.log({ props });
+  const filteredData = useFilter(data, props.location.search);
   const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
+  console.log({ itemsSlice, data: data.itemsById });
 
   if (itemsSlice.length) {
     const { itemsById } = data;
@@ -31,7 +37,7 @@ const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
             zIndex: "5000"
           }}
         >
-          {"location.pathname"}
+          {props.location.search || "nothing"}
         </div>
         {itemsSlice.map(id => {
           const {

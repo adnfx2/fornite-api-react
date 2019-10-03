@@ -1,11 +1,12 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Search from "../../../components/Search/Search";
 import RadioGroup from "../../../components/RadioGroup/RadioGroup";
 import SearchSelect from "../../../components/SearchSelect/SearchSelect";
 import { breakpoints } from "../../../styles/variables";
 import { nameRadioGroup, getRarities } from "./FilterMenuConfig";
+import queryString from "query-string";
 
 const useFilterMenuStyle = createUseStyles({
   filterMenu: {
@@ -26,24 +27,27 @@ const FilterMenu = ({ rarities }) => {
   const classes = useFilterMenuStyle();
   const _rarities = getRarities(rarities);
   const history = useHistory();
-
+  const location = useLocation();
+  const handler = label => {
+    const queries = queryString.parse(location.search);
+    const finalQueries = queryString.stringify({
+      ...queries,
+      rNames: label
+    });
+    console.log({ queries });
+    console.log({ finalQueries });
+    history.push(`${location.pathname}?${finalQueries}`);
+  };
   return (
     <div className={classes.filterMenu}>
-      <button
-        onClick={() => {
-          const {
-            location: { pathname }
-          } = history;
-          console.log(pathname);
-          history.push(`${pathname}?crabs=hello&h=jk`);
-        }}
-      >
-        test
-      </button>
       <h4 className={classes.title}>Sort By</h4>
       <Search />
       <h5 className={classes.subTitle}>Name</h5>
-      <RadioGroup className="pl-2" config={nameRadioGroup} />
+      <RadioGroup
+        actionHandler={handler}
+        className="pl-2"
+        config={nameRadioGroup}
+      />
       <h5 className={classes.subTitle}>Rarity</h5>
       <SearchSelect className="pl-2" config={_rarities} />
     </div>

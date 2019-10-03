@@ -75,7 +75,7 @@ const Store = props => {
                 const C = route.render;
                 var newRoute = {
                   ...route,
-                  render: props => <C {...props} data={props[dataKey]} />
+                  render: _props => <C {...props} data={props[dataKey]} />
                 };
               }
               const finalRoute = newRoute || route;

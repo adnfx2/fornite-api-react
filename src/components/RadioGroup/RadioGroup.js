@@ -15,7 +15,12 @@ const RadioGroup = ({ config, className, ...props }) => {
   return (
     <div className={`${classes.radioGroup} ${className || ""}`.trim()}>
       {options.map((el, i) => (
-        <RadioButton key={i} label={el.label} groupName={groupName} />
+        <RadioButton
+          key={i}
+          label={el.label}
+          groupName={groupName}
+          {...props}
+        />
       ))}
     </div>
   );
