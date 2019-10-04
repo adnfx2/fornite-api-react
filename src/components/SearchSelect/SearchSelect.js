@@ -28,13 +28,18 @@ const renderOptions = options => {
   return options.map(option => <Option key={option} name={option} />);
 };
 
-const SearchSelect = ({ config, className, ...props }) => {
+const SearchSelect = ({ config, className, forwardRef, ...props }) => {
   const { options } = config;
   const classes = useSearchSelectStyle();
+
   return (
-    <div className={`${className || ""}`.trim()}>
-      <select className={classes.select}>{renderOptions(options)}</select>
-    </div>
+    <select
+      {...props}
+      ref={forwardRef}
+      className={`${classes.select} ${className || ""}`.trim()}
+    >
+      {renderOptions(options)}
+    </select>
   );
 };
 

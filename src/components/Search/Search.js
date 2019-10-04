@@ -32,14 +32,22 @@ const useSearchStyle = createUseStyles({
   }
 });
 
-const Search = props => {
+const Search = ({ forwardRef, ...props }) => {
   const { search, input, icon } = useSearchStyle();
+
   return (
     <div className={search}>
       <span className={icon}>
         <FontAwesomeIcon icon={faSearch} />
       </span>
-      <input size={15} className={input} type="text" placeholder="Search..." />
+      <input
+        {...props}
+        ref={forwardRef}
+        size={15}
+        className={input}
+        type="text"
+        placeholder="Search..."
+      />
     </div>
   );
 };

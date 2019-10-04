@@ -17,7 +17,7 @@ const useFilter = (data, queryParams) => {
 const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
   const filteredData = useFilter(data, props.location.search);
   const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
-  console.log({ itemsSlice, data: data.itemsById });
+  console.log("rendering ListItems");
 
   if (itemsSlice.length) {
     const { itemsById } = data;
@@ -28,17 +28,6 @@ const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
         loadMoreHandler={loadMoreHandler}
         nextPage={nextPage}
       >
-        <div
-          style={{
-            background: "var(--primary)",
-            position: "absolute",
-            padding: "1em",
-            color: "#fff",
-            zIndex: "5000"
-          }}
-        >
-          {props.location.search || "nothing"}
-        </div>
         {itemsSlice.map(id => {
           const {
             name,
