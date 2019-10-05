@@ -20,6 +20,11 @@ const useFilterMenuStyle = createUseStyles({
   },
   subTitle: {
     composes: ["pt-4 pb-2"]
+  },
+  reset: {
+    composes: ["pt-4"],
+    textDecoration: "underline",
+    color: "#00f"
   }
 });
 
@@ -41,21 +46,27 @@ const FilterMenu = ({ rarities }) => {
   });
 
   const rarityRef = useRef();
-  const searchSelectHandler = createFilterHandler(() => {
+  const typeRef = useRef();
+  const searchSelectHandler = createFilterHandler((ref) => {
     const {
       dataset: { selectId },
       value
-    } = rarityRef.current;
+    } = ref.current;
 
     return {
       [selectId]: value
     };
   });
 
+  const resetHandler = createFilterHandler("reset");
+
   return (
     <div className={classes.filterMenu}>
       <h4 className={classes.title}>Sort By</h4>
-      <Search forwardRef={searchRef} onKeyPress={searchHandler} />
+      <Search 
+        forwardRef={searchRef}
+        onKeyPress={searchHandler} 
+      />
       <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup
         onChange={radioGroupHandler}
@@ -70,6 +81,17 @@ const FilterMenu = ({ rarities }) => {
         className="pl-2"
         config={_rarities}
       />
+        <h5 className={classes.subTitle}>Type</h5>
+      <SearchSelect
+        data-select-id="type"
+        onClick={searchSelectHandler}
+        forwardRef={typeRef}
+        className="pl-2"
+        config={_rarities}
+      />
+      <div onClick={resetHandler} className={classes.reset}>
+        Reset
+      </div>
     </div>
   );
 };

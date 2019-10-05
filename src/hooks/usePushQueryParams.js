@@ -9,7 +9,11 @@ const usePushQueryParams = () => {
 
   const pushQueryParamsToUrl = queryHelper => (...args) => {
     const prevQueries = queryString.parse(location.search);
-
+    // flag to reset queryParams
+    if (queryHelper === "reset") {
+      history.push(location.pathname)
+      return;
+    }
     // queryHelper() it's a function that returns a key:value pair, correspondent to the selection in the form component.
     const query = queryHelper(...args);
     const mergedQueries = {
