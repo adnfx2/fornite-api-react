@@ -32,7 +32,12 @@ const useSearchStyle = createUseStyles({
   }
 });
 
-const Search = ({ forwardRef, ...props }) => {
+const Search = ({
+  size = 15,
+  placeholder = "Search...",
+  value = "",
+  ...props
+}) => {
   const { search, input, icon } = useSearchStyle();
 
   return (
@@ -42,11 +47,11 @@ const Search = ({ forwardRef, ...props }) => {
       </span>
       <input
         {...props}
-        ref={forwardRef}
-        size={15}
+        size={size}
         className={input}
         type="text"
-        placeholder="Search..."
+        placeholder={placeholder}
+        value={value}
       />
     </div>
   );

@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+import React from "react";
 import { createUseStyles } from "react-jss";
 import Search from "../../../components/Search/Search";
 import RadioGroup from "../../../components/RadioGroup/RadioGroup";
 import SearchSelect from "../../../components/SearchSelect/SearchSelect";
 import { breakpoints } from "../../../styles/variables";
 import { nameRadioGroup, getRarities } from "./FilterMenuConfig";
-import usePushQueryParams from "../../../hooks/usePushQueryParams";
+import usePushQueryParamsToURL from "../../../hooks/usePushQueryParamsToURL";
 
 const useFilterMenuStyle = createUseStyles({
   filterMenu: {
@@ -31,49 +31,29 @@ const useFilterMenuStyle = createUseStyles({
 const FilterMenu = ({ rarities }) => {
   const _rarities = getRarities(rarities);
   const classes = useFilterMenuStyle();
-  const createFilterHandler = usePushQueryParams();
-  const radioGroupHandler = createFilterHandler(label => ({
-    [nameRadioGroup.groupName]: label
-  }));
+  const [urlParams, createFilterHandler] = usePushQueryParamsToURL();
 
-  const searchRef = useRef();
   const searchHandler = createFilterHandler(event => {
-    console.log("change");
-    const { key } = event;
-    if (key === "Enter") {
-      return { search: searchRef.current.value };
-    }
+    const value = event.target.value;
+    return { search: value };
   });
 
-  const rarityRef = useRef();
-  const typeRef = useRef();
-  const searchSelectHandler = createFilterHandler((ref) => {
-    const {
-      dataset: { selectId },
-      value
-    } = ref.current;
-
-    return {
-      [selectId]: value
-    };
+  const radioGroupHandler = createFilterHandler((e, value) => {
+    return { nameOrder: value };
   });
-
-  const resetHandler = createFilterHandler("reset");
 
   return (
     <div className={classes.filterMenu}>
       <h4 className={classes.title}>Sort By</h4>
-      <Search 
-        forwardRef={searchRef}
-        onKeyPress={searchHandler} 
-      />
+      <Search onChange={searchHandler} value={urlParams.search} />
       <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup
         onChange={radioGroupHandler}
         className="pl-2"
         config={nameRadioGroup}
+        value={urlParams.nameOrder}
       />
-      <h5 className={classes.subTitle}>Rarity</h5>
+      {/*<h5 className={classes.subTitle}>Rarity</h5>
       <SearchSelect
         data-select-id="rarity"
         onClick={searchSelectHandler}
@@ -81,7 +61,7 @@ const FilterMenu = ({ rarities }) => {
         className="pl-2"
         config={_rarities}
       />
-        <h5 className={classes.subTitle}>Type</h5>
+      <h5 className={classes.subTitle}>Type</h5>
       <SearchSelect
         data-select-id="type"
         onClick={searchSelectHandler}
@@ -90,8 +70,8 @@ const FilterMenu = ({ rarities }) => {
         config={_rarities}
       />
       <div onClick={resetHandler} className={classes.reset}>
-        Reset
-      </div>
+      Reset
+      </div>*/}
     </div>
   );
 };

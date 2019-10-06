@@ -11,13 +11,11 @@ const SortByAlpha = (array, data) => {
 
 const useFilter = (data, queryParams) => {
   const queries = queryString.parse(queryParams);
-  console.log({ queries });
 };
 
 const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
   const filteredData = useFilter(data, props.location.search);
   const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
-  console.log("rendering ListItems");
 
   if (itemsSlice.length) {
     const { itemsById } = data;
