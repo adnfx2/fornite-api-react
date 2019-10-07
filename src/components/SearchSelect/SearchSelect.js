@@ -19,23 +19,25 @@ const useSearchSelectStyle = createUseStyles({
   }
 });
 
-const Option = ({ name }) => {
-  return <option value={name}>{name}</option>;
-};
+const Option = ({ name }) => ( 
+  <option value={name}>{name}</option>
+);
 
 const renderOptions = options => {
-  if (!options) return;
-  return options.map(option => <Option key={option} name={option} />);
+  if (options.length) {
+    return options.map(option => <Option key={option} name={option} />);
+  }
 };
 
-const SearchSelect = ({ config, className, forwardRef, ...props }) => {
+const SearchSelect = ({ config, className, value, ...props }) => {
   const { options } = config;
   const classes = useSearchSelectStyle();
-
+  const finalValue = value || options[0];
   return (
     <select
       {...props}
-      ref={forwardRef}
+      value={finalValue}
+      disabled={!options.length}
       className={`${classes.select} ${className || ""}`.trim()}
     >
       {renderOptions(options)}

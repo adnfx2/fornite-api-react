@@ -24,7 +24,10 @@ const useFilterMenuStyle = createUseStyles({
   reset: {
     composes: ["pt-4"],
     textDecoration: "underline",
-    color: "#00f"
+    color: "#00f",
+    [`&:hover, &:active`]: {
+      color: "#40c"
+    }
   }
 });
 
@@ -32,7 +35,7 @@ const FilterMenu = ({ rarities }) => {
   const _rarities = getRarities(rarities);
   const classes = useFilterMenuStyle();
   const [urlParams, createFilterHandler] = usePushQueryParamsToURL();
-
+  
   const searchHandler = createFilterHandler(event => {
     const value = event.target.value;
     return { search: value };
@@ -41,6 +44,16 @@ const FilterMenu = ({ rarities }) => {
   const radioGroupHandler = createFilterHandler((e, value) => {
     return { nameOrder: value };
   });
+  
+  const selectHandler = createFilterHandler(e => {
+    const { target: {
+      dataset: { filterId },
+      value
+    } } = e;
+    return { [filterId]: value };
+  });
+
+  const resetHandler = createFilterHandler("reset");
 
   return (
     <div className={classes.filterMenu}>
@@ -48,30 +61,30 @@ const FilterMenu = ({ rarities }) => {
       <Search onChange={searchHandler} value={urlParams.search} />
       <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup
-        onChange={radioGroupHandler}
         className="pl-2"
         config={nameRadioGroup}
+        onChange={radioGroupHandler}
         value={urlParams.nameOrder}
       />
-      {/*<h5 className={classes.subTitle}>Rarity</h5>
+      <h5 className={classes.subTitle}>Rarity</h5>
       <SearchSelect
-        data-select-id="rarity"
-        onClick={searchSelectHandler}
-        forwardRef={rarityRef}
         className="pl-2"
         config={_rarities}
+        data-filter-id={"rarity"}
+        onChange={selectHandler}
+        value={urlParams.rarity}
       />
       <h5 className={classes.subTitle}>Type</h5>
       <SearchSelect
-        data-select-id="type"
-        onClick={searchSelectHandler}
-        forwardRef={typeRef}
         className="pl-2"
         config={_rarities}
+        data-filter-id="type"
+        onChange={selectHandler}
+        value={urlParams.type}
       />
       <div onClick={resetHandler} className={classes.reset}>
-      Reset
-      </div>*/}
+        Reset
+      </div>
     </div>
   );
 };

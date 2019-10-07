@@ -14,7 +14,7 @@ export const getRarities = rarities => {
           firstLetterCaps(rarities[rarity].name)
         )
       ]
-    : null;
+    : [];
   return {
     title: "Rarity",
     options: _rarities
