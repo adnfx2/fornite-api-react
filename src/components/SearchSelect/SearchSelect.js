@@ -19,9 +19,7 @@ const useSearchSelectStyle = createUseStyles({
   }
 });
 
-const Option = ({ name }) => ( 
-  <option value={name}>{name}</option>
-);
+const Option = ({ name }) => <option value={name}>{name}</option>;
 
 const renderOptions = options => {
   if (options.length) {
@@ -29,13 +27,13 @@ const renderOptions = options => {
   }
 };
 
-const SearchSelect = ({ config, className, value, ...props }) => {
-  const { options } = config;
+const SearchSelect = ({ options, className, value, filterId, ...props }) => {
   const classes = useSearchSelectStyle();
   const finalValue = value || options[0];
   return (
     <select
       {...props}
+      data-filter-id={filterId}
       value={finalValue}
       disabled={!options.length}
       className={`${classes.select} ${className || ""}`.trim()}

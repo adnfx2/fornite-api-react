@@ -9,20 +9,26 @@ const useRadioGroupStyle = createUseStyles({
   }
 });
 
-const RadioGroup = ({ config, className, value, onChange, ...props }) => {
-  const { groupName, options } = config;
+const RadioGroup = ({
+  options,
+  filterId,
+  className,
+  value,
+  onChange,
+  ...props
+}) => {
   const classes = useRadioGroupStyle();
-  const finalValue = value || options[0].label;
+  const finalValue = value || options[0];
 
   return (
     <div className={`${classes.radioGroup} ${className || ""}`.trim()}>
       {options.map(option => (
         <RadioButton
-          key={option.label}
-          checked={finalValue === option.label}
+          key={option}
+          filterId={filterId}
+          checked={finalValue === option}
           onChange={onChange}
-          label={option.label}
-          groupName={groupName}
+          label={option}
         />
       ))}
     </div>

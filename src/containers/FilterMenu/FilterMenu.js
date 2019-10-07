@@ -1,11 +1,11 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
-import Search from "../../../components/Search/Search";
-import RadioGroup from "../../../components/RadioGroup/RadioGroup";
-import SearchSelect from "../../../components/SearchSelect/SearchSelect";
-import { breakpoints } from "../../../styles/variables";
-import { nameRadioGroup, getRarities } from "./FilterMenuConfig";
-import usePushQueryParamsToURL from "../../../hooks/usePushQueryParamsToURL";
+import Search from "../../components/Search/Search";
+import RadioGroup from "../../components/RadioGroup/RadioGroup";
+import SearchSelect from "../../components/SearchSelect/SearchSelect";
+import { breakpoints } from "../../styles/variables";
+import { alphabeticOrderOptions, getOptions } from "./FilterMenuConfig";
+import usePushQueryParamsToURL from "../../hooks/usePushQueryParamsToURL";
 
 const useFilterMenuStyle = createUseStyles({
   filterMenu: {
@@ -31,55 +31,52 @@ const useFilterMenuStyle = createUseStyles({
   }
 });
 
-const FilterMenu = ({ rarities }) => {
-  const _rarities = getRarities(rarities);
+const FilterMenu = ({ rarities, types }) => {
+  const raritiesArray = getOptions(rarities);
+  const typesArray = getOptions(types);
   const classes = useFilterMenuStyle();
-  const [urlParams, createFilterHandler] = usePushQueryParamsToURL();
-  
-  const searchHandler = createFilterHandler(event => {
-    const value = event.target.value;
-    return { search: value };
-  });
+  const [urlParams, createPushQueryParams] = usePushQueryParamsToURL();
 
-  const radioGroupHandler = createFilterHandler((e, value) => {
-    return { nameOrder: value };
-  });
-  
-  const selectHandler = createFilterHandler(e => {
-    const { target: {
+  const filterHandler = createPushQueryParams(e => {
+    const {
       dataset: { filterId },
       value
-    } } = e;
+    } = e.target;
     return { [filterId]: value };
   });
 
-  const resetHandler = createFilterHandler("reset");
+  const resetHandler = createPushQueryParams("reset");
 
   return (
     <div className={classes.filterMenu}>
       <h4 className={classes.title}>Sort By</h4>
-      <Search onChange={searchHandler} value={urlParams.search} />
+      <Search
+        filterId="search"
+        onChange={filterHandler}
+        value={urlParams.search}
+      />
       <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup
         className="pl-2"
-        config={nameRadioGroup}
-        onChange={radioGroupHandler}
+        options={alphabeticOrderOptions}
+        filterId="nameOrder"
+        onChange={filterHandler}
         value={urlParams.nameOrder}
       />
       <h5 className={classes.subTitle}>Rarity</h5>
       <SearchSelect
         className="pl-2"
-        config={_rarities}
-        data-filter-id={"rarity"}
-        onChange={selectHandler}
+        options={raritiesArray}
+        filterId={"rarity"}
+        onChange={filterHandler}
         value={urlParams.rarity}
       />
       <h5 className={classes.subTitle}>Type</h5>
       <SearchSelect
         className="pl-2"
-        config={_rarities}
-        data-filter-id="type"
-        onChange={selectHandler}
+        options={typesArray}
+        filterId="type"
+        onChange={filterHandler}
         value={urlParams.type}
       />
       <div onClick={resetHandler} className={classes.reset}>

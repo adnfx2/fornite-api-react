@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
 import { Container, Row, Col } from "react-bootstrap";
 import { NavLink, Route, Switch, Redirect } from "react-router-dom";
-import FilterMenu from "./components/FilterMenu";
-import FilterButton from "./components/FilterButton";
+import FilterMenu from "../../containers/FilterMenu/FilterMenu";
+import FilterButton from "../../components/FilterButton/FilterButton";
 import ResponsiveFilterOptions from "./components/ResponsiveFilterOptions";
 import { fetchWeapons, fetchItems } from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
@@ -91,7 +91,10 @@ const Store = props => {
           filterToggleHandler={filterToggleHandler}
           visible={visible}
         >
-          <FilterMenu rarities={items && items.itemsByRarity} />
+          <FilterMenu
+            rarities={items && items.itemsByRarity}
+            types={items && items.itemsByType}
+          />
         </ResponsiveFilterOptions>
       </Row>
     </Container>

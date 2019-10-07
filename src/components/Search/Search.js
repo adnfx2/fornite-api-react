@@ -34,6 +34,7 @@ const useSearchStyle = createUseStyles({
 
 const Search = ({
   size = 15,
+  filterId,
   placeholder = "Search...",
   value = "",
   ...props
@@ -48,6 +49,7 @@ const Search = ({
       <input
         {...props}
         size={size}
+        data-filter-id={filterId}
         className={input}
         type="text"
         placeholder={placeholder}
