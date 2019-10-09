@@ -8,7 +8,7 @@ const usePushQueryParamsToURL = () => {
   const history = useHistory();
   const location = useLocation();
   const currentQueries = queryString.parse(location.search);
-  
+
   const pushQueryParamsToUrl = queryHelper => (...args) => {
     // flag to reset queryParams
     if (queryHelper === "reset") {
