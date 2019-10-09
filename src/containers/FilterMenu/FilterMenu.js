@@ -23,8 +23,10 @@ const useFilterMenuStyle = createUseStyles({
   },
   reset: {
     composes: ["pt-4"],
+    display: "inline-block",
     textDecoration: "underline",
     color: "#00f",
+    cursor: "pointer",
     [`&:hover, &:active`]: {
       color: "#40c"
     }
@@ -36,7 +38,7 @@ const FilterMenu = ({ rarities, types }) => {
   const typesArray = getOptions(types);
   const classes = useFilterMenuStyle();
   const [urlParams, createPushQueryParams] = usePushQueryParamsToURL();
-
+  const resetHandler = createPushQueryParams("reset");
   const filterHandler = createPushQueryParams(e => {
     const {
       dataset: { filterId },
@@ -45,15 +47,13 @@ const FilterMenu = ({ rarities, types }) => {
     return { [filterId]: value };
   });
 
-  const resetHandler = createPushQueryParams("reset");
-
   return (
     <div className={classes.filterMenu}>
       <h4 className={classes.title}>Sort By</h4>
       <Search
         filterId="search"
-        onChange={filterHandler}
-        value={urlParams.search}
+        actionHandler={filterHandler}
+        externalValue={urlParams.search}
       />
       <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup
@@ -79,9 +79,9 @@ const FilterMenu = ({ rarities, types }) => {
         onChange={filterHandler}
         value={urlParams.type}
       />
-      <div onClick={resetHandler} className={classes.reset}>
+      <span onClick={resetHandler} className={classes.reset}>
         Reset
-      </div>
+      </span>
     </div>
   );
 };

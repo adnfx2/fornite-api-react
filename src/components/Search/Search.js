@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -36,10 +36,25 @@ const Search = ({
   size = 15,
   filterId,
   placeholder = "Search...",
-  value = "",
+  externalValue = "",
+  actionHandler,
   ...props
 }) => {
   const { search, input, icon } = useSearchStyle();
+  const [innerValue, setInnerValue] = useState("");
+
+  // When an externalValue changes, display that value in the input text element.
+  useEffect(() => {
+    setInnerValue(externalValue);
+  }, [externalValue]);
+
+  const onChangeHandler = e => {
+    const value = e.target.value;
+    setInnerValue(value);
+    if (!value) actionHandler(e);
+  };
+  const onKeyPressHandler = e =>
+    e.key === "Enter" && innerValue !== externalValue && actionHandler(e);
 
   return (
     <div className={search}>
@@ -47,13 +62,14 @@ const Search = ({
         <FontAwesomeIcon icon={faSearch} />
       </span>
       <input
-        {...props}
+        onChange={onChangeHandler}
+        onKeyPress={onKeyPressHandler}
         size={size}
         data-filter-id={filterId}
         className={input}
         type="text"
         placeholder={placeholder}
-        value={value}
+        value={innerValue}
       />
     </div>
   );
