@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
+import NoSearchFound from "../../../components/NoSeachFound/NoSearchFound";
 import ListPlaceholder from "./ListPlaceholder.js";
 import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
+import { applyFilters } from "../../../utils/sortingFunctions";
+import filterExecutionOrder from "../../../settings/filterConfig";
 import queryString from "query-string";
+import testItems from "../testItems.json";
+import testResults from "../testResults.json";
 
-const SortByAlpha = (array, data) => {
-  return array.sort((a, b) => data[a].name.localeCompare(data[b].name));
-};
+const ListItems = ({
+  data = { itemsById: {}, result: [] },
+  location,
+  ...props
+}) => {
+  const filteredData = applyFilters(
+    { data: testItems, keys: testResults },
+    location.search,
+    filterExecutionOrder
+  );
+  const [itemsSlice, nextPage, loadMoreHandler] = usePagination(filteredData);
 
-const useFilter = (data, queryParams) => {
-  const queries = queryString.parse(queryParams);
-};
-
-const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
-  const filteredData = useFilter(data, props.location.search);
-  const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
-
+  // Is data ready to be displayed?
   if (itemsSlice.length) {
-    const { itemsById } = data;
-
+    // const { itemsById } = data;
+    const itemsById = testItems;
     return (
       <StyledCardGroup
-        numberOfItems={data.result.length}
+        // numberOfItems={data.result.length}
+        numberOfItems={filteredData.length}
         loadMoreHandler={loadMoreHandler}
         nextPage={nextPage}
       >
@@ -55,9 +62,13 @@ const ListItems = ({ data = { itemsById: {}, result: [] }, ...props }) => {
         })}
       </StyledCardGroup>
     );
-  } else {
-    return <ListPlaceholder />;
   }
+  //  Are we filtering data ?
+  if (testItems && location.search) {
+    return <NoSearchFound />;
+  }
+  //  We must be fecthing data, display a placeholder
+  return <ListPlaceholder />;
 };
 
 export default ListItems;

@@ -10,8 +10,6 @@ import { fetchWeapons, fetchItems } from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
 import { storeLinks, storeRoutes } from "../../routes/routes";
 import fortniteBanner from "../../assets/images/Fortnite-Banner.jpg";
-import testItems from "./testItems.json";
-import testResults from "./testResults.json";
 
 const useStyle = createUseStyles({
   store__title: {
@@ -21,7 +19,7 @@ const useStyle = createUseStyles({
     textShadow: "2px 2px 8px #212529"
   }
 });
-console.log({ testItems, testResults });
+
 const useShouldFetch = (data, dispatcher) => {
   useEffect(() => {
     if (!data) {
