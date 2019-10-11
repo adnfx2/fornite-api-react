@@ -1,23 +1,38 @@
 import * as sortFuncs from "../utils/sortingFunctions";
+
+const modifySearch = value => {
+  if (value === "All") {
+    return "";
+  } else {
+    return "_" + value.toLocaleLowerCase();
+  }
+};
+
 export default [
   {
     id: 0,
-    filterKey: "type",
+    paramKey: "type",
+    field: "type",
+    customization: modifySearch,
     filterFunc: sortFuncs.commonFilter
   },
   {
     id: 1,
-    filterKey: "rarity",
+    paramKey: "rarity",
+    field: "rarity",
+    customization: modifySearch,
     filterFunc: sortFuncs.commonFilter
   },
   {
     id: 2,
-    filterKey: "search",
+    paramKey: "search",
+    field: "name",
     filterFunc: sortFuncs.commonFilter
   },
   {
     id: 3,
-    filterKey: "name",
-    filterFunc: sortFuncs.commonFilter
+    paramKey: "nameOrder",
+    field: "name",
+    filterFunc: sortFuncs.alphaSort
   }
 ];

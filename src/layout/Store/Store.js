@@ -30,8 +30,7 @@ const useShouldFetch = (data, dispatcher) => {
 
 const useFilterToggle = () => {
   const [visible, setVisible] = useState(false);
-  const filterToggleHandler = () =>
-    setVisible(prevVisible => console.log("hi") || !prevVisible);
+  const filterToggleHandler = () => setVisible(prevVisible => !prevVisible);
   return [visible, filterToggleHandler];
 };
 

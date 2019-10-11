@@ -6,17 +6,14 @@ import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
 import { applyFilters } from "../../../utils/sortingFunctions";
 import filterExecutionOrder from "../../../settings/filterConfig";
-import queryString from "query-string";
-import testItems from "../testItems.json";
-import testResults from "../testResults.json";
 
 const ListItems = ({
-  data = { itemsById: {}, result: [] },
+  data = { itemsById: null, result: [] },
   location,
   ...props
 }) => {
   const filteredData = applyFilters(
-    { data: testItems, keys: testResults },
+    { data: data.itemsById, keys: data.result },
     location.search,
     filterExecutionOrder
   );
@@ -25,7 +22,6 @@ const ListItems = ({
   // Is data ready to be displayed?
   if (itemsSlice.length) {
     // const { itemsById } = data;
-    const itemsById = testItems;
     return (
       <StyledCardGroup
         // numberOfItems={data.result.length}
@@ -42,7 +38,7 @@ const ListItems = ({
             type,
             obtainedType,
             ratings
-          } = itemsById[id];
+          } = data.itemsById[id];
           const normalizedData = {
             id,
             name,
@@ -64,7 +60,7 @@ const ListItems = ({
     );
   }
   //  Are we filtering data ?
-  if (testItems && location.search) {
+  if (data.itemsById && location.search) {
     return <NoSearchFound />;
   }
   //  We must be fecthing data, display a placeholder
