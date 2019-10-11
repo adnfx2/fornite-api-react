@@ -25,7 +25,7 @@ You can simple run:
 
 ### Run it on codesandbox
 
-[Codesandbox live testing](https://codesandbox.io/s/fornite-api-react-t2m6x)
+[Codesandbox live testing](https://codesandbox.io/s/fornite-api-react-pxjzc)
 
 ### Features
 
