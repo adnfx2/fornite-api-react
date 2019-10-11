@@ -1,16 +1,31 @@
 import React from "react";
+import NoSearchFound from "../../../components/NoSeachFound/NoSearchFound";
 import ListPlaceholder from "./ListPlaceholder.js";
 import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
+import { applyFilters } from "../../../utils/sortingFunctions";
+import { filterExecutionOrder } from "../../../settings/filterConfig";
 
-export const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
-  const [itemsSlice, nextPage, loadMoreHandler] = usePagination(data.result);
+const ListItems = ({
+  data = { itemsById: null, result: [] },
+  location,
+  ...props
+}) => {
+  const filteredData = applyFilters(
+    { data: data.itemsById, keys: data.result },
+    location.search,
+    filterExecutionOrder
+  );
+  const [itemsSlice, nextPage, loadMoreHandler] = usePagination(filteredData);
+
+  // Is data ready to be displayed?
   if (itemsSlice.length) {
-    const { itemsById } = data;
+    // const { itemsById } = data;
     return (
       <StyledCardGroup
-        numberOfItems={data.result.length}
+        // numberOfItems={data.result.length}
+        numberOfItems={filteredData.length}
         loadMoreHandler={loadMoreHandler}
         nextPage={nextPage}
       >
@@ -23,7 +38,7 @@ export const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
             type,
             obtainedType,
             ratings
-          } = itemsById[id];
+          } = data.itemsById[id];
           const normalizedData = {
             id,
             name,
@@ -34,7 +49,7 @@ export const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
               `Cost: ${cost || "--"}`,
               `Get: ${obtainedType}`,
               `Type: ${type.slice(1)}`,
-              `Avg. stars: ${ratings.avgStars}`,
+              `Stars: ${ratings.avgStars}`,
               `Points: ${ratings.totalPoints}`,
               `Votes: ${ratings.numberVotes}`
             ]
@@ -43,9 +58,13 @@ export const ListItems = ({ data = { itemsById: {}, result: [] } }) => {
         })}
       </StyledCardGroup>
     );
-  } else {
-    return <ListPlaceholder />;
   }
+  //  Are we filtering data ?
+  if (data.itemsById && location.search) {
+    return <NoSearchFound />;
+  }
+  //  We must be fecthing data, display a placeholder
+  return <ListPlaceholder />;
 };
 
 export default ListItems;

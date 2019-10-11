@@ -15,7 +15,7 @@ const useCardPlaceholderStyle = createUseStyles({
     [`@media only screen and (min-width: ${breakpoints.md}px)`]: {
       maxWidth: `calc(33.33% - ${gutter})`
     },
-    [`@media only screen and (min-width: ${breakpoints.lg}px)`]: {
+    [`@media only screen and (min-width: ${breakpoints.xl}px)`]: {
       maxWidth: `calc(25% - ${gutter})`
     }
   }
@@ -35,8 +35,34 @@ const CardPlaceholder = () => {
   );
 };
 
+const useTextPlaceholderStyle = createUseStyles({
+  textPlaceholder: {
+    composes: ["p-2 w-100 d-flex"],
+    marginBottom: "20px"
+  },
+  smallBlock: {
+    width: "2em"
+  },
+  mediumBlock: {
+    composes: ["ml-2"],
+    width: "5em"
+  }
+});
+
+const TextPlaceholder = () => {
+  const classes = useTextPlaceholderStyle();
+
+  return (
+    <div className={classes.textPlaceholder}>
+      <Placeholder.Text className={classes.smallBlock} variant="md" />
+      <Placeholder.Text className={classes.mediumBlock} variant="md" />
+    </div>
+  );
+};
+
 const ListPlaceholder = () => (
   <div className="d-flex flex-wrap">
+    <TextPlaceholder />
     {Array.from(Array(4)).map((_, i) => (
       <CardPlaceholder key={i} />
     ))}

@@ -6,7 +6,7 @@ import { createUseStyles } from "react-jss";
 
 const useStyle = createUseStyles({
   filterBtn: {
-    composes: ["d-md-none mx-2 px-4 py-1 border rounded"],
+    composes: ["d-lg-none mx-2 px-4 py-1 border rounded"],
     cursor: "pointer",
     transition: "transform 100ms ease-in-out",
     [`&:hover`]: {

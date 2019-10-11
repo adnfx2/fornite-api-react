@@ -12,7 +12,7 @@ const useBlinkingAnimationStyle = createUseStyles({
     // Name convention needed to avoid future conflicts (Because of being global).
     [`@keyframes ${BLINKING}`]: {
       [`0%`]: { opacity: 1 },
-      [`50%`]: { opacity: 0.7 },
+      [`50%`]: { opacity: 0.6 },
       [`100%`]: { opacity: 1 }
     }
   }
@@ -85,7 +85,7 @@ const usePlaceholderTextStyle = createUseStyles({
     }
   }
 });
-const Text = props => {
+const Text = ({ className, ...props }) => {
   const { variant = "sm", splitted } = props;
   const size =
     //  prettier-ignore
@@ -97,7 +97,10 @@ const Text = props => {
   const { placeholder__text } = usePlaceholderTextStyle(size);
   return (
     <div
-      className={`${placeholder__text} ${splitted ? "splitted" : ""}`.trim()}
+      className={`${placeholder__text} ${
+        splitted ? "splitted" : ""
+      } ${className || ""}`.trim()}
+      {...props}
     />
   );
 };
@@ -171,8 +174,8 @@ const Paragraph = ({ lines = 1 }) => {
     <div className={placeholder__paragraph}>
       {Array.from(Array(lines)).map((_, index) => (
         <React.Fragment key={index}>
-          <Text variant="sm" splitted />
-          <Text variant="sm" splitted />
+          <Text variant="sm" splitted={1} />
+          <Text variant="sm" splitted={1} />
         </React.Fragment>
       ))}
     </div>

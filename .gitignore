@@ -8,17 +8,6 @@
 # testing
 /coverage
 
-# bare
-/branches
-/hooks
-/info
-/objects
-/refs
-/config
-HEAD
-description
-config
-
 # production
 /build
 

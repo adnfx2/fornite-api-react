@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createUseStyles } from "react-jss";
 
 //  Backdrop
 const useStyleBackdrop = createUseStyles({
   backdrop: {
+    display: "flex",
+    justifyContent: "flex-end",
     width: "100%",
     height: "100%",
     color: "white",
@@ -26,13 +28,15 @@ const Backdrop = ({ children, active, onClick }) => {
 //  Content
 const useStyleContent = createUseStyles({
   content: {
-    width: "100%",
+    position: "relative",
+    minWidth: "275px",
     height: "100%",
-    transition: "margin-left ease-in-out 300ms 20ms",
-    backgroundColor: "slategray",
-    marginLeft: "100%",
+    transition: "left ease-in-out 300ms 20ms",
+    backgroundColor: "#fff",
+    overflowY: "scroll",
+    left: "100%",
     [`.active &`]: {
-      marginLeft: "50%"
+      left: "0%"
     }
   }
 });
@@ -53,19 +57,19 @@ const useStyleSideOverlay = createUseStyles({
     right: 0,
     bottom: 0,
     left: 0,
-    transition: "z-index ease-in-out 300ms 10ms",
     zIndex: -1,
+    transition: "z-index ease-in-out 300ms 10ms",
     [`&.active`]: {
       zIndex: 1
     }
   }
 });
-const SideOverlay = ({ children, active, hideOverlayHandler }) => {
+const SideOverlay = ({ children, active, toggleOverlayHandler }) => {
   const { sideoverlay } = useStyleSideOverlay();
   const classes = `${sideoverlay} ${active ? "active" : ""}`;
   return (
     <div className={classes}>
-      <Backdrop onClick={hideOverlayHandler}>
+      <Backdrop onClick={toggleOverlayHandler}>
         <Content>{children}</Content>
       </Backdrop>
     </div>

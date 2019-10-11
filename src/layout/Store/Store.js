@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import { NavLink, Route, Switch, Redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { createUseStyles } from "react-jss";
-import FilterButton from "./components/FilterButton";
+import { Container, Row, Col } from "react-bootstrap";
+import { NavLink, Route, Switch, Redirect } from "react-router-dom";
+import FilterMenu from "../../containers/FilterMenu/FilterMenu";
+import FilterButton from "../../components/FilterButton/FilterButton";
+import ResponsiveFilterOptions from "./components/ResponsiveFilterOptions";
 import { fetchWeapons, fetchItems } from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
 import { storeLinks, storeRoutes } from "../../routes/routes";
@@ -23,15 +25,22 @@ const useShouldFetch = (data, dispatcher) => {
     if (!data) {
       dispatcher();
     }
-  }, []);
+  }, []); //eslint-disable-line
+};
+
+const useFilterToggle = () => {
+  const [visible, setVisible] = useState(false);
+  const filterToggleHandler = () => setVisible(prevVisible => !prevVisible);
+  return [visible, filterToggleHandler];
 };
 
 const Store = props => {
   const { weapons, fetchWeapons, items, fetchItems } = props;
   useShouldFetch(weapons, fetchWeapons);
   useShouldFetch(items, fetchItems);
-  const weaponsSorting = null;
-  const itemsSorting = null;
+  const [visible, filterToggleHandler] = useFilterToggle();
+  // const weaponsSorting = null;
+  // const itemsSorting = null;
   const classes = useStyle();
 
   return (
@@ -53,7 +62,7 @@ const Store = props => {
               {link.name}
             </NavLink>
           ))}
-          <FilterButton />
+          <FilterButton onClick={filterToggleHandler} />
         </Col>
       </Row>
       <Row>
@@ -65,7 +74,7 @@ const Store = props => {
                 const C = route.render;
                 var newRoute = {
                   ...route,
-                  render: () => <C data={props[dataKey]} />
+                  render: _props => <C {...props} data={props[dataKey]} />
                 };
               }
               const finalRoute = newRoute || route;
@@ -77,6 +86,15 @@ const Store = props => {
             })}
           </Switch>
         </Col>
+        <ResponsiveFilterOptions
+          filterToggleHandler={filterToggleHandler}
+          visible={visible}
+        >
+          <FilterMenu
+            rarities={items && items.itemsByRarity}
+            types={items && items.itemsByType}
+          />
+        </ResponsiveFilterOptions>
       </Row>
     </Container>
   );
@@ -94,6 +112,7 @@ const mapStateToProps = ({ dataFetched, errors }) => {
     weaponsErrorMsg: weapons.error,
     items: items.data,
     itemsErrorMsg: items.error,
+
     filter: "none"
   };
 };
