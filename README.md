@@ -1,5 +1,5 @@
 #PROJECT NEWS!!
---> FortniteAPI services are currently unstable, the mantainer is migrating his database. if this process doesn't get completed soon, I'll look for a new api. Meanwhile I'll keep developing the missing parts of this website.
+--> FortniteAPI services are currently unstable, the mantainer of that api is migrating & upgrading his database. if this process doesn't get completed soon, I'll look for a new api. Meanwhile I'll keep developing the missing parts of this website.
 
 ---
 
@@ -9,7 +9,7 @@
 
 ### About
 
-FortniteStarred It's a on-going project meant to facilitate to users informantion related to fortnite in-game items, weapons & more. All the data is provided by [<forniteapi.com>](https://fortniteapi.com).
+FortniteStarred It's a on-going project meant to facilitate informantion related to fortnite in-game items, weapons & more. All the data is provided by [<forniteapi.com>](https://fortniteapi.com).
 
 ### Run this project
 
