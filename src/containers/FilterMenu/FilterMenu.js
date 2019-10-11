@@ -4,7 +4,10 @@ import Search from "../../components/Search/Search";
 import RadioGroup from "../../components/RadioGroup/RadioGroup";
 import SearchSelect from "../../components/SearchSelect/SearchSelect";
 import { breakpoints } from "../../styles/variables";
-import { alphabeticOrderOptions, getOptions } from "./FilterMenuConfig";
+import {
+  alphabeticOrderOptions,
+  getOptions
+} from "../../settings/filterConfig";
 import usePushQueryParamsToURL from "../../hooks/usePushQueryParamsToURL";
 
 const useFilterMenuStyle = createUseStyles({
@@ -63,14 +66,6 @@ const FilterMenu = ({ rarities, types }) => {
         onChange={filterHandler}
         value={urlParams.nameOrder}
       />
-      <h5 className={classes.subTitle}>Rarity</h5>
-      <SearchSelect
-        className="pl-2"
-        options={raritiesArray}
-        filterId={"rarity"}
-        onChange={filterHandler}
-        value={urlParams.rarity}
-      />
       <h5 className={classes.subTitle}>Type</h5>
       <SearchSelect
         className="pl-2"
@@ -78,6 +73,14 @@ const FilterMenu = ({ rarities, types }) => {
         filterId="type"
         onChange={filterHandler}
         value={urlParams.type}
+      />
+      <h5 className={classes.subTitle}>Rarity</h5>
+      <SearchSelect
+        className="pl-2"
+        options={raritiesArray}
+        filterId={"rarity"}
+        onChange={filterHandler}
+        value={urlParams.rarity}
       />
       <span onClick={resetHandler} className={classes.reset}>
         Reset

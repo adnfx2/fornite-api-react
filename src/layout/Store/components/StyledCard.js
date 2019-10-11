@@ -14,6 +14,7 @@ const useStyledCard = createUseStyles({
   hideOverflow: {
     overflow: "scroll",
     whiteSpace: "nowrap",
+    scrollbarWidth: "none",
     [`&::-webkit-scrollbar`]: {
       display: "none"
     }

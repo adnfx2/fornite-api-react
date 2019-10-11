@@ -5,7 +5,7 @@ import StyledCardGroup from "./StyledCardGroup";
 import StyledCard from "./StyledCard.js";
 import usePagination from "../../../hooks/usePagination";
 import { applyFilters } from "../../../utils/sortingFunctions";
-import filterExecutionOrder from "../../../settings/filterConfig";
+import { filterExecutionOrder } from "../../../settings/filterConfig";
 
 const ListItems = ({
   data = { itemsById: null, result: [] },

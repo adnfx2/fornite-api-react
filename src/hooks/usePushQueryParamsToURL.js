@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 
