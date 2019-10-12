@@ -2,6 +2,7 @@ import React from "react";
 import { createUseStyles } from "react-jss";
 import Search from "../../components/Search/Search";
 import RadioGroup from "../../components/RadioGroup/RadioGroup";
+import ToggeableStar from "../../components/ToggleableStar/ToggeableStar";
 import SearchSelect from "../../components/SearchSelect/SearchSelect";
 import { breakpoints } from "../../styles/variables";
 import {
@@ -81,6 +82,13 @@ const FilterMenu = ({ rarities, types }) => {
         filterId={"rarity"}
         onChange={filterHandler}
         value={urlParams.rarity}
+      />
+      <ToggeableStar
+        filterId="starreds"
+        actionHandler={filterHandler}
+        isStarred={urlParams.starreds}
+        className="pt-4"
+        text="Starreds only"
       />
       <span onClick={resetHandler} className={classes.reset}>
         Reset

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { createUseStyles } from "react-jss";
 import { fortniteColors } from "../../../styles/variables";
@@ -73,12 +73,14 @@ const useStyledCard = createUseStyles({
   }
 });
 
-const StyledCard = ({ data }) => {
-  /*test*/
-  const [btn, setBtn] = useState(false);
-  const handler = () => setBtn(value => !value);
-  /*end test*/
-  const { name, image, rarity, attributes } = data;
+const StyledCard = ({ data, starredCards, starredsHandler }) => {
+  const { id, name, image, rarity, attributes } = data;
+  const isCardStarred = starredCards[id] ? true : false;
+  const { addToStarreds, removeFromStarreds } = starredsHandler;
+  const handler = e =>
+    isCardStarred
+      ? removeFromStarreds(id)
+      : addToStarreds({ id, timestamp: Date.now() });
   const type = data.type || null;
   const classes = useStyledCard({ rarity, type });
 
@@ -107,7 +109,7 @@ const StyledCard = ({ data }) => {
         <Button onClick={handler} variant="light" className="border ml-auto">
           Give star{" "}
           <FontAwesomeIcon
-            className={`${classes.star} ${btn ? "active" : ""}`}
+            className={`${classes.star} ${isCardStarred ? "active" : ""}`}
             icon={faStar}
           />
         </Button>

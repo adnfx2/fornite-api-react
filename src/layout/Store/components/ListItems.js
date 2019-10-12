@@ -10,10 +10,12 @@ import { filterExecutionOrder } from "../../../settings/filterConfig";
 const ListItems = ({
   data = { itemsById: null, result: [] },
   location,
+  starredCards,
+  starredsHandler,
   ...props
 }) => {
   const filteredData = applyFilters(
-    { data: data.itemsById, keys: data.result },
+    { data: { itemsById: data.itemsById, starredCards }, keys: data.result },
     location.search,
     filterExecutionOrder
   );
@@ -21,7 +23,6 @@ const ListItems = ({
 
   // Is data ready to be displayed?
   if (itemsSlice.length) {
-    // const { itemsById } = data;
     return (
       <StyledCardGroup
         // numberOfItems={data.result.length}
@@ -54,7 +55,14 @@ const ListItems = ({
               `Votes: ${ratings.numberVotes}`
             ]
           };
-          return <StyledCard key={id} data={normalizedData} />;
+          return (
+            <StyledCard
+              key={id}
+              starredCards={starredCards}
+              starredsHandler={starredsHandler}
+              data={normalizedData}
+            />
+          );
         })}
       </StyledCardGroup>
     );

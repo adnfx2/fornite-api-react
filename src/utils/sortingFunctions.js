@@ -1,52 +1,77 @@
 import memoize from "lodash.memoize";
 import queryString from "query-string";
 
-export const commonFilter = ({ data, keys }, searchBy, searchValue) =>
-  keys.filter(
-    key => data[key][searchBy].toLocaleLowerCase().indexOf(searchValue) !== -1
+/* ****** Sorting functions ****** */
+export const commonFilter = ({ data, keys }, nestedProps, searchValue) => {
+  const { source, field } = nestedProps;
+  const selectedData = data[source];
+  return keys.filter(
+    key =>
+      selectedData[key][field].toLocaleLowerCase().indexOf(searchValue) !== -1
   );
-const memoCommonResolver = ({ data, keys }, searchBy, searchValue) =>
-  `${keys.length}_${searchBy}_${searchValue}`;
+};
+// No memoization needed just yet for this function
+export const starredsFilter = ({ data, keys }, nestedProps) => {
+  const { source } = nestedProps;
+  const selectedData = data[source];
+  const allStarredsItems = Object.keys(selectedData);
+  return allStarredsItems;
+};
 
-// Memoized version of commonFilter (without cache tracking)
-export const memoCommonFilter = memoize(commonFilter, memoCommonResolver);
-export const alphaSort = ({ data, keys }, searchBy, searchValue) => {
+export const alphaSort = ({ data, keys }, nestedProps, searchValue) => {
+  const { source, field } = nestedProps;
+  const selectedData = data[source];
   if (searchValue === "a-z") {
     return keys
       .slice()
-      .sort((keyA, keyZ) =>
-        data[keyA][searchBy].localeCompare(data[keyZ][searchBy])
+      .sort((prevID, nextID) =>
+        selectedData[prevID][field].localeCompare(selectedData[nextID][field])
       );
   } else if (searchValue === "z-a") {
     return keys
       .slice()
-      .sort((keyA, keyZ) =>
-        data[keyZ][searchBy].localeCompare(data[keyA][searchBy])
+      .sort((prevID, nextID) =>
+        selectedData[nextID][field].localeCompare(selectedData[prevID][field])
       );
   }
   return keys;
 };
+
+/* ****** Memoized sorting functions ****** */
+// Memoized resolver
+const memoCommonResolver = ({ data, keys }, nestedProps, searchValue) =>
+  `${keys.length}_${nestedProps.field}_${searchValue}`;
+
+// Memoized version of commonFilter (without cache tracking)
+export const memoCommonFilter = memoize(commonFilter, memoCommonResolver);
+
 // Memoized version of alphaSort (without cache tracking)
 export const memoAlphaSort = memoize(alphaSort, memoCommonResolver); //memoized version
 
+/* ****** Helper functions ****** */
 // Apply several filters to data previously normalized in the form '{ data, keys }', only the filters specified as queryParams in the url are going to be applied by a given order.
 export const applyFilters = (sourceData, queryParams, filtersOrder) => {
   const { data, keys } = sourceData;
+  // Check if we got data and a search is active
+  if (!keys.length || !queryParams) return keys;
+
+  const queries = queryString.parse(queryParams);
   let filteredKeys = keys;
-  if (queryParams) {
-    const queries = queryString.parse(queryParams);
-    // Perform each filter by a given order
-    filtersOrder.forEach(filter => {
-      const { paramKey, field, filterFunc, customization } = filter;
-      // Apply only the filters in the url as queryParams
-      if (queries[paramKey]) {
-        // Customize data if requiered
-        const query = customization
-          ? customization(queries[paramKey])
-          : queries[paramKey].toLocaleLowerCase();
-        filteredKeys = filterFunc({ data, keys: filteredKeys }, field, query);
-      }
-    });
-  }
+  // Perform each filter by a given order
+  filtersOrder.forEach(filter => {
+    const { paramKey, nestedProps, filterFunc, modifySearch } = filter;
+    // Apply only the filters in the url as queryParams
+    if (queries[paramKey]) {
+      // Customize data if requiered
+      const query = modifySearch
+        ? modifySearch(queries[paramKey])
+        : queries[paramKey].toLocaleLowerCase();
+      filteredKeys = filterFunc(
+        { data, keys: filteredKeys },
+        nestedProps,
+        query
+      );
+    }
+  });
   return filteredKeys;
 };

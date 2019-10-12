@@ -13,28 +13,35 @@ const modifySearch = value => {
 export const filterExecutionOrder = [
   {
     id: 0,
+    sourceDataKey: "starredCards",
+    paramKey: "starreds",
+    nestedProps: { source: "starredCards" },
+    filterFunc: sortFuncs.starredsFilter
+  },
+  {
+    id: 0,
     paramKey: "type",
-    field: "type",
-    customization: modifySearch,
+    nestedProps: { source: "itemsById", field: "type" },
+    modifySearch,
     filterFunc: sortFuncs.memoCommonFilter
   },
   {
     id: 1,
     paramKey: "rarity",
-    field: "rarity",
-    customization: modifySearch,
+    nestedProps: { source: "itemsById", field: "rarity" },
+    modifySearch,
     filterFunc: sortFuncs.memoCommonFilter
   },
   {
     id: 2,
     paramKey: "search",
-    field: "name",
+    nestedProps: { source: "itemsById", field: "name" },
     filterFunc: sortFuncs.memoCommonFilter
   },
   {
     id: 3,
     paramKey: "nameOrder",
-    field: "name",
+    nestedProps: { source: "itemsById", field: "name" },
     filterFunc: sortFuncs.memoAlphaSort
   }
 ];

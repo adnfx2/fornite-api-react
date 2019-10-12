@@ -6,7 +6,12 @@ import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import FilterMenu from "../../containers/FilterMenu/FilterMenu";
 import FilterButton from "../../components/FilterButton/FilterButton";
 import ResponsiveFilterOptions from "./components/ResponsiveFilterOptions";
-import { fetchWeapons, fetchItems } from "../../redux/actions/actions";
+import {
+  fetchWeapons,
+  fetchItems,
+  addToStarreds,
+  removeFromStarreds
+} from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
 import { storeLinks, storeRoutes } from "../../routes/routes";
 import fortniteBanner from "../../assets/images/Fortnite-Banner.jpg";
@@ -35,13 +40,20 @@ const useFilterToggle = () => {
 };
 
 const Store = props => {
-  const { weapons, fetchWeapons, items, fetchItems } = props;
+  const {
+    weapons,
+    fetchWeapons,
+    items,
+    fetchItems,
+    starredCards,
+    addToStarreds,
+    removeFromStarreds
+  } = props;
   useShouldFetch(weapons, fetchWeapons);
   useShouldFetch(items, fetchItems);
   const [visible, filterToggleHandler] = useFilterToggle();
-  // const weaponsSorting = null;
-  // const itemsSorting = null;
   const classes = useStyle();
+  const starredsHandler = { addToStarreds, removeFromStarreds };
 
   return (
     <Container className="mb-3 text-dark" fluid>
@@ -74,7 +86,14 @@ const Store = props => {
                 const C = route.render;
                 var newRoute = {
                   ...route,
-                  render: _props => <C {...props} data={props[dataKey]} />
+                  render: routeProps => (
+                    <C
+                      {...routeProps}
+                      starredCards={starredCards}
+                      starredsHandler={starredsHandler}
+                      data={props[dataKey]}
+                    />
+                  )
                 };
               }
               const finalRoute = newRoute || route;
@@ -100,7 +119,7 @@ const Store = props => {
   );
 };
 
-const mapStateToProps = ({ dataFetched, errors }) => {
+const mapStateToProps = ({ dataFetched, errors, starredCards }) => {
   const array = [ENDPOINT_WEAPONS, ENDPOINT_ITEMS];
   const [weapons, items] = array.map(el => {
     const key = el.split("/")[0];
@@ -112,12 +131,16 @@ const mapStateToProps = ({ dataFetched, errors }) => {
     weaponsErrorMsg: weapons.error,
     items: items.data,
     itemsErrorMsg: items.error,
-
-    filter: "none"
+    starredCards
   };
 };
 
-const mapDispatchToProps = { fetchWeapons, fetchItems };
+const mapDispatchToProps = {
+  fetchWeapons,
+  fetchItems,
+  addToStarreds,
+  removeFromStarreds
+};
 
 export default connect(
   mapStateToProps,

@@ -47,3 +47,16 @@ export const fetchWeapons = () => ({
     }
   }
 });
+
+// Starred cards
+export const ADD_TO_STARREDS = "ADD_TO_STARREDS";
+export const addToStarreds = ({ id, timestamp }) => ({
+  type: ADD_TO_STARREDS,
+  id,
+  timestamp
+});
+export const REMOVE_FROM_STARREDS = "REMOVE_FROM_STARREDS";
+export const removeFromStarreds = id => ({
+  type: REMOVE_FROM_STARREDS,
+  id
+});
