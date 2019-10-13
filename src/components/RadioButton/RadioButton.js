@@ -14,21 +14,12 @@ const useStyle = createUseStyles({
   }
 });
 
-const RadioButton = ({ filterId, label, groupName, checked, onChange }) => {
+const RadioButton = ({ compId, label, groupName, checked, onChange }) => {
   const classes = useStyle();
-  const _handler = e => {
-    e.target.value = label;
-    onChange(e);
-  };
+  const handler = e => onChange(e, { compId, value: label });
   return (
     <label className={classes.radioButton}>
-      <input
-        checked={checked}
-        data-filter-id={filterId}
-        onChange={_handler}
-        type="radio"
-        name={groupName}
-      />
+      <input checked={checked} onChange={handler} type="radio" />
       <span className={classes.label}>{label}</span>
     </label>
   );

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { createUseStyles } from "react-jss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import useControlledComponent from "../../hooks/useControlledComponent";
 
 const useSearchStyle = createUseStyles({
   search: {
@@ -34,39 +35,34 @@ const useSearchStyle = createUseStyles({
 
 const Search = ({
   size = 15,
-  filterId,
+  compId,
   placeholder = "Search...",
-  externalValue = "",
+  externalState = "",
   actionHandler,
   ...props
 }) => {
-  const { search, input, icon } = useSearchStyle();
-  const [innerValue, setInnerValue] = useState("");
-
-  // When an externalValue changes, display that value in the input text element.
-  useEffect(() => {
-    setInnerValue(externalValue);
-  }, [externalValue]);
-
+  const styles = useSearchStyle();
+  const [innerValue, setInnerValue] = useControlledComponent("");
   const onChangeHandler = e => {
     const value = e.target.value;
     setInnerValue(value);
-    if (!value) actionHandler(e);
+    !value && actionHandler({ compId, value });
   };
   const onKeyPressHandler = e =>
-    e.key === "Enter" && innerValue !== externalValue && actionHandler(e);
+    e.key === "Enter" &&
+    innerValue !== externalState &&
+    actionHandler({ compId, innerValue });
 
   return (
-    <div className={search}>
-      <span className={icon}>
+    <div className={styles.search}>
+      <span className={styles.icon}>
         <FontAwesomeIcon icon={faSearch} />
       </span>
       <input
         onChange={onChangeHandler}
         onKeyPress={onKeyPressHandler}
         size={size}
-        data-filter-id={filterId}
-        className={input}
+        className={styles.input}
         type="text"
         placeholder={placeholder}
         value={innerValue}

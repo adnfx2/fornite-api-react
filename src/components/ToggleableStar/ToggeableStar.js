@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import useControlledComponent from "../../hooks/useControlledComponent";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -17,22 +18,17 @@ const useStyles = createUseStyles({
 
 const ToggeableStar = ({
   actionHandler,
-  isStarred,
+  externalState,
   className,
-  filterId,
-  text,
+  compId,
+  label,
   ...props
 }) => {
   const styles = useStyles();
-  const [toggle, setToggle] = useState(isStarred);
+  const [starred, setToggleStarred] = useControlledComponent(externalState);
   const handler = e => {
-    setToggle(prevToggle => {
-      const newToggle = !prevToggle;
-      actionHandler({
-        target: { dataset: { filterId: filterId }, value: newToggle }
-      });
-      return newToggle;
-    });
+    setToggleStarred(prevStarred => !prevStarred);
+    actionHandler && actionHandler({ compId, value: !starred });
   };
 
   return (
@@ -41,10 +37,10 @@ const ToggeableStar = ({
       className={`${styles.star} ${className || ""}`.trim()}
       onClick={handler}
     >
-      {text}{" "}
+      {label}{" "}
       <FontAwesomeIcon
         icon={faStar}
-        className={`${styles.star__icon} ${toggle ? "active" : ""}`.trim()}
+        className={`${styles.star__icon} ${starred ? "active" : ""}`.trim()}
       />
     </div>
   );

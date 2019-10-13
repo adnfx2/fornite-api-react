@@ -5,11 +5,8 @@ import RadioGroup from "../../components/RadioGroup/RadioGroup";
 import ToggeableStar from "../../components/ToggleableStar/ToggeableStar";
 import SearchSelect from "../../components/SearchSelect/SearchSelect";
 import { breakpoints } from "../../styles/variables";
-import {
-  alphabeticOrderOptions,
-  getOptions
-} from "../../settings/filterConfig";
-import usePushQueryParamsToURL from "../../hooks/usePushQueryParamsToURL";
+import { alphaSortOptions, getOptions } from "../../settings/filterConfig";
+import useQueryParams from "../../hooks/useQueryParams";
 
 const useFilterMenuStyle = createUseStyles({
   filterMenu: {
@@ -41,56 +38,48 @@ const FilterMenu = ({ rarities, types }) => {
   const raritiesArray = getOptions(rarities);
   const typesArray = getOptions(types);
   const classes = useFilterMenuStyle();
-  const [urlParams, createPushQueryParams] = usePushQueryParamsToURL();
-  const resetHandler = createPushQueryParams("reset");
-  const filterHandler = createPushQueryParams(e => {
-    const {
-      dataset: { filterId },
-      value
-    } = e.target;
-    return { [filterId]: value };
-  });
+  const [urlParams, pushQueryParams] = useQueryParams();
 
   return (
     <div className={classes.filterMenu}>
       <h4 className={classes.title}>Sort By</h4>
       <Search
-        filterId="search"
-        actionHandler={filterHandler}
-        externalValue={urlParams.search}
+        compId="search"
+        actionHandler={pushQueryParams}
+        externalState={urlParams.search}
       />
       <h5 className={classes.subTitle}>Name</h5>
       <RadioGroup
         className="pl-2"
-        options={alphabeticOrderOptions}
-        filterId="nameOrder"
-        onChange={filterHandler}
-        value={urlParams.nameOrder}
+        options={alphaSortOptions}
+        compId="nameOrder"
+        actionHandler={pushQueryParams}
+        externalState={urlParams.nameOrder}
       />
       <h5 className={classes.subTitle}>Type</h5>
       <SearchSelect
         className="pl-2"
         options={typesArray}
-        filterId="type"
-        onChange={filterHandler}
-        value={urlParams.type}
+        compId="type"
+        actionHandler={pushQueryParams}
+        externalState={urlParams.type}
       />
       <h5 className={classes.subTitle}>Rarity</h5>
       <SearchSelect
         className="pl-2"
         options={raritiesArray}
-        filterId={"rarity"}
-        onChange={filterHandler}
-        value={urlParams.rarity}
+        compId={"rarity"}
+        actionHandler={pushQueryParams}
+        externalState={urlParams.rarity}
       />
       <ToggeableStar
-        filterId="starreds"
-        actionHandler={filterHandler}
-        isStarred={urlParams.starreds}
         className="pt-4"
-        text="Starreds only"
+        compId="starreds"
+        label="Starreds only"
+        actionHandler={pushQueryParams}
+        externalState={urlParams.starreds}
       />
-      <span onClick={resetHandler} className={classes.reset}>
+      <span onClick={() => pushQueryParams("reset")} className={classes.reset}>
         Reset
       </span>
     </div>

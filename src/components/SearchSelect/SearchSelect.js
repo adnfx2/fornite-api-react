@@ -1,4 +1,5 @@
 import React from "react";
+import useControlledComponent from "../../hooks/useControlledComponent";
 import { createUseStyles } from "react-jss";
 
 const useSearchSelectStyle = createUseStyles({
@@ -27,14 +28,26 @@ const renderOptions = options => {
   }
 };
 
-const SearchSelect = ({ options, className, value, filterId, ...props }) => {
+const SearchSelect = ({
+  compId,
+  options,
+  className,
+  externalState,
+  actionHandler
+}) => {
   const classes = useSearchSelectStyle();
-  const finalValue = value || options[0];
+  const validateState =
+    options.find(option => option === externalState) || options[0];
+  const [selectedItem, setSelectedItem] = useControlledComponent(validateState);
+  const handler = e => {
+    const value = e.target.value;
+    setSelectedItem(value);
+    actionHandler && actionHandler({ compId, value });
+  };
   return (
     <select
-      {...props}
-      data-filter-id={filterId}
-      value={finalValue}
+      onChange={handler}
+      value={selectedItem}
       disabled={!options.length}
       className={`${classes.select} ${className || ""}`.trim()}
     >

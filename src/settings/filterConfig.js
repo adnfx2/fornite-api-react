@@ -46,7 +46,7 @@ export const filterExecutionOrder = [
   }
 ];
 
-export const alphabeticOrderOptions = ["Default", "A-Z", "Z-A"];
+export const alphaSortOptions = ["Default", "A-Z", "Z-A"];
 
 export const getOptions = options => {
   const _options = options
