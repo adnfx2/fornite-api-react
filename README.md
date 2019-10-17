@@ -33,7 +33,7 @@ Currently the project have three main sections:
 
 1. **Landing Page** (contains a brief introduction about fortnite and in-game news).
 2. **Store** (Here you can navigate, explorer and give stars to a wide variety of in-game weapons & items).
-3. **StarredBoard** (All the items starreds in the Store will appear in this section)
+3. **Emptyboard** (Postponed..., A simple message notifying that there's nothing on that page yet)
 
 ### Why to create FortniteStarred?
 
@@ -49,7 +49,7 @@ I was looking for a clean and simple way to look up fornite items without too mu
 
 -[x] **Store** -- completed.
 
--[ ] **StarredBoard** -- in-progress
+-[x] **Emptyboard** -- completed
 
 ---
 
