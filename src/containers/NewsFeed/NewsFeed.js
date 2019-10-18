@@ -96,7 +96,10 @@ const mapStateToProps = ({ dataFetched, errors }) => {
   const news = dataFetched[newsKey];
   const error = errors.apiErrors[newsKey];
   return {
-    news: news && news.data,
+    news:
+      news &&
+      news.data &&
+      news.data.reverse() /*Fix to not show broken images first due to thirdparty api issues*/,
     errorMessage: error
   };
 };
