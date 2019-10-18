@@ -10,7 +10,7 @@ const dataFetched = (state = {}, action) => {
 
 const errors = (state = { apiErrors: {} }, action) => {
   if (action.apiErrors) {
-    return { ...state, apiErrors: { ...action.apiErrors } };
+    return { ...state, apiErrors: { ...state.apiErrors, ...action.apiErrors } };
   }
   return state;
 };
