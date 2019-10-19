@@ -172,7 +172,7 @@ const Paragraph = ({ lines = 1 }) => {
   const { placeholder__paragraph } = useParagraphStyle();
   return (
     <div className={placeholder__paragraph}>
-      {Array.from(Array(lines)).map((_, index) => (
+      {[...Array(lines)].map((_, index) => (
         <React.Fragment key={index}>
           <Text variant="sm" splitted={1} />
           <Text variant="sm" splitted={1} />
@@ -194,7 +194,7 @@ const Ellipsis = ({ quantity = 3, className = "" }) => {
   const { placeholder__ellipsis } = useEllipsisStyle();
   return (
     <div className={`${placeholder__ellipsis} ${className}`.trim()}>
-      {Array.from(Array(quantity)).map((_, index) => (
+      {[...Array(quantity)].map((_, index) => (
         <React.Fragment key={index}>
           <Circle variant="sm" />
         </React.Fragment>

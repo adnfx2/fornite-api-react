@@ -14,7 +14,10 @@ import {
 } from "../../redux/actions/actions";
 import { ENDPOINT_WEAPONS, ENDPOINT_ITEMS } from "../../utils/api/api";
 import { storeLinks, storeRoutes } from "../../routes/routes";
+import renderGameItems from "./components/renderGameItems";
+import renderGameWeapons from "./components/renderGameWeapons";
 import fortniteBanner from "../../assets/images/Fortnite-Banner.jpg";
+import ListItems from "./components/ListItems";
 
 const useStyle = createUseStyles({
   store__title: {
@@ -43,8 +46,10 @@ const Store = props => {
   const {
     weapons,
     fetchWeapons,
+    weaponsErrorMsg,
     items,
     fetchItems,
+    itemsErrorMsg,
     starredCards,
     addToStarreds,
     removeFromStarreds
@@ -54,7 +59,20 @@ const Store = props => {
   const [visible, filterToggleHandler] = useFilterToggle();
   const classes = useStyle();
   const starredsHandler = { addToStarreds, removeFromStarreds };
-
+  const listsConfigs = {
+    items: {
+      sourceData: { ...items, starredCards },
+      renderItems: renderGameItems,
+      error: itemsErrorMsg,
+      reloadHandler: () => fetchItems()
+    },
+    weapons: {
+      sourceData: { ...weapons, starredCards },
+      renderItems: renderGameWeapons,
+      error: weaponsErrorMsg,
+      reloadHandler: () => fetchWeapons()
+    }
+  };
   return (
     <Container className="mb-3 text-dark" fluid>
       <Row>
@@ -81,27 +99,17 @@ const Store = props => {
         <Col className="pt-3">
           <Switch>
             {storeRoutes.map(({ name, ...route }) => {
-              if (route.render) {
-                const dataKey = `${name.toLowerCase()}`;
-                const C = route.render;
-                var newRoute = {
-                  ...route,
-                  render: routeProps => (
-                    <C
-                      {...routeProps}
-                      starredCards={starredCards}
-                      starredsHandler={starredsHandler}
-                      data={props[dataKey]}
-                    />
-                  )
-                };
-              }
-              const finalRoute = newRoute || route;
               const isRoute = !route.to;
+              const dataKey = `${name.toLowerCase()}`;
               // prettier-ignore
               return isRoute
-                ? <Route key={name} {...finalRoute} />
-                : <Redirect key={name} {...finalRoute}/>
+                ? <Route
+                  {...route}
+                  key={name}
+                  render={routeProps =>
+                    <ListItems {...routeProps} {...listsConfigs[dataKey]} starredsHandler={starredsHandler}/>
+                  }/>
+                : <Redirect key={name} {...route}/>
             })}
           </Switch>
         </Col>

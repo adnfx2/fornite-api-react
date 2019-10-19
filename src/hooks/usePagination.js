@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const max = 12; //  Maximun amount of data to be displayed
 
-const usePagination = data => {
+const usePagination = (data = []) => {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(data.length / max);
   const nextPage = page < totalPages;

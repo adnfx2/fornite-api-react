@@ -1,74 +1,77 @@
 import React from "react";
+import { Button, CardGroup } from "react-bootstrap";
 import NoSearchFound from "../../../components/NoSeachFound/NoSearchFound";
+import NetworkError from "../../../components/NetworkError/NetworkError";
 import ListPlaceholder from "./ListPlaceholder.js";
-import StyledCardGroup from "./StyledCardGroup";
-import StyledCard from "./StyledCard.js";
+import renderGameItems from "./renderGameItems";
 import usePagination from "../../../hooks/usePagination";
 import { applyFilters } from "../../../utils/sortingFunctions";
 import { filterExecutionOrder } from "../../../settings/filterConfig";
+import { createUseStyles } from "react-jss";
+
+const useStyles = createUseStyles({
+  "error-container": {
+    display: "flex",
+    justifyItems: "center",
+    minHeight: "50vh",
+    height: "100%",
+    marginTop: "78px"
+  }
+});
 
 const ListItems = ({
-  data = { itemsById: null, result: [] },
+  sourceData,
   location,
-  starredCards,
   starredsHandler,
+  error,
+  reloadHandler,
   ...props
 }) => {
-  const filteredData = applyFilters(
-    { data: { itemsById: data.itemsById, starredCards }, keys: data.result },
-    location.search,
-    filterExecutionOrder
-  );
-  const [itemsSlice, nextPage, loadMoreHandler] = usePagination(filteredData);
-
+  const isDataAvailable = sourceData.result;
+  const filteredKeys =
+    isDataAvailable &&
+    applyFilters(sourceData, location.search, filterExecutionOrder);
+  const [slicedKeys, nextPage, loadMoreHandler] = usePagination(filteredKeys);
+  const styles = useStyles();
   // Is data ready to be displayed?
-  if (itemsSlice.length) {
+  if (slicedKeys.length) {
     return (
-      <StyledCardGroup
-        // numberOfItems={data.result.length}
-        numberOfItems={filteredData.length}
-        loadMoreHandler={loadMoreHandler}
-        nextPage={nextPage}
-      >
-        {itemsSlice.map(id => {
-          const {
-            name,
-            images,
-            rarity,
-            cost,
-            type,
-            obtainedType,
-            ratings
-          } = data.itemsById[id];
-          const normalizedData = {
-            id,
-            name,
-            image: images.icon,
-            rarity,
-            type,
-            attributes: [
-              `Cost: ${cost || "--"}`,
-              `Get: ${obtainedType}`,
-              `Type: ${type.slice(1)}`,
-              `Stars: ${ratings.avgStars}`,
-              `Points: ${ratings.totalPoints}`,
-              `Votes: ${ratings.numberVotes}`
-            ]
-          };
-          return (
-            <StyledCard
-              key={id}
-              starredCards={starredCards}
-              starredsHandler={starredsHandler}
-              data={normalizedData}
-            />
-          );
-        })}
-      </StyledCardGroup>
+      <React.Fragment>
+        <p className="p-2">Total: {filteredKeys.length}</p>
+        <CardGroup>
+          {renderGameItems(sourceData, slicedKeys, {
+            starredsHandler
+          })}
+        </CardGroup>
+        {nextPage ? (
+          <span className="d-flex justify-content-center">
+            <Button
+              className="m-3"
+              size="lg"
+              variant="secondary"
+              onClick={loadMoreHandler}
+            >
+              LoadMore
+            </Button>
+          </span>
+        ) : (
+          ""
+        )}
+      </React.Fragment>
+    );
+  }
+  // Any errors popped up while fetching data ?
+  if (error) {
+    return (
+      <NetworkError
+        className={styles["error-container"]}
+        errorMsg="Our api provider is having issues, please try again later."
+        reloadHandler={reloadHandler}
+      />
     );
   }
   //  Are we filtering data ?
-  if (data.itemsById && location.search) {
+  if (isDataAvailable && location.search) {
     return <NoSearchFound />;
   }
   //  We must be fecthing data, display a placeholder

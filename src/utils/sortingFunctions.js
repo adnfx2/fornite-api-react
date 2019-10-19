@@ -51,7 +51,7 @@ export const memoAlphaSort = memoize(alphaSort, memoCommonResolver); //memoized 
 /* ****** Helper functions ****** */
 // Apply several filters to data previously normalized in the form '{ data, keys }', only the filters specified as queryParams in the url are going to be applied by a given order.
 export const applyFilters = (sourceData, queryParams, filtersOrder) => {
-  const { data, keys } = sourceData;
+  const { result: keys, ...data } = sourceData;
   // Check if we got data and a search is active
   if (!keys.length || !queryParams) return keys;
 

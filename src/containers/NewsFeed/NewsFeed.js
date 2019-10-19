@@ -2,12 +2,10 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Carousel from "react-bootstrap/Carousel";
 import Spinner from "react-bootstrap/Spinner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUnlink } from "@fortawesome/free-solid-svg-icons";
 import { fetchNews } from "../../redux/actions/actions";
+import NetworkError from "../../components/NetworkError/NetworkError";
 import Snippet from "./Snippet";
 import FlexBackground from "./FlexBackground";
-import ComponentsFactory from "../../components/ComponentsFactory/ComponentsFactory";
 import { createUseStyles } from "react-jss";
 import { breakpoints } from "../../styles/variables";
 import { ENDPOINT_NEWS_STW } from "../../utils/api/api";
@@ -41,13 +39,12 @@ const useStyles = createUseStyles({
   carousel__error: {
     fontWeight: "bold",
     letterSpacing: "1px",
-    color: "#4c4c4c",
-    cursor: "pointer"
+    color: "#4c4c4c"
   }
 });
 
 const NewsFeed = props => {
-  const { loadNews, news, errorMessage } = props;
+  const { loadNews, news, errorMsg } = props;
   useEffect(() => {
     if (!news) {
       loadNews();
@@ -73,17 +70,18 @@ const NewsFeed = props => {
         </Carousel>
       ) : (
         <FlexBackground>
-          {!errorMessage ? (
-            <ComponentsFactory quantity={5}>
-              <Spinner animation="grow" role="status" variant="light">
+          {!errorMsg ? (
+            [...Array(5)].map((_, i) => (
+              <Spinner key={i} animation="grow" role="status" variant="light">
                 <span className="sr-only">Loading...</span>
               </Spinner>
-            </ComponentsFactory>
+            ))
           ) : (
-            <div onClick={reloadHandler} className={classes.carousel__error}>
-              <FontAwesomeIcon icon={faUnlink} /> {errorMessage}, Click here to
-              reload!
-            </div>
+            <NetworkError
+              errorMsg={`${errorMsg}, Click here to reload!`}
+              className={classes.carousel__error}
+              reloadHandler={reloadHandler}
+            />
           )}
         </FlexBackground>
       )}
@@ -100,7 +98,7 @@ const mapStateToProps = ({ dataFetched, errors }) => {
       news &&
       news.data &&
       news.data.reverse() /*Fix to not show broken images first due to thirdparty api issues*/,
-    errorMessage: error
+    errorMsg: error
   };
 };
 

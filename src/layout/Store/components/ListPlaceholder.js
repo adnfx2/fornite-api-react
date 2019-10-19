@@ -63,7 +63,7 @@ const TextPlaceholder = () => {
 const ListPlaceholder = () => (
   <div className="d-flex flex-wrap">
     <TextPlaceholder />
-    {Array.from(Array(4)).map((_, i) => (
+    {[...Array(4)].map((_, i) => (
       <CardPlaceholder key={i} />
     ))}
   </div>

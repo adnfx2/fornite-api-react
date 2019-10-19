@@ -2,8 +2,6 @@ import Home from "../layout/Home/Home";
 import Store from "../layout/Store/Store";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import NotFound from "../layout/NotFound/NotFound";
-import ListWeapons from "../layout/Store/components/ListWeapons";
-import ListItems from "../layout/Store/components/ListItems";
 
 //  Main routes
 const HOME = "Home";
@@ -54,19 +52,17 @@ const ROUTE_ITEMS = "/store/items";
 
 export const storeRoutes = [
   {
-    name: WEAPONS,
-    path: ROUTE_WEAPONS,
-    render: ListWeapons
+    name: ITEMS,
+    path: ROUTE_ITEMS
   },
   {
-    name: ITEMS,
-    path: ROUTE_ITEMS,
-    render: ListItems
+    name: WEAPONS,
+    path: ROUTE_WEAPONS
   },
   {
     name: "Store-Redirect",
     from: ROUTE_STORE,
-    to: ROUTE_WEAPONS
+    to: ROUTE_ITEMS
   },
   {
     name: "Not-Found",
