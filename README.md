@@ -1,11 +1,15 @@
-#PROJECT NEWS!!
---> FortniteAPI services are currently unstable, the mantainer of that api is migrating & upgrading his database. if this process doesn't get completed soon, I'll look for a new api. Meanwhile I'll keep developing the missing parts of this website.
+## PROJECT NEWS!!
+--> FortniteAPI services are currently unstable, I'm looking forward for a new api provider to fix the issue.
+
+#### Live preview
+
+[Codesandbox Testing](https://codesandbox.io/s/fornite-api-react-zeh3s)
 
 ---
 
 # -- FortniteStarred --
 
-![Fortnite](https://s.pngkit.com/png/small/542-5420737_fortnite-llama-head-fortnite-playground-mode-logo.png)
+![Project preview](./docs/projectPreview.png "project preview")
 
 ### About
 
@@ -22,10 +26,6 @@ You can simple run:
 - `npm start`
 
 (or yarn start if you prefer it).
-
-### Run it on codesandbox
-
-[Codesandbox live testing](https://codesandbox.io/s/fornite-api-react-pxjzc)
 
 ### Features
 
@@ -50,6 +50,16 @@ I was looking for a clean and simple way to look up fornite items without too mu
 -[x] **Store** -- completed.
 
 -[x] **Emptyboard** -- completed
+
+### Wishlist
+
+-Image optimization (Like medium does).
+
+-Firebase integration to allow user registration and a small cloud storage.
+
+-Page animation transition.
+
+All of those things among others were out of the scope of this project.
 
 ---
 
