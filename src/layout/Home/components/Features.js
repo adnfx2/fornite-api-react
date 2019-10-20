@@ -34,11 +34,11 @@ const renderList = items =>
   );
 
 const Home = props => {
-  const classes = useStyles();
+  const styles = useStyles();
   return (
     <section>
       <Container className="pt-5 pb-4" fluid={true}>
-        <h1 className={classes.features__title}>Gametributes!</h1>
+        <h1 className={styles.features__title}>Gametributes!</h1>
         <Row noGutters={true}>{renderList(features)}</Row>
       </Container>
     </section>

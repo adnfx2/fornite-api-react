@@ -82,23 +82,23 @@ const StyledCard = ({ data, starredCards, starredsHandler }) => {
       ? removeFromStarreds(id)
       : addToStarreds({ id, timestamp: Date.now() });
   const type = data.type || null;
-  const classes = useStyledCard({ rarity, type });
+  const styles = useStyledCard({ rarity, type });
 
   return (
-    <Card className={classes.card}>
+    <Card className={styles.card}>
       <Card.Header>
-        <h5 className={classes.card__header}>
+        <h5 className={styles.card__header}>
           {firstLetterCaps(rarity.slice(1))}
         </h5>
       </Card.Header>
-      <Card.Img variant="top" src={image} className={classes.card__image} />
+      <Card.Img variant="top" src={image} className={styles.card__image} />
       <Card.Body>
-        <Card.Title className={classes.hideOverflow}>{name}</Card.Title>
-        <Card.Text className={classes.card__attributes}>
+        <Card.Title className={styles.hideOverflow}>{name}</Card.Title>
+        <Card.Text className={styles.card__attributes}>
           {attributes.map((attr, i) => (
             <span
               key={i}
-              className={`${classes.card__attribute} ${classes.hideOverflow}`}
+              className={`${styles.card__attribute} ${styles.hideOverflow}`}
             >
               {attr}
             </span>
@@ -109,7 +109,7 @@ const StyledCard = ({ data, starredCards, starredsHandler }) => {
         <Button onClick={handler} variant="light" className="border ml-auto">
           Give star{" "}
           <FontAwesomeIcon
-            className={`${classes.star} ${isCardStarred ? "active" : ""}`}
+            className={`${styles.star} ${isCardStarred ? "active" : ""}`}
             icon={faStar}
           />
         </Button>

@@ -17,8 +17,8 @@ const useStyles = createUseStyles({
 });
 
 const FlexBackground = ({ children, ...props }) => {
-  const classes = useStyles(props);
-  return <div className={classes.carousel__img}>{children}</div>;
+  const styles = useStyles(props);
+  return <div className={styles.carousel__img}>{children}</div>;
 };
 
 export default FlexBackground;

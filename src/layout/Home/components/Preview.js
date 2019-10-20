@@ -50,19 +50,19 @@ const useStyles = createUseStyles({
 });
 
 const Preview = () => {
-  const classes = useStyles();
+  const styles = useStyles();
   return (
     <section>
       <Container className="pb-5 pl-0 pr-0" fluid={true}>
-        <div className={classes.jumpingContainer}>
-          <h1 className={classes.jumpingTitle}>Are you ready to drop?</h1>
+        <div className={styles.jumpingContainer}>
+          <h1 className={styles.jumpingTitle}>Are you ready to drop?</h1>
         </div>
-        <Row className={classes.previewBackground}>
+        <Row className={styles.previewBackground}>
           <Col className="pr-0 pl-0" md={4}>
-            <div className={classes.flex_image} />
+            <div className={styles.flex_image} />
           </Col>
           <Col>
-            <h1 className={classes.title}>Getting to know!</h1>
+            <h1 className={styles.title}>Getting to know!</h1>
             <p className="pb-4 pl-3 pr-3">
               <q>
                 Fortnite is an online video game developed by Epic Games and
@@ -77,7 +77,7 @@ const Preview = () => {
                 worlds and battle arenas.
               </q>
               <CustomLink
-                classes="text-black-50 small d-flex justify-content-end"
+                styles="text-black-50 small d-flex justify-content-end"
                 external={true}
                 href="https://en.wikipedia.org/wiki/Fortnite"
                 placeholder={`\u2013 Wikipedia`}

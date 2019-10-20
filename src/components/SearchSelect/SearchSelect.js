@@ -35,7 +35,7 @@ const SearchSelect = ({
   externalState,
   actionHandler
 }) => {
-  const classes = useSearchSelectStyle();
+  const styles = useSearchSelectStyle();
   const validateState =
     options.find(option => option === externalState) || options[0];
   const [selectedItem, setSelectedItem] = useControlledComponent(validateState);
@@ -49,7 +49,7 @@ const SearchSelect = ({
       onChange={handler}
       value={selectedItem}
       disabled={!options.length}
-      className={`${classes.select} ${className || ""}`.trim()}
+      className={`${styles.select} ${className || ""}`.trim()}
     >
       {renderOptions(options)}
     </select>

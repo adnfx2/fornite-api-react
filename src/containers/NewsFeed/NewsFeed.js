@@ -53,10 +53,10 @@ const NewsFeed = props => {
   const reloadHandler = () => {
     loadNews();
   };
-  const classes = useStyles();
+  const styles = useStyles();
   return (
-    <div className={classes.containerCarousel}>
-      <h5 className={classes.carousel__title}>Recent feed</h5>
+    <div className={styles.containerCarousel}>
+      <h5 className={styles.carousel__title}>Recent feed</h5>
       {news ? (
         <Carousel indicators={false} fade={true}>
           {news.map(({ title, image, ...props }) => (
@@ -79,7 +79,7 @@ const NewsFeed = props => {
           ) : (
             <NetworkError
               errorMsg={`${errorMsg}, Click here to reload!`}
-              className={classes.carousel__error}
+              className={styles.carousel__error}
               reloadHandler={reloadHandler}
             />
           )}

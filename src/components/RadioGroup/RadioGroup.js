@@ -18,7 +18,7 @@ const RadioGroup = ({
   actionHandler,
   ...props
 }) => {
-  const classes = useRadioGroupStyle();
+  const styles = useRadioGroupStyle();
   const validateState =
     options.find(option => option === externalState) || options[0];
   const [radioSelected, setRadioSelected] = useControlledComponent(
@@ -32,7 +32,7 @@ const RadioGroup = ({
   };
 
   return (
-    <div className={`${classes.radioGroup} ${className || ""}`.trim()}>
+    <div className={`${styles.radioGroup} ${className || ""}`.trim()}>
       {options.map(option => (
         <RadioButton
           key={option}

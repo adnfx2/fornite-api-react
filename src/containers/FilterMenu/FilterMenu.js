@@ -37,18 +37,18 @@ const useFilterMenuStyle = createUseStyles({
 const FilterMenu = ({ rarities, types }) => {
   const raritiesArray = getOptions(rarities);
   const typesArray = getOptions(types);
-  const classes = useFilterMenuStyle();
+  const styles = useFilterMenuStyle();
   const [urlParams, pushQueryParams] = useQueryParams();
 
   return (
-    <div className={classes.filterMenu}>
-      <h4 className={classes.title}>Sort By</h4>
+    <div className={styles.filterMenu}>
+      <h4 className={styles.title}>Sort By</h4>
       <Search
         compId="search"
         actionHandler={pushQueryParams}
         externalState={urlParams.search}
       />
-      <h5 className={classes.subTitle}>Name</h5>
+      <h5 className={styles.subTitle}>Name</h5>
       <RadioGroup
         className="pl-2"
         options={alphaSortOptions}
@@ -56,7 +56,7 @@ const FilterMenu = ({ rarities, types }) => {
         actionHandler={pushQueryParams}
         externalState={urlParams.nameOrder}
       />
-      <h5 className={classes.subTitle}>Type</h5>
+      <h5 className={styles.subTitle}>Type</h5>
       <SearchSelect
         className="pl-2"
         options={typesArray}
@@ -64,7 +64,7 @@ const FilterMenu = ({ rarities, types }) => {
         actionHandler={pushQueryParams}
         externalState={urlParams.type}
       />
-      <h5 className={classes.subTitle}>Rarity</h5>
+      <h5 className={styles.subTitle}>Rarity</h5>
       <SearchSelect
         className="pl-2"
         options={raritiesArray}
@@ -79,7 +79,7 @@ const FilterMenu = ({ rarities, types }) => {
         actionHandler={pushQueryParams}
         externalState={urlParams.starreds}
       />
-      <span onClick={() => pushQueryParams("reset")} className={classes.reset}>
+      <span onClick={() => pushQueryParams("reset")} className={styles.reset}>
         Reset
       </span>
     </div>

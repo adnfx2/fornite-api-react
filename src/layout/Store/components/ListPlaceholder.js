@@ -50,12 +50,12 @@ const useTextPlaceholderStyle = createUseStyles({
 });
 
 const TextPlaceholder = () => {
-  const classes = useTextPlaceholderStyle();
+  const styles = useTextPlaceholderStyle();
 
   return (
-    <div className={classes.textPlaceholder}>
-      <Placeholder.Text className={classes.smallBlock} variant="md" />
-      <Placeholder.Text className={classes.mediumBlock} variant="md" />
+    <div className={styles.textPlaceholder}>
+      <Placeholder.Text className={styles.smallBlock} variant="md" />
+      <Placeholder.Text className={styles.mediumBlock} variant="md" />
     </div>
   );
 };

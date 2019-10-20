@@ -42,22 +42,22 @@ const Hero = props => {
       ? { selectedImage: heroImgPortrait, styles: { padding: "pr-4 pl-4" } }
       : { selectedImage: heroImgLandscape, styles: {} };
 
-  const classes = useStyles(image.styles);
+  const styles = useStyles(image.styles);
   const fortniteDownloadRef = fortniteReferences[1].endpoint;
 
   return (
     <section>
       <div className="pt-5 position-relative">
-        <Jumbotron className={classes.c_jumbotron} fluid={true}>
+        <Jumbotron className={styles.c_jumbotron} fluid={true}>
           <img
-            className={classes.flexBackground}
+            className={styles.flexBackground}
             src={image.selectedImage}
             alt="Fortnite Hero"
           />
           <CustomLink
             href={fortniteDownloadRef}
             external={true}
-            placeholder={<Button className={classes.button}>Join now!</Button>}
+            placeholder={<Button className={styles.button}>Join now!</Button>}
           />
         </Jumbotron>
       </div>

@@ -17,10 +17,10 @@ const useStyle = createUseStyles({
 
 const FilterButton = ({ onClick, className: outerStyles }) => {
   const innerStyles = useStyle();
-  const classes = `${innerStyles.filterBtn} ${outerStyles || ""}`.trim();
+  const styles = `${innerStyles.filterBtn} ${outerStyles || ""}`.trim();
 
   return (
-    <Button variant="light" onClick={onClick} className={classes}>
+    <Button variant="light" onClick={onClick} className={styles}>
       <FontAwesomeIcon icon={faSlidersH} /> Filter
     </Button>
   );

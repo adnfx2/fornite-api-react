@@ -56,14 +56,14 @@ const useStyles = createUseStyles({
 });
 
 const Snippet = ({ title, body, meta: { mainColor } }) => {
-  const classes = useStyles(
+  const styles = useStyles(
     mainColor.length < 7 ? color("slategray").hex() : mainColor
   );
   return (
     <React.Fragment>
-      <div className={`${classes.container}`}>
-        <h3 className={classes.title}>{title}</h3>
-        <p className={classes.body}>{body}</p>
+      <div className={`${styles.container}`}>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.body}>{body}</p>
       </div>
     </React.Fragment>
   );

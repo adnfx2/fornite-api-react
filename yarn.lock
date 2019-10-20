@@ -446,9 +446,9 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     lodash "^4.17.13"
 
-"@babel/plugin-transform-classes@^7.5.5":
+"@babel/plugin-transform-styles@^7.5.5":
   version "7.5.5"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-classes/-/plugin-transform-classes-7.5.5.tgz#d094299d9bd680a14a2a0edae38305ad60fb4de9"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-styles/-/plugin-transform-styles-7.5.5.tgz#d094299d9bd680a14a2a0edae38305ad60fb4de9"
   integrity sha512-U2htCNK/6e9K7jGyJ++1p5XRU+LJjrwtoiVn9SzRlDT2KubcZ11OOwy3s24TjHxPgxNwonCYP7U2K51uVYCMDg==
   dependencies:
     "@babel/helper-annotate-as-pure" "^7.0.0"
@@ -750,7 +750,7 @@
     "@babel/plugin-transform-async-to-generator" "^7.5.0"
     "@babel/plugin-transform-block-scoped-functions" "^7.2.0"
     "@babel/plugin-transform-block-scoping" "^7.6.0"
-    "@babel/plugin-transform-classes" "^7.5.5"
+    "@babel/plugin-transform-styles" "^7.5.5"
     "@babel/plugin-transform-computed-properties" "^7.2.0"
     "@babel/plugin-transform-destructuring" "^7.6.0"
     "@babel/plugin-transform-dotall-regex" "^7.4.4"
@@ -806,7 +806,7 @@
     "@babel/plugin-transform-async-to-generator" "^7.5.0"
     "@babel/plugin-transform-block-scoped-functions" "^7.2.0"
     "@babel/plugin-transform-block-scoping" "^7.6.2"
-    "@babel/plugin-transform-classes" "^7.5.5"
+    "@babel/plugin-transform-styles" "^7.5.5"
     "@babel/plugin-transform-computed-properties" "^7.2.0"
     "@babel/plugin-transform-destructuring" "^7.6.0"
     "@babel/plugin-transform-dotall-regex" "^7.6.2"
@@ -3883,7 +3883,7 @@ expand-brackets@^2.1.4:
     debug "^2.3.3"
     define-property "^0.2.5"
     extend-shallow "^2.0.1"
-    posix-character-classes "^0.1.0"
+    posix-character-styles "^0.1.0"
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
@@ -7361,9 +7361,9 @@ portfinder@^1.0.9:
     debug "^2.2.0"
     mkdirp "0.5.x"
 
-posix-character-classes@^0.1.0:
+posix-character-styles@^0.1.0:
   version "0.1.1"
-  resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
+  resolved "https://registry.yarnpkg.com/posix-character-styles/-/posix-character-styles-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
 postcss-attribute-case-insensitive@^4.0.1:
@@ -8413,6 +8413,13 @@ react-redux@^7.1.0:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.9.0"
+
+react-router-bootstrap@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/react-router-bootstrap/-/react-router-bootstrap-0.25.0.tgz#5d1a99b5b8a2016c011fc46019d2397e563ce0df"
+  integrity sha512-/22eqxjn6Zv5fvY2rZHn57SKmjmJfK7xzJ6/G1OgxAjLtKVfWgV5sn41W2yiqzbtV5eE4/i4LeDLBGYTqx7jbA==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-router-dom@^5.1.2:
   version "5.1.2"

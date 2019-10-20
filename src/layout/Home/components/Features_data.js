@@ -7,18 +7,18 @@ export const features = [
     title: "Friends",
     image: friends_svg,
     body:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In ipsam quae nostrum quasi suscipit sit temporibus recusandae exercitationem nisi id?"
+      "Join forces with your friends and fight on endless battles where only one team can conquer the land of the impossible."
   },
   {
     title: "Weapons",
     image: weapons_svg,
     body:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In ipsam quae nostrum quasi suscipit sit temporibus recusandae exercitationem nisi id?"
+      "Find and fight for the most powerful weapons on the map, there are all sort of crazy weapons out there waiting for you!"
   },
   {
     title: "Game mods",
     image: addons_svg,
     body:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In ipsam quae nostrum quasi suscipit sit temporibus recusandae exercitationem nisi id?"
+      "Are you bored with the main game mode?, we got your back! There are tons of seasonal events and different mini-games to enjoy."
   }
 ];

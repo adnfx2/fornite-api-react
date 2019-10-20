@@ -22,7 +22,7 @@ const renderLinks = item => (
       <span>{item.content}</span>
     ) : (
       <CustomLink
-        classes="text-light"
+        styles="text-light"
         href={item.endpoint}
         placeholder={<span>{item.placeholder}</span>}
         external={item.external}
@@ -52,7 +52,7 @@ const createLinks = references => {
       ...acc,
       [id]: props => (
         <CustomLink
-          classes="text-light"
+          styles="text-light"
           href={endpoint}
           placeholder={finalPlaceholder}
           external={external}

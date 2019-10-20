@@ -12,10 +12,9 @@ import { createUseStyles } from "react-jss";
 const useStyles = createUseStyles({
   "error-container": {
     display: "flex",
-    justifyItems: "center",
-    minHeight: "50vh",
-    height: "100%",
-    marginTop: "78px"
+    justifyContent: "center",
+    alignItems: "center",
+    height: "50vh"
   }
 });
 
@@ -65,7 +64,7 @@ const ListItems = ({
     return (
       <NetworkError
         className={styles["error-container"]}
-        errorMsg="Our api provider is having issues, please try again later."
+        errorMsg="Our api provider is having issues, please click here to reload or refresh the page."
         reloadHandler={reloadHandler}
       />
     );

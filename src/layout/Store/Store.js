@@ -57,7 +57,7 @@ const Store = props => {
   useShouldFetch(weapons, fetchWeapons);
   useShouldFetch(items, fetchItems);
   const [visible, filterToggleHandler] = useFilterToggle();
-  const classes = useStyle();
+  const styles = useStyle();
   const starredsHandler = { addToStarreds, removeFromStarreds };
   const listsConfigs = {
     items: {
@@ -77,7 +77,7 @@ const Store = props => {
     <Container className="mb-3 text-dark" fluid>
       <Row>
         <Col className="px-0">
-          <h1 className={classes.store__title}>Store</h1>
+          <h1 className={styles.store__title}>Store</h1>
         </Col>
       </Row>
       <Row>
@@ -96,7 +96,7 @@ const Store = props => {
         </Col>
       </Row>
       <Row>
-        <Col className="pt-3">
+        <Col className="py-3">
           <Switch>
             {storeRoutes.map(({ name, ...route }) => {
               const isRoute = !route.to;
@@ -117,7 +117,7 @@ const Store = props => {
           filterToggleHandler={filterToggleHandler}
           visible={visible}
         >
-          <FilterMenu
+          <FilterMenu /*Only works with items, weapons api it's not working yet*/
             rarities={items && items.itemsByRarity}
             types={items && items.itemsByType}
           />

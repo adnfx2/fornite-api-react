@@ -66,9 +66,9 @@ const useStyleSideOverlay = createUseStyles({
 });
 const SideOverlay = ({ children, active, toggleOverlayHandler }) => {
   const { sideoverlay } = useStyleSideOverlay();
-  const classes = `${sideoverlay} ${active ? "active" : ""}`;
+  const styles = `${sideoverlay} ${active ? "active" : ""}`;
   return (
-    <div className={classes}>
+    <div className={styles}>
       <Backdrop onClick={toggleOverlayHandler}>
         <Content>{children}</Content>
       </Backdrop>
