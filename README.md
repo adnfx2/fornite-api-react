@@ -3,7 +3,7 @@
 
 #### Live preview
 
-[Codesandbox Testing](https://codesandbox.io/s/fornite-api-react-zeh3s)
+[Codesandbox Testing](https://codesandbox.io/s/github/adnfx2/fornite-api-react)
 
 ---
 
@@ -65,4 +65,4 @@ All of those things among others were out of the scope of this project.
 
 If you have any suggestions/ideas/feedback let me know here <fx.adrian@gmail.com>.
 
-> No copyright infringement intended, this project was created only for educational purposes & for the ease of sharing fortnite related information.
+> No copyright infringement intended, this project was created only for educational purposes & for the ease of sharing fortnite related content.
