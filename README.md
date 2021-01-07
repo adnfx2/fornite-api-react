@@ -1,5 +1,6 @@
 ## PROJECT NEWS!!
---> FortniteAPI services are currently unstable, I'm looking forward for a new api provider to fix the issue.
+--> ~~FortniteAPI services are currently unstable, I'm looking forward for a new api provider to fix the issue.~~
+--> API abandoned by mantainer looking for a stable api.
 
 #### Live preview
 
